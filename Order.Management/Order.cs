@@ -14,9 +14,6 @@ namespace Order.Management
 
         public abstract void GenerateReport();
 
-        public string ToString()
-        {
-            return "\nName: " + CustomerName + " Address: " + Address + " Due Date: " + DueDate + " Order #: " + OrderNumber;
-        }
+        public override string ToString() => "\nName: " + CustomerName + " Address: " + Address + " Due Date: " + DueDate + " Order #: " + OrderNumber;
     }
 }

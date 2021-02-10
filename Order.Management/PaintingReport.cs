@@ -7,21 +7,23 @@ namespace Order.Management
     class PaintingReport : Order
     {
         public int tableWidth = 73;
+
         public PaintingReport(string customerName, string customerAddress, string dueDate, List<Shape> shapes)
         {
-            base.CustomerName = customerName;
+            CustomerName = customerName;
             base.Address = customerAddress;
             base.DueDate = dueDate;
             base.OrderedBlocks = shapes;
         }
+
         public override void GenerateReport()
         {
             Console.WriteLine("\nYour painting report has been generated: ");
             Console.WriteLine(base.ToString());
-            generateTable();
+            GenerateTable();
         }
 
-        public void generateTable()
+        public void GenerateTable()
         {
             PrintLine();
             PrintRow("        ", "   Red   ", "  Blue  ", " Yellow ");

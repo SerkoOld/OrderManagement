@@ -5,7 +5,9 @@ namespace Order.Management
 {
     class Program
     {
+
         // Main entry
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE0060:Remove unused parameter", Justification = "<Pending>")]
         static void Main(string[] args)
         {
             var (customerName, address, dueDate) = CustomerInfoInput();
@@ -23,11 +25,11 @@ namespace Order.Management
         public static Circle OrderCirclesInput()
         {
             Console.Write("\nPlease input the number of Red Circle: ");
-            int redCircle = Convert.ToInt32(userInput());
+            int redCircle = Convert.ToInt32(UserInput());
             Console.Write("Please input the number of Blue Circle: ");
-            int blueCircle = Convert.ToInt32(userInput());
+            int blueCircle = Convert.ToInt32(UserInput());
             Console.Write("Please input the number of Yellow Circle: ");
-            int yellowCircle = Convert.ToInt32(userInput());
+            int yellowCircle = Convert.ToInt32(UserInput());
 
             Circle circle = new Circle(redCircle, blueCircle, yellowCircle);
             return circle;
@@ -37,11 +39,11 @@ namespace Order.Management
         public static Square OrderSquaresInput()
         {
             Console.Write("\nPlease input the number of Red Squares: ");
-            int redSquare = Convert.ToInt32(userInput());
+            int redSquare = Convert.ToInt32(UserInput());
             Console.Write("Please input the number of Blue Squares: ");
-            int blueSquare = Convert.ToInt32(userInput());
+            int blueSquare = Convert.ToInt32(UserInput());
             Console.Write("Please input the number of Yellow Squares: ");
-            int yellowSquare = Convert.ToInt32(userInput());
+            int yellowSquare = Convert.ToInt32(UserInput());
 
             Square square = new Square(redSquare, blueSquare, yellowSquare);
             return square;
@@ -51,18 +53,18 @@ namespace Order.Management
         public static Triangle OrderTrianglesInput()
         {
             Console.Write("\nPlease input the number of Red Triangles: ");
-            int redTriangle = Convert.ToInt32(userInput());
+            int redTriangle = Convert.ToInt32(UserInput());
             Console.Write("Please input the number of Blue Triangles: ");
-            int blueTriangle = Convert.ToInt32(userInput());
+            int blueTriangle = Convert.ToInt32(UserInput());
             Console.Write("Please input the number of Yellow Triangles: ");
-            int yellowTriangle = Convert.ToInt32(userInput());
+            int yellowTriangle = Convert.ToInt32(UserInput());
 
             Triangle triangle = new Triangle(redTriangle, blueTriangle, yellowTriangle);
             return triangle;
         }
 
         // User Console Input
-        public static string userInput()
+        public static string UserInput()
         {
             string input = Console.ReadLine();
             while (string.IsNullOrEmpty(input))
@@ -99,11 +101,11 @@ namespace Order.Management
         private static (string customerName, string address, string dueDate) CustomerInfoInput()
         {
             Console.Write("Please input your Name: ");
-            string customerName = userInput();
+            string customerName = UserInput();
             Console.Write("Please input your Address: ");
-            string address = userInput();
+            string address = UserInput();
             Console.Write("Please input your Due Date: ");
-            string dueDate = userInput();
+            string dueDate = UserInput();
             return (customerName, address, dueDate);
         }
 
@@ -114,10 +116,13 @@ namespace Order.Management
             Triangle triangle = OrderTrianglesInput();
             Circle circle = OrderCirclesInput();
 
-            var orderedShapes = new List<Shape>();
-            orderedShapes.Add(square);
-            orderedShapes.Add(triangle);
-            orderedShapes.Add(circle);
+            var orderedShapes = new List<Shape>
+            {
+                square,
+                triangle,
+                circle
+            };
+
             return orderedShapes;
         }
     }

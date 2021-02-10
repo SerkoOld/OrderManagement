@@ -28,10 +28,12 @@ namespace Order.Management
         {
             return (base.NumberOfRedShape * Price);
         }
+
         public int BlueSquaresTotal()
         {
             return (base.NumberOfBlueShape * Price);
         }
+
         public int YellowSquaresTotal()
         {
             return (base.NumberOfYellowShape * Price);

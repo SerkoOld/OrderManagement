@@ -9,7 +9,7 @@ namespace Order.Management
         public int tableWidth = 20;
         public CuttingListReport(string customerName, string customerAddress, string dueDate, List<Shape> shapes)
         {
-            base.CustomerName = customerName;
+            CustomerName = customerName;
             base.Address = customerAddress;
             base.DueDate = dueDate;
             base.OrderedBlocks = shapes;
@@ -19,9 +19,9 @@ namespace Order.Management
         {
             Console.WriteLine("\nYour cutting list has been generated: ");
             Console.WriteLine(base.ToString());
-            generateTable();
+            GenerateTable();
         }
-        public void generateTable()
+        public void GenerateTable()
         {
             PrintLine();
             PrintRow("        ", "   Qty   ");

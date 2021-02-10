@@ -10,7 +10,7 @@ namespace Order.Management
         public Circle(int red, int blue, int yellow)
         {
             Name = "Circle";
-            base.Price = circlePrice;
+            Price = circlePrice;
             AdditionalCharge = 1;
             base.NumberOfRedShape = red;
             base.NumberOfBlueShape = blue;

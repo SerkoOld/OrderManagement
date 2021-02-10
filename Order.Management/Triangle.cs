@@ -7,6 +7,7 @@ namespace Order.Management
     class Triangle : Shape
     {
         public int TrianglePrice = 2;
+
         public Triangle(int numberOfRedTriangles, int numberOfBlueTriangles, int numberOfYellowTriangles)
         {
             Name = "Triangle";
@@ -26,10 +27,12 @@ namespace Order.Management
         {
             return (base.NumberOfRedShape * Price);
         }
+
         public int BlueTrianglesTotal()
         {
             return (base.NumberOfBlueShape * Price);
         }
+
         public int YellowTrianglesTotal()
         {
             return (base.NumberOfYellowShape * Price);

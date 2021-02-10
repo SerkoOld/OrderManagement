@@ -33,7 +33,7 @@ namespace Order.Management
 
         public int TotalAmountOfRedShapes()
         {
-            return base.OrderedBlocks[0].NumberOfRedShape + base.OrderedBlocks[1].NumberOfRedShape +
+            return OrderedBlocks[0].NumberOfRedShape + base.OrderedBlocks[1].NumberOfRedShape +
                    base.OrderedBlocks[2].NumberOfRedShape;
         }
 
