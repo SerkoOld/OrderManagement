@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Order.Management
+﻿namespace Order.Management
 {
     class Triangle : Shape
     {
@@ -11,32 +7,19 @@ namespace Order.Management
         public Triangle(int numberOfRedTriangles, int numberOfBlueTriangles, int numberOfYellowTriangles)
         {
             Name = "Triangle";
-            base.Price = TrianglePrice;
+            Price = TrianglePrice;
             AdditionalCharge = 1;
-            base.NumberOfRedShape = numberOfRedTriangles;
-            base.NumberOfBlueShape = numberOfBlueTriangles;
-            base.NumberOfYellowShape = numberOfYellowTriangles;
+            NumberOfRedShape = numberOfRedTriangles;
+            NumberOfBlueShape = numberOfBlueTriangles;
+            NumberOfYellowShape = numberOfYellowTriangles;
         }
 
-        public override int Total()
-        {
-            return RedTrianglesTotal() + BlueTrianglesTotal() + YellowTrianglesTotal();
-        }
+        public override int Total => RedTrianglesTotal+ BlueTrianglesTotal+ YellowTrianglesTotal;
 
-        public int RedTrianglesTotal()
-        {
-            return (base.NumberOfRedShape * Price);
-        }
+        public int RedTrianglesTotal => (NumberOfRedShape * Price);
 
-        public int BlueTrianglesTotal()
-        {
-            return (base.NumberOfBlueShape * Price);
-        }
+        public int BlueTrianglesTotal => (NumberOfBlueShape * Price);
 
-        public int YellowTrianglesTotal()
-        {
-            return (base.NumberOfYellowShape * Price);
-        }
-    
-}
+        public int YellowTrianglesTotal => (NumberOfYellowShape * Price);
+    }
 }

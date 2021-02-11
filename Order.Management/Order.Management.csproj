@@ -2,7 +2,16 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
+	<!--to remove the error thrown since support for netcoreapp3.0 is deprecated-->
     <TargetFramework>netcoreapp3.1</TargetFramework>
+
+    <!--the name of the Order.Management project can be confusing when doing this-->
+    <StartupObject>Order.Management.Program</StartupObject> 
+	  
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\.editorconfig" Link=".editorconfig" />
+  </ItemGroup>
 
 </Project>

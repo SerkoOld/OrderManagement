@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Order.Management
+﻿namespace Order.Management
 {
     abstract class Shape
     {
@@ -18,17 +14,10 @@ namespace Order.Management
 
         public int NumberOfYellowShape { get; set; }
 
-        public int TotalQuantityOfShape()
-        {
-            return NumberOfRedShape + NumberOfBlueShape + NumberOfYellowShape;
-        }
+        public int TotalQuantityOfShape => NumberOfRedShape + NumberOfBlueShape + NumberOfYellowShape;
 
-        public int AdditionalChargeTotal()
-        {
-            return NumberOfRedShape * AdditionalCharge;
-        }
+        public int AdditionalChargeTotal => NumberOfRedShape * AdditionalCharge;
 
-        public abstract int Total();
-
+        public abstract int Total { get; }
     }
 }
