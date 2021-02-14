@@ -6,7 +6,6 @@ namespace Order.Management
 {
     class CuttingListReport : Order
     {
-        public int tableWidth = 20;
         public CuttingListReport(string customerName, string customerAddress, string dueDate, List<Shape> shapes)
         {
             base.CustomerName = customerName;
@@ -15,54 +14,28 @@ namespace Order.Management
             base.OrderedBlocks = shapes;
         }
 
-        public override void GenerateReport()
-        {
-            Console.WriteLine("\nYour cutting list has been generated: ");
-            Console.WriteLine(base.ToString());
-            generateTable();
-        }
-        public void generateTable()
+        public override int TableWidth => 20;
+
+        public override string ReportType => "Cutting List";
+
+        public override void  GenerateTable()
         {
             PrintLine();
-            PrintRow("        ", "   Qty   ");
+            PrintRow(new List<string> {
+                "        ", 
+                "   Qty   " 
+            });
             PrintLine();
-            PrintRow("Square",base.OrderedBlocks[0].TotalQuantity.ToString());
-            PrintRow("Triangle", base.OrderedBlocks[1].TotalQuantity.ToString());
-            PrintRow("Circle", base.OrderedBlocks[2].TotalQuantity.ToString());
+            foreach (var order in OrderedBlocks)
+            {
+                PrintRow(new List<string>
+                {
+                    order.Name,
+                    order.TotalQuantity.ToString(),
+                });
+            }
+
             PrintLine();
         }
-        public void PrintLine()
-        {
-            Console.WriteLine(new string('-', tableWidth));
-        }
-
-        public void PrintRow(params string[] columns)
-        {
-            int width = (tableWidth - columns.Length) / columns.Length;
-            string row = "|";
-
-            foreach (string column in columns)
-            {
-                row += AlignCentre(column, width) + "|";
-            }
-
-            Console.WriteLine(row);
-        }
-
-        public string AlignCentre(string text, int width)
-        {
-            text = text.Length > width ? text.Substring(0, width - 3) + "..." : text;
-
-            if (string.IsNullOrEmpty(text))
-            {
-                return new string(' ', width);
-            }
-            else
-            {
-                return text.PadRight(width - (width - text.Length) / 2).PadLeft(width);
-            }
-        }
-
-
     }
 }

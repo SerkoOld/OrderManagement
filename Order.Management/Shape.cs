@@ -29,7 +29,7 @@ namespace Order.Management
         
         public abstract string Name { get; }
         public abstract int Price { get; }
-        public virtual int AdditionalCharge { get => 1; }
+        public virtual int AdditionalChargeRed { get => 1; }
 
         #endregion
 
@@ -46,7 +46,7 @@ namespace Order.Management
 
         protected virtual int AdditionalChargeTotal()
         {
-            return NumberOfRedShape * AdditionalCharge;
+            return NumberOfRedShape * AdditionalChargeRed;
         }
 
         protected virtual int Total()
