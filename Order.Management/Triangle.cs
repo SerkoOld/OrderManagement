@@ -6,15 +6,13 @@ namespace Order.Management
 {
     class Triangle : Shape
     {
-        public int TrianglePrice = 2;
+        public override string Name => "Triangle";
+
+        public override int Price => 2;
+
         public Triangle(int numberOfRedTriangles, int numberOfBlueTriangles, int numberOfYellowTriangles)
+            : base(numberOfRedTriangles, numberOfBlueTriangles, numberOfYellowTriangles)
         {
-            Name = "Triangle";
-            base.Price = TrianglePrice;
-            AdditionalCharge = 1;
-            base.NumberOfRedShape = numberOfRedTriangles;
-            base.NumberOfBlueShape = numberOfBlueTriangles;
-            base.NumberOfYellowShape = numberOfYellowTriangles;
         }
 
         public override int Total()

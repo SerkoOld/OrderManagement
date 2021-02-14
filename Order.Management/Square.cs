@@ -6,17 +6,12 @@ namespace Order.Management
 {
     class Square : Shape
     {
+        public override string Name => "Square";
+        public override int Price => 1;
 
-        public int SquarePrice = 1;
-
-        public Square(int numberOfRedSquares, int numberOfBlueSquares, int numberOfYellowSquares)
+        public Square(int numberOfRedSquares, int numberOfBlueSquares, int numberOfYellowSquares) : 
+            base(numberOfRedSquares, numberOfBlueSquares, numberOfYellowSquares)
         {
-            Name = "Square";
-            base.Price = SquarePrice;
-            AdditionalCharge = 1;
-            base.NumberOfRedShape = numberOfRedSquares;
-            base.NumberOfBlueShape = numberOfBlueSquares;
-            base.NumberOfYellowShape = numberOfYellowSquares;
         }
 
         public override int Total()

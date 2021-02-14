@@ -6,12 +6,19 @@ namespace Order.Management
 {
     abstract class Shape
     {
-        public string Name { get; set; }
-        public int Price { get; set; }
-        public int AdditionalCharge { get; set; }
-        public int NumberOfRedShape { get; set; }
-        public int NumberOfBlueShape { get; set; }
-        public int NumberOfYellowShape { get; set; }
+        protected Shape(int numberOfRedShape, int numberOfBlueShape, int numberOfYellowShape)
+        {
+            NumberOfRedShape = numberOfRedShape;
+            NumberOfBlueShape = numberOfBlueShape;
+            NumberOfYellowShape = numberOfYellowShape;
+        }
+
+        public abstract string Name { get; }
+        public abstract int Price { get; }
+        public virtual int AdditionalCharge { get => 1; }
+        public int NumberOfRedShape { get; private set; }
+        public int NumberOfBlueShape { get; private set; }
+        public int NumberOfYellowShape { get; private set; }
         public int TotalQuantityOfShape()
         {
             return NumberOfRedShape + NumberOfBlueShape + NumberOfYellowShape;
