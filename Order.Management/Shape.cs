@@ -26,10 +26,10 @@ namespace Order.Management
         }
 
         #region Abstract properties
-
-        protected abstract string Name { get; }
-        protected abstract int Price { get; }
-        protected virtual int AdditionalCharge { get => 1; }
+        
+        public abstract string Name { get; }
+        public abstract int Price { get; }
+        public virtual int AdditionalCharge { get => 1; }
 
         #endregion
 
