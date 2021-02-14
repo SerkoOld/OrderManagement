@@ -26,9 +26,9 @@ namespace Order.Management
             PrintLine();
             PrintRow("        ", "   Qty   ");
             PrintLine();
-            PrintRow("Square",base.OrderedBlocks[0].TotalQuantityOfShape().ToString());
-            PrintRow("Triangle", base.OrderedBlocks[1].TotalQuantityOfShape().ToString());
-            PrintRow("Circle", base.OrderedBlocks[2].TotalQuantityOfShape().ToString());
+            PrintRow("Square",base.OrderedBlocks[0].TotalQuantity.ToString());
+            PrintRow("Triangle", base.OrderedBlocks[1].TotalQuantity.ToString());
+            PrintRow("Circle", base.OrderedBlocks[2].TotalQuantity.ToString());
             PrintLine();
         }
         public void PrintLine()

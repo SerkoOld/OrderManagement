@@ -53,15 +53,15 @@ namespace Order.Management
         }
         public void OrderSquareDetails()
         {
-            Console.WriteLine("\nSquares 		  " + base.OrderedBlocks[0].TotalQuantityOfShape() + " @ $" + base.OrderedBlocks[0].Price + " ppi = $" + base.OrderedBlocks[0].Total());
+            Console.WriteLine("\nSquares 		  " + base.OrderedBlocks[0].TotalQuantity + " @ $" + base.OrderedBlocks[0].Price + " ppi = $" + base.OrderedBlocks[0].TotalPrice);
         }
         public void OrderTriangleDetails()
         {
-            Console.WriteLine("Triangles 		  " + base.OrderedBlocks[1].TotalQuantityOfShape() + " @ $" + base.OrderedBlocks[1].Price + " ppi = $" + base.OrderedBlocks[1].Total());
+            Console.WriteLine("Triangles 		  " + base.OrderedBlocks[1].TotalQuantity + " @ $" + base.OrderedBlocks[1].Price + " ppi = $" + base.OrderedBlocks[1].TotalPrice);
         }
         public void OrderCircleDetails()
         {
-            Console.WriteLine("Circles 		  " + base.OrderedBlocks[2].TotalQuantityOfShape() + " @ $" + base.OrderedBlocks[2].Price + " ppi = $" + base.OrderedBlocks[2].Total());
+            Console.WriteLine("Circles 		  " + base.OrderedBlocks[2].TotalQuantity + " @ $" + base.OrderedBlocks[2].Price + " ppi = $" + base.OrderedBlocks[2].TotalPrice);
         }
         public void PrintLine()
         {

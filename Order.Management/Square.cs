@@ -13,23 +13,5 @@ namespace Order.Management
             base(numberOfRedSquares, numberOfBlueSquares, numberOfYellowSquares)
         {
         }
-
-        public override int Total()
-        {
-            return RedSquaresTotal() + BlueSquaresTotal() + YellowSquaresTotal();
-        }
-
-        public int RedSquaresTotal()
-        {
-            return (base.NumberOfRedShape * Price);
-        }
-        public int BlueSquaresTotal()
-        {
-            return (base.NumberOfBlueShape * Price);
-        }
-        public int YellowSquaresTotal()
-        {
-            return (base.NumberOfYellowShape * Price);
-        }
     }
 }

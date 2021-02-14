@@ -14,24 +14,5 @@ namespace Order.Management
             : base(numberOfRedTriangles, numberOfBlueTriangles, numberOfYellowTriangles)
         {
         }
-
-        public override int Total()
-        {
-            return RedTrianglesTotal() + BlueTrianglesTotal() + YellowTrianglesTotal();
-        }
-
-        public int RedTrianglesTotal()
-        {
-            return (base.NumberOfRedShape * Price);
-        }
-        public int BlueTrianglesTotal()
-        {
-            return (base.NumberOfBlueShape * Price);
-        }
-        public int YellowTrianglesTotal()
-        {
-            return (base.NumberOfYellowShape * Price);
-        }
-    
-}
+    }
 }

@@ -13,22 +13,5 @@ namespace Order.Management
         public Circle(int red, int blue, int yellow) :base(red, blue, yellow)
         {
         }
-        public override int Total()
-        {
-            return RedCirclesTotal() + BlueCirclesTotal() + YellowCirclesTotal();
-        }
-
-        public int RedCirclesTotal()
-        {
-            return (base.NumberOfRedShape * Price);
-        }
-        public int BlueCirclesTotal()
-        {
-            return (base.NumberOfBlueShape * Price);
-        }
-        public int YellowCirclesTotal()
-        {
-            return (base.NumberOfYellowShape * Price);
-        }
     }
 }
