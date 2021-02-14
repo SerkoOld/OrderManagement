@@ -6,22 +6,55 @@ namespace Order.Management
 {
     abstract class Shape
     {
-        public string Name { get; set; }
-        public int Price { get; set; }
-        public int AdditionalCharge { get; set; }
-        public int NumberOfRedShape { get; set; }
-        public int NumberOfBlueShape { get; set; }
-        public int NumberOfYellowShape { get; set; }
-        public int TotalQuantityOfShape()
+        #region Public Properties
+
+        public int TotalPrice { get; private set; }
+        public int TotalQuantity { get; private set; }
+        public int NumberOfRedShape { get; private set; }
+        public int NumberOfBlueShape { get; private set; }
+        public int NumberOfYellowShape { get; private set; }
+
+        #endregion
+
+        protected Shape(int numberOfRedShape, int numberOfBlueShape, int numberOfYellowShape)
+        {
+            NumberOfRedShape = numberOfRedShape;
+            NumberOfBlueShape = numberOfBlueShape;
+            NumberOfYellowShape = numberOfYellowShape;
+            TotalPrice = Total();
+            TotalQuantity = TotalQuantityOfShape();
+        }
+
+        #region Abstract properties
+        
+        public abstract string Name { get; }
+        public abstract int Price { get; }
+        public virtual int AdditionalChargeRed { get => 1; }
+
+        #endregion
+
+        #region Protected Methods
+
+        protected int TotalQuantityOfShape()
         {
             return NumberOfRedShape + NumberOfBlueShape + NumberOfYellowShape;
         }
 
-        public int AdditionalChargeTotal()
-        {
-            return NumberOfRedShape * AdditionalCharge;
-        }
-        public abstract int Total();
+        #endregion
 
+        #region Abstract protected methods
+
+        protected virtual int AdditionalChargeTotal()
+        {
+            return NumberOfRedShape * AdditionalChargeRed;
+        }
+
+        protected virtual int Total()
+        {
+            return (NumberOfRedShape * Price) + 
+                (NumberOfBlueShape * Price) + 
+                (NumberOfYellowShape * Price);
+        }
+        #endregion
     }
 }
