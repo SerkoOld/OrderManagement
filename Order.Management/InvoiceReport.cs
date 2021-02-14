@@ -12,12 +12,8 @@ namespace Order.Management
         private string PriceTotalText => "ppi = $";
         private int TotalReds => TotalAmountOfRedShapes();
 
-        public InvoiceReport(string customerName, string customerAddress, string dueDate, List<Shape> shapes)
+        public InvoiceReport(CustomerInfo customerInfo, List<Shape> shapes) : base(customerInfo, shapes)
         {
-            base.CustomerName = customerName;
-            base.Address = customerAddress;
-            base.DueDate = dueDate;
-            base.OrderedBlocks = shapes;
         }
 
         public override void GenerateReport()

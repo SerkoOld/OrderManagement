@@ -6,12 +6,8 @@ namespace Order.Management
 {
     class PaintingReport : Order
     {
-        public PaintingReport(string customerName, string customerAddress, string dueDate, List<Shape> shapes)
-        {
-            base.CustomerName = customerName;
-            base.Address = customerAddress;
-            base.DueDate = dueDate;
-            base.OrderedBlocks = shapes;
+        public PaintingReport(CustomerInfo customerInfo, List<Shape> shapes) : base(customerInfo, shapes)
+        {      
         }
 
         public override string ReportType => "Painting";

@@ -6,12 +6,8 @@ namespace Order.Management
 {
     class CuttingListReport : Order
     {
-        public CuttingListReport(string customerName, string customerAddress, string dueDate, List<Shape> shapes)
+        public CuttingListReport(CustomerInfo customerInfo, List<Shape> shapes) : base(customerInfo, shapes)
         {
-            base.CustomerName = customerName;
-            base.Address = customerAddress;
-            base.DueDate = dueDate;
-            base.OrderedBlocks = shapes;
         }
 
         public override int TableWidth => 20;

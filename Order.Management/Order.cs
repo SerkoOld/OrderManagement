@@ -6,11 +6,15 @@ namespace Order.Management
 {
     abstract class Order
     {
-        public string CustomerName { get; set; }
-        public string Address { get; set; }
-        public string DueDate { get; set; }
-        public int OrderNumber { get; set; }
-        public List<Shape> OrderedBlocks { get; set; }
+        CustomerInfo CustomerInfo { get; set; }
+        public int OrderNumber { get; private set; }
+        public List<Shape> OrderedBlocks { get; private set; }
+
+        public Order(CustomerInfo customerInfo, List<Shape> shapes) 
+        {
+            CustomerInfo = customerInfo;
+            OrderedBlocks = shapes;
+        }
 
         #region Abstract Methods
         public virtual void GenerateTable()
@@ -68,7 +72,7 @@ namespace Order.Management
 
         private string CustomerDetails()
         {
-            return "\nName: " + CustomerName + " Address: " + Address + " Due Date: " + DueDate + " Order #: " + OrderNumber;
+            return "\nName: " + CustomerInfo.CustomerName + " Address: " + CustomerInfo.Address + " Due Date: " + CustomerInfo.DueDate + " Order #: " + OrderNumber;
         }
 
         protected void PrintLine()
