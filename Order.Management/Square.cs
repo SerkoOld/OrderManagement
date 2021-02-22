@@ -12,11 +12,11 @@ namespace Order.Management
         public Square(int numberOfRedSquares, int numberOfBlueSquares, int numberOfYellowSquares)
         {
             Name = "Square";
-            base.Price = SquarePrice;
+            Price = SquarePrice;
             AdditionalCharge = 1;
-            base.NumberOfRedShape = numberOfRedSquares;
-            base.NumberOfBlueShape = numberOfBlueSquares;
-            base.NumberOfYellowShape = numberOfYellowSquares;
+            NumberOfRedShape = numberOfRedSquares;
+            NumberOfBlueShape = numberOfBlueSquares;
+            NumberOfYellowShape = numberOfYellowSquares;
         }
 
         public override int Total()
@@ -28,10 +28,12 @@ namespace Order.Management
         {
             return (base.NumberOfRedShape * Price);
         }
+
         public int BlueSquaresTotal()
         {
             return (base.NumberOfBlueShape * Price);
         }
+
         public int YellowSquaresTotal()
         {
             return (base.NumberOfYellowShape * Price);
