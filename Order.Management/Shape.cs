@@ -12,6 +12,7 @@ namespace Order.Management
         public int NumberOfRedShape { get; set; }
         public int NumberOfBlueShape { get; set; }
         public int NumberOfYellowShape { get; set; }
+
         public int TotalQuantityOfShape()
         {
             return NumberOfRedShape + NumberOfBlueShape + NumberOfYellowShape;
@@ -21,6 +22,7 @@ namespace Order.Management
         {
             return NumberOfRedShape * AdditionalCharge;
         }
+
         public abstract int Total();
 
     }
