@@ -1,39 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
 namespace Order.Management
 {
-    class Triangle : Shape
+    internal class Triangle : Shape
     {
-        public int TrianglePrice = 2;
-        public Triangle(int numberOfRedTriangles, int numberOfBlueTriangles, int numberOfYellowTriangles)
-        {
-            Name = "Triangle";
-            base.Price = TrianglePrice;
-            AdditionalCharge = 1;
-            base.NumberOfRedShape = numberOfRedTriangles;
-            base.NumberOfBlueShape = numberOfBlueTriangles;
-            base.NumberOfYellowShape = numberOfYellowTriangles;
-        }
+        private const int TrianglePrice = 2;
+        private const string TriangleName = "Triangle";
 
-        public override int Total()
+        public Triangle(int red, int blue, int yellow) : base(red, blue, yellow)
         {
-            return RedTrianglesTotal() + BlueTrianglesTotal() + YellowTrianglesTotal();
+            Name = TriangleName;
+            Price = TrianglePrice;
         }
-
-        public int RedTrianglesTotal()
-        {
-            return (base.NumberOfRedShape * Price);
-        }
-        public int BlueTrianglesTotal()
-        {
-            return (base.NumberOfBlueShape * Price);
-        }
-        public int YellowTrianglesTotal()
-        {
-            return (base.NumberOfYellowShape * Price);
-        }
-    
-}
+    }
 }
