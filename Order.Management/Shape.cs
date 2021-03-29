@@ -1,27 +1,31 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
 namespace Order.Management
 {
     abstract class Shape
     {
-        public string Name { get; set; }
-        public int Price { get; set; }
-        public int AdditionalCharge { get; set; }
-        public int NumberOfRedShape { get; set; }
-        public int NumberOfBlueShape { get; set; }
-        public int NumberOfYellowShape { get; set; }
+        private int _additionalCharge = 1;
+        protected string Name { get; set; }  
+        public int Price { get; protected set; }
+        public int AdditionalCharge { get; }
+        public int NumberOfRedShape { get; }
+        public int NumberOfBlueShape { get; }
+        public int NumberOfYellowShape { get; }
+
+        protected Shape(int red, int blue, int yellow) 
+        {
+            NumberOfRedShape = red;
+            NumberOfBlueShape = blue;
+            NumberOfYellowShape = yellow;
+            AdditionalCharge = _additionalCharge;
+        }
         public int TotalQuantityOfShape()
         {
             return NumberOfRedShape + NumberOfBlueShape + NumberOfYellowShape;
         }
 
-        public int AdditionalChargeTotal()
+        public int TotalPrice()  
         {
-            return NumberOfRedShape * AdditionalCharge;
-        }
-        public abstract int Total();
-
+            return (NumberOfRedShape * Price) + (NumberOfBlueShape * Price) + (NumberOfYellowShape * Price);
+        } 
     }
 }
+
