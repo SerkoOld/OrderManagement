@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 
 namespace Order.Management
 {
@@ -22,12 +23,9 @@ namespace Order.Management
         // Order Circle Input
         public static Circle OrderCirclesInput()
         {
-            Console.Write("\nPlease input the number of Red Circle: ");
-            int redCircle = Convert.ToInt32(userInput());
-            Console.Write("Please input the number of Blue Circle: ");
-            int blueCircle = Convert.ToInt32(userInput());
-            Console.Write("Please input the number of Yellow Circle: ");
-            int yellowCircle = Convert.ToInt32(userInput());
+            int redCircle = ReadInt("\nPlease input the number of Red Circle: ");                        
+            int blueCircle = ReadInt("Please input the number of Blue Circle: ");
+            int yellowCircle = ReadInt("Please input the number of Yellow Circle: ");
 
             Circle circle = new Circle(redCircle, blueCircle, yellowCircle);
             return circle;
@@ -36,12 +34,9 @@ namespace Order.Management
         // Order Squares Input
         public static Square OrderSquaresInput()
         {
-            Console.Write("\nPlease input the number of Red Squares: ");
-            int redSquare = Convert.ToInt32(userInput());
-            Console.Write("Please input the number of Blue Squares: ");
-            int blueSquare = Convert.ToInt32(userInput());
-            Console.Write("Please input the number of Yellow Squares: ");
-            int yellowSquare = Convert.ToInt32(userInput());
+            int redSquare = ReadInt("\nPlease input the number of Red Squares: ");
+            int blueSquare = ReadInt("Please input the number of Blue Squares: ");
+            int yellowSquare = ReadInt("Please input the number of Yellow Squares: ");
 
             Square square = new Square(redSquare, blueSquare, yellowSquare);
             return square;
@@ -50,12 +45,9 @@ namespace Order.Management
         // Order Triangles Input
         public static Triangle OrderTrianglesInput()
         {
-            Console.Write("\nPlease input the number of Red Triangles: ");
-            int redTriangle = Convert.ToInt32(userInput());
-            Console.Write("Please input the number of Blue Triangles: ");
-            int blueTriangle = Convert.ToInt32(userInput());
-            Console.Write("Please input the number of Yellow Triangles: ");
-            int yellowTriangle = Convert.ToInt32(userInput());
+            int redTriangle = ReadInt("\nPlease input the number of Red Triangles: ");
+            int blueTriangle = ReadInt("Please input the number of Blue Triangles: ");
+            int yellowTriangle = ReadInt("Please input the number of Yellow Triangles: ");
 
             Triangle triangle = new Triangle(redTriangle, blueTriangle, yellowTriangle);
             return triangle;
@@ -69,7 +61,6 @@ namespace Order.Management
             {
                 Console.WriteLine("please enter valid details");
                 input = Console.ReadLine();
-
             }
             return input;
         }
@@ -98,12 +89,9 @@ namespace Order.Management
         // Get customer Info
         private static (string customerName, string address, string dueDate) CustomerInfoInput()
         {
-            Console.Write("Please input your Name: ");
-            string customerName = userInput();
-            Console.Write("Please input your Address: ");
-            string address = userInput();
-            Console.Write("Please input your Due Date: ");
-            string dueDate = userInput();
+            string customerName = ReadName("Please input your Name: ");
+            string address = ReadAddress("Please input your Address: ");
+            string dueDate = ReadDate("Please input your Due Date: ").ToString();
             return (customerName, address, dueDate);
         }
 
@@ -119,6 +107,54 @@ namespace Order.Management
             orderedShapes.Add(triangle);
             orderedShapes.Add(circle);
             return orderedShapes;
+        }
+
+        // Create a funcion to read int only 
+        private static int ReadInt(string prompt)
+        {
+            Console.Write(prompt);
+            string number = Console.ReadLine(); 
+            int value;
+            while(!Int32.TryParse(number, out value))
+            {
+                Console.Write("Not a valid number, try again: ");
+                number = Console.ReadLine();
+            }
+            return value; 
+        }
+        private static string ReadName(string prompt)
+        {
+            Console.Write(prompt);
+            string name = Console.ReadLine();
+            while (!Regex.IsMatch(name, @"^[A-Za-zÀ-ú]+ [A-Za-zÀ-ú]+$")) 
+            {
+                Console.Write("Name must be 1-35 alfanum, try again: ");
+                name = Console.ReadLine();
+            }
+            return name;
+        }
+        public static string ReadAddress(string prompt)
+        {
+            Console.Write(prompt);
+            string input = Console.ReadLine();
+            while (string.IsNullOrEmpty(input))
+            {
+                Console.Write("Please enter a valid address: ");
+                input = Console.ReadLine();
+            }
+            return input;
+        }
+        private static DateTime ReadDate(string prompt)
+        {
+            Console.Write(prompt);
+            string date = Console.ReadLine();
+            DateTime value;
+            while (!DateTime.TryParse(date, out value))
+            {
+                Console.Write("Not a valid date, try again: ");
+                date = Console.ReadLine();
+            }
+            return value;
         }
     }
 }
