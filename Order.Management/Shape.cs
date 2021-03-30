@@ -32,7 +32,6 @@ namespace Order.Management
         {
             return NumberOfRedShape + NumberOfBlueShape + NumberOfYellowShape;
         }
-
         public int AdditionalChargeTotal()
         {
             return NumberOfRedShape * AdditionalCharge;
