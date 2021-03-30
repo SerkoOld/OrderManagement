@@ -6,7 +6,7 @@ namespace Order.Management
 {
     class CuttingListReport : Order
     {
-        public int tableWidth = 20;
+        private int tableWidth = 20;
         public CuttingListReport(string customerName, string customerAddress, string dueDate, List<Shape> shapes)
         {
             base.CustomerName = customerName;
@@ -23,18 +23,16 @@ namespace Order.Management
         }
         public void generateTable()
         {
-            PrintLine();
+            PrintLine(new string('-', tableWidth));
             PrintRow("        ", "   Qty   ");
-            PrintLine();
+            PrintLine(new string('-', tableWidth));
             PrintRow("Square",base.OrderedBlocks[0].TotalQuantityOfShape().ToString());
             PrintRow("Triangle", base.OrderedBlocks[1].TotalQuantityOfShape().ToString());
             PrintRow("Circle", base.OrderedBlocks[2].TotalQuantityOfShape().ToString());
-            PrintLine();
+            PrintLine(new string('-', tableWidth));
         }
-        public void PrintLine()
-        {
-            Console.WriteLine(new string('-', tableWidth));
-        }
+        //Consider moving this to the base class 
+        
 
         public void PrintRow(params string[] columns)
         {
