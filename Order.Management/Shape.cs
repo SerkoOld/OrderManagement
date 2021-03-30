@@ -18,7 +18,12 @@ namespace Order.Management
     abstract class Shape
     {
         public string Name { get; set; }
-        public int Price { get; set; }
+        private double _price; 
+        //Price is decimal value of 2 decimal places 
+        public double Price {
+            get { return Math.Round(_price, 2); }
+            set { _price = value; }
+        }
         public int AdditionalCharge { get; set; }
         public int NumberOfRedShape { get; set; }
         public int NumberOfBlueShape { get; set; }
@@ -32,7 +37,7 @@ namespace Order.Management
         {
             return NumberOfRedShape * AdditionalCharge;
         }
-        public abstract int Total();
+        public abstract double Total();
 
     }
 }
