@@ -23,19 +23,15 @@ namespace Order.Management
 
         public void generateTable()
         {
-            PrintLine();
+            PrintLine(new string('-', tableWidth));
             PrintRow("        ", "   Red   ", "  Blue  ", " Yellow ");
-            PrintLine();
+            PrintLine(new string('-', tableWidth));
             PrintRow("Square", base.OrderedBlocks[0].NumberOfRedShape.ToString(), base.OrderedBlocks[0].NumberOfBlueShape.ToString(), base.OrderedBlocks[0].NumberOfYellowShape.ToString());
             PrintRow("Triangle", base.OrderedBlocks[1].NumberOfRedShape.ToString(), base.OrderedBlocks[1].NumberOfBlueShape.ToString(), base.OrderedBlocks[1].NumberOfYellowShape.ToString());
             PrintRow("Circle", base.OrderedBlocks[2].NumberOfRedShape.ToString(), base.OrderedBlocks[2].NumberOfBlueShape.ToString(), base.OrderedBlocks[2].NumberOfYellowShape.ToString());
-            PrintLine();
+            PrintLine(new string('-', tableWidth));
         }
-       
-        public void PrintLine()
-        {
-            Console.WriteLine(new string('-', tableWidth));
-        }
+        //Consider moving this to the base class 
 
         public void PrintRow(params string[] columns)
         {
