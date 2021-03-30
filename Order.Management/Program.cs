@@ -122,6 +122,7 @@ namespace Order.Management
             }
             return value; 
         }
+        // Create a function to read names only {first name + last name} 
         private static string ReadName(string prompt)
         {
             Console.Write(prompt);
@@ -133,6 +134,7 @@ namespace Order.Management
             }
             return name;
         }
+        // Create a fuction to read string only. This can be improved depending on the address format 
         public static string ReadAddress(string prompt)
         {
             Console.Write(prompt);
@@ -144,6 +146,7 @@ namespace Order.Management
             }
             return input;
         }
+        // Create a function that returns a DateTime type only
         private static DateTime ReadDate(string prompt)
         {
             Console.Write(prompt);
