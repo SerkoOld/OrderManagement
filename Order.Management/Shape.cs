@@ -7,6 +7,7 @@ namespace Order.Management
     /*
     The main Math class
     Contains all methods for performing basic math functions
+*/
     /// <summary>
     /// The main Shape class.
     /// Abstract class contains all methods for performing basic shape functions.
