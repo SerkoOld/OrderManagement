@@ -16,20 +16,20 @@ namespace Order.Management
             base.NumberOfBlueShape = blue;
             base.NumberOfYellowShape = yellow;
         }
-        public override int Total()
+        public override double Total()
         {
             return RedCirclesTotal() + BlueCirclesTotal() + YellowCirclesTotal();
         }
 
-        public int RedCirclesTotal()
+        public double RedCirclesTotal()
         {
             return (base.NumberOfRedShape * Price);
         }
-        public int BlueCirclesTotal()
+        public double BlueCirclesTotal()
         {
             return (base.NumberOfBlueShape * Price);
         }
-        public int YellowCirclesTotal()
+        public double YellowCirclesTotal()
         {
             return (base.NumberOfYellowShape * Price);
         }
