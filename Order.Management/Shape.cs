@@ -4,6 +4,16 @@ using System.Text;
 
 namespace Order.Management
 {
+    /*
+    The main Math class
+    Contains all methods for performing basic math functions
+    /// <summary>
+    /// The main Shape class.
+    /// Abstract class contains all methods for performing basic shape functions.
+    /// </summary>
+    /// <remarks>
+    /// <para>More specific shapes can inherit this class.</para>
+    /// </remarks>
     abstract class Shape
     {
         public string Name { get; set; }
