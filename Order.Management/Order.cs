@@ -19,5 +19,10 @@ namespace Order.Management
         {
             return "\nName: " + CustomerName + " Address: " + Address + " Due Date: " + DueDate + " Order #: " + OrderNumber;
         }
+
+        public void PrintLine(string lineToPrint)
+        {
+            Console.WriteLine(lineToPrint);
+        }
     }
 }
