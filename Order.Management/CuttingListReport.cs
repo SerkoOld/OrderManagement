@@ -6,35 +6,33 @@ namespace Order.Management
 {
     class CuttingListReport : Order
     {
-        public int tableWidth = 20;
+        private int tableWidth = 20;
         public CuttingListReport(string customerName, string customerAddress, string dueDate, List<Shape> shapes)
         {
-            base.CustomerName = customerName;
-            base.Address = customerAddress;
-            base.DueDate = dueDate;
-            base.OrderedBlocks = shapes;
+            CustomerName = customerName;
+            Address = customerAddress;
+            DueDate = dueDate;
+            OrderedBlocks = shapes;
         }
 
         public override void GenerateReport()
         {
             Console.WriteLine("\nYour cutting list has been generated: ");
-            Console.WriteLine(base.ToString());
+            Console.WriteLine(ToString());
             generateTable();
         }
         public void generateTable()
         {
-            PrintLine();
+            PrintLine(new string('-', tableWidth));
             PrintRow("        ", "   Qty   ");
-            PrintLine();
-            PrintRow("Square",base.OrderedBlocks[0].TotalQuantityOfShape().ToString());
-            PrintRow("Triangle", base.OrderedBlocks[1].TotalQuantityOfShape().ToString());
-            PrintRow("Circle", base.OrderedBlocks[2].TotalQuantityOfShape().ToString());
-            PrintLine();
+            PrintLine(new string('-', tableWidth));
+            PrintRow("Square", OrderedBlocks[0].TotalQuantityOfShape().ToString());
+            PrintRow("Triangle", OrderedBlocks[1].TotalQuantityOfShape().ToString());
+            PrintRow("Circle", OrderedBlocks[2].TotalQuantityOfShape().ToString());
+            PrintLine(new string('-', tableWidth));
         }
-        public void PrintLine()
-        {
-            Console.WriteLine(new string('-', tableWidth));
-        }
+        //Consider moving this to the base class 
+        
 
         public void PrintRow(params string[] columns)
         {

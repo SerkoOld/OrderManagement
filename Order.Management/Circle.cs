@@ -6,32 +6,32 @@ namespace Order.Management
 {
     class Circle : Shape
     {
-        public int circlePrice = 3;
+        private double circlePrice = 3;
         public Circle(int red, int blue, int yellow)
         {
             Name = "Circle";
-            base.Price = circlePrice;
+            Price = circlePrice;
             AdditionalCharge = 1;
-            base.NumberOfRedShape = red;
-            base.NumberOfBlueShape = blue;
-            base.NumberOfYellowShape = yellow;
+            NumberOfRedShape = red;
+            NumberOfBlueShape = blue;
+            NumberOfYellowShape = yellow;
         }
-        public override int Total()
+        public override double Total()
         {
             return RedCirclesTotal() + BlueCirclesTotal() + YellowCirclesTotal();
         }
 
-        public int RedCirclesTotal()
+        public double RedCirclesTotal()
         {
-            return (base.NumberOfRedShape * Price);
+            return (NumberOfRedShape * Price);
         }
-        public int BlueCirclesTotal()
+        public double BlueCirclesTotal()
         {
-            return (base.NumberOfBlueShape * Price);
+            return (NumberOfBlueShape * Price);
         }
-        public int YellowCirclesTotal()
+        public double YellowCirclesTotal()
         {
-            return (base.NumberOfYellowShape * Price);
+            return (NumberOfYellowShape * Price);
         }
     }
 }
