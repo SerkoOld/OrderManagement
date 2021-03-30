@@ -53,18 +53,6 @@ namespace Order.Management
             return triangle;
         }
 
-        // User Console Input
-        public static string userInput()
-        {
-            string input = Console.ReadLine();
-            while (string.IsNullOrEmpty(input))
-            {
-                Console.WriteLine("please enter valid details");
-                input = Console.ReadLine();
-            }
-            return input;
-        }
-
         // Generate Painting Report 
         private static void PaintingReport(string customerName, string address, string dueDate, List<Shape> orderedShapes)
         {
