@@ -7,16 +7,16 @@ namespace Order.Management
     class Square : Shape
     {
 
-        public int SquarePrice = 1;
+        private double squarePrice = 1;
 
         public Square(int numberOfRedSquares, int numberOfBlueSquares, int numberOfYellowSquares)
         {
             Name = "Square";
-            base.Price = SquarePrice;
+            Price = squarePrice;
             AdditionalCharge = 1;
-            base.NumberOfRedShape = numberOfRedSquares;
-            base.NumberOfBlueShape = numberOfBlueSquares;
-            base.NumberOfYellowShape = numberOfYellowSquares;
+            NumberOfRedShape = numberOfRedSquares;
+            NumberOfBlueShape = numberOfBlueSquares;
+            NumberOfYellowShape = numberOfYellowSquares;
         }
 
         public override double Total()
@@ -26,15 +26,15 @@ namespace Order.Management
 
         public double RedSquaresTotal()
         {
-            return (base.NumberOfRedShape * Price);
+            return (NumberOfRedShape * Price);
         }
         public double BlueSquaresTotal()
         {
-            return (base.NumberOfBlueShape * Price);
+            return (NumberOfBlueShape * Price);
         }
         public double YellowSquaresTotal()
         {
-            return (base.NumberOfYellowShape * Price);
+            return (NumberOfYellowShape * Price);
         }
     }
 }
