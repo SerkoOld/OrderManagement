@@ -19,20 +19,20 @@ namespace Order.Management
             base.NumberOfYellowShape = numberOfYellowSquares;
         }
 
-        public override int Total()
+        public override double Total()
         {
             return RedSquaresTotal() + BlueSquaresTotal() + YellowSquaresTotal();
         }
 
-        public int RedSquaresTotal()
+        public double RedSquaresTotal()
         {
             return (base.NumberOfRedShape * Price);
         }
-        public int BlueSquaresTotal()
+        public double BlueSquaresTotal()
         {
             return (base.NumberOfBlueShape * Price);
         }
-        public int YellowSquaresTotal()
+        public double YellowSquaresTotal()
         {
             return (base.NumberOfYellowShape * Price);
         }
