@@ -6,30 +6,31 @@ namespace Order.Management
 {
     class Circle : Shape
     {
-        public int circlePrice = 3;
+        private const int circlePrice = 3;
         public Circle(int red, int blue, int yellow)
         {
             Name = "Circle";
-            base.Price = circlePrice;
+            Price = circlePrice;
             AdditionalCharge = 1;
-            base.NumberOfRedShape = red;
-            base.NumberOfBlueShape = blue;
-            base.NumberOfYellowShape = yellow;
+            NumberOfRedShape = red;
+            NumberOfBlueShape = blue;
+            NumberOfYellowShape = yellow;
         }
         public override int Total()
         {
             return RedCirclesTotal() + BlueCirclesTotal() + YellowCirclesTotal();
         }
+        
 
-        public int RedCirclesTotal()
+        private int RedCirclesTotal()
         {
             return (base.NumberOfRedShape * Price);
         }
-        public int BlueCirclesTotal()
+        private int BlueCirclesTotal()
         {
             return (base.NumberOfBlueShape * Price);
         }
-        public int YellowCirclesTotal()
+        private int YellowCirclesTotal()
         {
             return (base.NumberOfYellowShape * Price);
         }
