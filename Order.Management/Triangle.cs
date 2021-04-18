@@ -6,15 +6,15 @@ namespace Order.Management
 {
     class Triangle : Shape
     {
-        public int TrianglePrice = 2;
+        private const int TrianglePrice = 2;
         public Triangle(int numberOfRedTriangles, int numberOfBlueTriangles, int numberOfYellowTriangles)
         {
             Name = "Triangle";
-            base.Price = TrianglePrice;
+            Price = TrianglePrice;
             AdditionalCharge = 1;
-            base.NumberOfRedShape = numberOfRedTriangles;
-            base.NumberOfBlueShape = numberOfBlueTriangles;
-            base.NumberOfYellowShape = numberOfYellowTriangles;
+            NumberOfRedShape = numberOfRedTriangles;
+            NumberOfBlueShape = numberOfBlueTriangles;
+            NumberOfYellowShape = numberOfYellowTriangles;
         }
 
         public override int Total()
@@ -22,15 +22,15 @@ namespace Order.Management
             return RedTrianglesTotal() + BlueTrianglesTotal() + YellowTrianglesTotal();
         }
 
-        public int RedTrianglesTotal()
+        private int RedTrianglesTotal()
         {
             return (base.NumberOfRedShape * Price);
         }
-        public int BlueTrianglesTotal()
+        private int BlueTrianglesTotal()
         {
             return (base.NumberOfBlueShape * Price);
         }
-        public int YellowTrianglesTotal()
+        private int YellowTrianglesTotal()
         {
             return (base.NumberOfYellowShape * Price);
         }
