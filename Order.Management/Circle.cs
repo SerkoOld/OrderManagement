@@ -20,6 +20,7 @@ namespace Order.Management
         {
             return RedCirclesTotal() + BlueCirclesTotal() + YellowCirclesTotal();
         }
+        
 
         private int RedCirclesTotal()
         {
