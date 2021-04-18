@@ -6,7 +6,7 @@ namespace Order.Management
 {
     abstract class Shape
     {
-        public string Name { get; set; }
+        protected string Name { get; set; }
         public int Price { get; set; }
         public int AdditionalCharge { get; set; }
         public int NumberOfRedShape { get; set; }
@@ -17,10 +17,10 @@ namespace Order.Management
             return NumberOfRedShape + NumberOfBlueShape + NumberOfYellowShape;
         }
 
-        public int AdditionalChargeTotal()
-        {
-            return NumberOfRedShape * AdditionalCharge;
-        }
+        //public int AdditionalChargeTotal()
+        //{
+          //  return NumberOfRedShape * AdditionalCharge;
+        //}
         public abstract int Total();
 
     }
