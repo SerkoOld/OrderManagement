@@ -77,7 +77,6 @@ namespace Order.Management
             {
                 Console.WriteLine("please enter valid details");
                 input = Console.ReadLine();
-
             }
             return input;
         }

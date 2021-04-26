@@ -2,22 +2,47 @@
 {
     public abstract class Shape
     {
-        public string Name { get; set; }
-        public int Price { get; set; }
-        public int AdditionalCharge { get; set; }
-        public int NumberOfRedShape { get; set; }
-        public int NumberOfBlueShape { get; set; }
-        public int NumberOfYellowShape { get; set; }
+        abstract public string Name { get; }
+        abstract public int Price { get; }
+
+        public int RedColorSurcharge => 1;
+        public int NumberOfRedShape { get; }
+        public int NumberOfBlueShape { get; }
+        public int NumberOfYellowShape { get; }
+
+        protected Shape(int numberOfRedShape, int numberOfBlueShape, int numberOfYellowShape)
+        {
+            NumberOfRedShape = numberOfRedShape;
+            NumberOfBlueShape = numberOfBlueShape;
+            NumberOfYellowShape = numberOfYellowShape;
+        }
+
         public int TotalQuantityOfShape()
         {
             return NumberOfRedShape + NumberOfBlueShape + NumberOfYellowShape;
         }
 
-        public int AdditionalChargeTotal()
+        public int RedColorChargeTotal()
         {
-            return NumberOfRedShape * AdditionalCharge;
+            return NumberOfRedShape * RedColorSurcharge;
         }
-        public abstract int Total();
 
+        public int Total()
+        {
+            return RedShapeTotalPrice() + BlueShapeTotalPrice() + YellowShapeTotalPrice();
+        }
+
+        private int RedShapeTotalPrice()
+        {
+            return (NumberOfRedShape * Price);
+        }
+        private int BlueShapeTotalPrice()
+        {
+            return (NumberOfBlueShape * Price);
+        }
+        private int YellowShapeTotalPrice()
+        {
+            return (NumberOfYellowShape * Price);
+        }
     }
 }

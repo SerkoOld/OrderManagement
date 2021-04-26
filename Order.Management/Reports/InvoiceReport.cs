@@ -25,7 +25,7 @@ namespace Order.Management.Reports
 
         private void RedPaintSurcharge()
         {
-            Console.WriteLine("Red Color Surcharge       " + TotalAmountOfRedShapes() + " @ $" + _order.OrderedBlocks[0].AdditionalCharge + " ppi = $" + TotalPriceRedPaintSurcharge());
+            Console.WriteLine("Red Color Surcharge       " + TotalAmountOfRedShapes() + " @ $" + _order.OrderedBlocks[0].RedColorSurcharge + " ppi = $" + TotalPriceRedPaintSurcharge());
         }
 
         private int TotalAmountOfRedShapes()
@@ -36,7 +36,7 @@ namespace Order.Management.Reports
 
         private int TotalPriceRedPaintSurcharge()
         {
-            return TotalAmountOfRedShapes() * _order.OrderedBlocks[0].AdditionalCharge;
+            return TotalAmountOfRedShapes() * _order.OrderedBlocks[0].RedColorSurcharge;
         }
         private void GenerateTable()
         {
