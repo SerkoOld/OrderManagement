@@ -1,11 +1,11 @@
 ﻿namespace Order.Management.Shapes
 {
-    class Circle : Shape
+    public class Circle : Shape
     {
-        public override string Name => "Circle";
+        public override ShapeName Name => ShapeName.Circle;
 
         public override int Price => 3;
 
-        public Circle(int numberOfRedTriangles, int numberOfBlueTriangles, int numberOfYellowTriangles) : base(numberOfRedTriangles, numberOfBlueTriangles, numberOfYellowTriangles) { }
+        public Circle(int numberOfRedCircles, int numberOfBlueCircles, int numberOfYellowCircles) : base(numberOfRedCircles, numberOfBlueCircles, numberOfYellowCircles) { }
     }
 }

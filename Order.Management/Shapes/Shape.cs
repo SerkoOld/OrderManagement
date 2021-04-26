@@ -2,10 +2,10 @@
 {
     public abstract class Shape
     {
-        abstract public string Name { get; }
+        abstract public ShapeName Name { get; }
         abstract public int Price { get; }
 
-        public int RedColorSurcharge => 1;
+        public static int RedColorSurcharge => 1;
         public int NumberOfRedShape { get; }
         public int NumberOfBlueShape { get; }
         public int NumberOfYellowShape { get; }

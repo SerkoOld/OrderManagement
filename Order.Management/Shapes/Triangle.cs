@@ -1,8 +1,8 @@
 ﻿namespace Order.Management.Shapes
 {
-    class Triangle : Shape
+    public class Triangle : Shape
     {
-        public override string Name => "Triangle";
+        public override ShapeName Name => ShapeName.Triangle;
 
         public override int Price => 2;
 

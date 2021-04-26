@@ -1,11 +1,11 @@
 ﻿namespace Order.Management.Shapes
 {
-    class Square : Shape
+    public class Square : Shape
     {
-        public override string Name => "Square";
+        public override ShapeName Name => ShapeName.Square;
 
         public override int Price => 1;
 
-        public Square(int numberOfRedTriangles, int numberOfBlueTriangles, int numberOfYellowTriangles) : base(numberOfRedTriangles, numberOfBlueTriangles, numberOfYellowTriangles) { }
+        public Square(int numberOfRedSquares, int numberOfBlueSquares, int numberOfYellowSquares) : base(numberOfRedSquares, numberOfBlueSquares, numberOfYellowSquares) { }
     }
 }
