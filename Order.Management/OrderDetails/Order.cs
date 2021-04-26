@@ -28,5 +28,13 @@ namespace Order.Management.OrderDetails
         {
             return "\nName: " + CustomerInfo.Name + " Address: " + CustomerInfo.Address + " Due Date: " + DueDate.ToString("dd MMM yyyy") + " Order #: " + OrderNumber;
         }
+
+        public decimal Total()
+        {
+            var total = Circle.Total() + Circle.RedColorChargeTotal() + 
+                        Square.Total() + Square.RedColorChargeTotal() +     
+                        Triangle.Total() + Triangle.RedColorChargeTotal();
+            return total;
+        }
     }
 }

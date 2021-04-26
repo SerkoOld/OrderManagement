@@ -5,9 +5,9 @@ namespace Order.Management.Shapes
     public abstract class Shape
     {
         abstract public ShapeName Name { get; }
-        abstract public int Price { get; }
+        abstract public decimal Price { get; }
 
-        public static int RedColorSurcharge => 1;
+        public static decimal RedColorSurcharge => 1;
         public int NumberOfRedShape { get; }
         public int NumberOfBlueShape { get; }
         public int NumberOfYellowShape { get; }
@@ -24,25 +24,25 @@ namespace Order.Management.Shapes
             return NumberOfRedShape + NumberOfBlueShape + NumberOfYellowShape;
         }
 
-        public int RedColorChargeTotal()
+        public decimal RedColorChargeTotal()
         {
             return NumberOfRedShape * RedColorSurcharge;
         }
 
-        public int Total()
+        public decimal Total()
         {
             return RedShapeTotalPrice() + BlueShapeTotalPrice() + YellowShapeTotalPrice();
         }
 
-        private int RedShapeTotalPrice()
+        private decimal RedShapeTotalPrice()
         {
             return (NumberOfRedShape * Price);
         }
-        private int BlueShapeTotalPrice()
+        private decimal BlueShapeTotalPrice()
         {
             return (NumberOfBlueShape * Price);
         }
-        private int YellowShapeTotalPrice()
+        private decimal YellowShapeTotalPrice()
         {
             return (NumberOfYellowShape * Price);
         }

@@ -6,6 +6,7 @@ namespace Order.Management.Reports
     class InvoiceReport : IReport
     {
         private const int FirstColumnWidth = 25;
+        private const int SecondColumnWidth = 15;
         private const int TableWidth = 73;
         private readonly OrderDetails.Order _order;
         private readonly ReportHelper _printReportHelper;
@@ -33,6 +34,8 @@ namespace Order.Management.Reports
             OrderShapeDetails(_triangle);
             OrderShapeDetails(_circle);
             RedPaintSurcharge();
+            _printReportHelper.PrintLine();
+            PrintTotal();
         }
 
         private void GenerateTable()
@@ -53,13 +56,16 @@ namespace Order.Management.Reports
 
         private void OrderShapeDetails(Shape shape)
         {
-            Console.WriteLine($"{shape.Name,-FirstColumnWidth}" + shape.TotalQuantityOfShape() + " @ $" + shape.Price + " ppi = $" + shape.Total());
+            var firstColumnValue = shape.Name;
+            var secondColumnValue = $"{shape.TotalQuantityOfShape()} @ {shape.Price:C} ppi = ";
+            Console.WriteLine($"{firstColumnValue,-FirstColumnWidth}{secondColumnValue,-SecondColumnWidth}{shape.Total():C}");
         }
 
         private void RedPaintSurcharge()
         {
             var firstColumnValue = "Red Color Surcharge";
-            Console.WriteLine($"{firstColumnValue,-FirstColumnWidth}" + TotalAmountOfRedShapes() + " @ $" + Shape.RedColorSurcharge + " ppi = $" + TotalPriceRedPaintSurcharge());
+            var secondColumnValue = $"{TotalAmountOfRedShapes()} @ {Shape.RedColorSurcharge:C} ppi = ";
+            Console.WriteLine($"{firstColumnValue,-FirstColumnWidth}{secondColumnValue,-SecondColumnWidth}{TotalPriceRedPaintSurcharge():C}");
         }
 
         private int TotalAmountOfRedShapes()
@@ -67,9 +73,16 @@ namespace Order.Management.Reports
             return _square.NumberOfRedShape + _triangle.NumberOfRedShape + _circle.NumberOfRedShape;
         }
 
-        private int TotalPriceRedPaintSurcharge()
+        private decimal TotalPriceRedPaintSurcharge()
         {
             return TotalAmountOfRedShapes() * Shape.RedColorSurcharge;
+        }
+
+        private void PrintTotal()
+        {
+            var firstColumnValue = "Total:";
+            const int firstAndSecondColumnWidth = FirstColumnWidth + SecondColumnWidth;
+            Console.WriteLine($"{firstColumnValue,-firstAndSecondColumnWidth} {_order.Total():C}");
         }
     }
 }
