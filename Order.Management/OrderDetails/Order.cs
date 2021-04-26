@@ -6,18 +6,23 @@ namespace Order.Management.OrderDetails
 {
     public class Order
     {
-        public Order(CustomerInfo customerInfo, DateTime dueDate, List<Shape> orderedBlocks)
-        {
-            CustomerInfo = customerInfo;
-            DueDate = dueDate;
-            OrderedBlocks = orderedBlocks;
-            //Nothing is said about generating OrderNumber, so I left it as it was defaulted to zero
-        }
+        private List<Shape> OrderedBlocks { get; }
+
+        public Circle Circle => (Circle)OrderedBlocks.Find(blocks => blocks.Name == ShapeName.Circle);
+        public Square Square => (Square)OrderedBlocks.Find(blocks => blocks.Name == ShapeName.Square);
+        public Triangle Triangle => (Triangle)OrderedBlocks.Find(blocks => blocks.Name == ShapeName.Triangle);
 
         public CustomerInfo CustomerInfo { get; }
         public DateTime DueDate { get; }
         public int OrderNumber { get; }
-        public List<Shape> OrderedBlocks { get; }
+
+        public Order(CustomerInfo customerInfo, DateTime dueDate, List<Shape> orderedBlocks)
+        {
+            CustomerInfo = customerInfo ?? throw new ArgumentNullException(nameof(customerInfo));
+            DueDate = dueDate;
+            OrderedBlocks = orderedBlocks ?? throw new ArgumentNullException(nameof(orderedBlocks));
+            //Nothing is said about generating OrderNumber, so I left it as it was defaulted to zero
+        }
 
         public string PrintOrderDetails()
         {
