@@ -122,21 +122,21 @@ namespace Order.Management
         }
 
         // Generate Painting Report 
-        private static void PaintingReport(OrderDetails.Order order)
+        private static void PaintingReport(IOrder order)
         {
             PaintingReport paintingReport = new PaintingReport(order);
             paintingReport.GenerateReport();
         }
 
         // Generate Painting Report 
-        private static void CuttingListReport(OrderDetails.Order order)
+        private static void CuttingListReport(IOrder order)
         {
             CuttingListReport cuttingListReport = new CuttingListReport(order);
             cuttingListReport.GenerateReport();
         }
 
         // Generate Invoice Report 
-        private static void InvoiceReport(OrderDetails.Order order)
+        private static void InvoiceReport(IOrder order)
         {
             InvoiceReport invoiceReport = new InvoiceReport(order);
             invoiceReport.GenerateReport();

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace Order.Management.OrderDetails
 {
-    public class Order
+    public class Order : IOrder
     {
         private List<Shape> OrderedBlocks { get; }
 
@@ -31,8 +31,8 @@ namespace Order.Management.OrderDetails
 
         public decimal Total()
         {
-            var total = Circle.Total() + Circle.RedColorChargeTotal() + 
-                        Square.Total() + Square.RedColorChargeTotal() +     
+            var total = Circle.Total() + Circle.RedColorChargeTotal() +
+                        Square.Total() + Square.RedColorChargeTotal() +
                         Triangle.Total() + Triangle.RedColorChargeTotal();
             return total;
         }

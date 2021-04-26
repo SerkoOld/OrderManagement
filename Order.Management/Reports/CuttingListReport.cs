@@ -1,14 +1,15 @@
-﻿using System;
+﻿using Order.Management.OrderDetails;
+using System;
 
 namespace Order.Management.Reports
 {
     class CuttingListReport : IReport
     {
         private const int TableWidth = 20;
-        private readonly OrderDetails.Order _order;
+        private readonly IOrder _order;
         private readonly ReportHelper _printReportHelper;
 
-        public CuttingListReport(OrderDetails.Order order)
+        public CuttingListReport(IOrder order)
         {
             _order = order ?? throw new ArgumentNullException(nameof(order));
             _printReportHelper = new ReportHelper(TableWidth);

@@ -1,4 +1,5 @@
-﻿using Order.Management.Shapes;
+﻿using Order.Management.OrderDetails;
+using Order.Management.Shapes;
 using System;
 
 namespace Order.Management.Reports
@@ -8,14 +9,14 @@ namespace Order.Management.Reports
         private const int FirstColumnWidth = 25;
         private const int SecondColumnWidth = 15;
         private const int TableWidth = 73;
-        private readonly OrderDetails.Order _order;
+        private readonly IOrder _order;
         private readonly ReportHelper _printReportHelper;
 
         private readonly Square _square;
         private readonly Triangle _triangle;
         private readonly Circle _circle;
 
-        public InvoiceReport(OrderDetails.Order order)
+        public InvoiceReport(IOrder order)
         {
             _order = order ?? throw new ArgumentNullException(nameof(order));
             _square = order.Square ?? throw new ArgumentNullException(nameof(order.Square));

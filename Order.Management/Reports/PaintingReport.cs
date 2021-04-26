@@ -1,14 +1,15 @@
-﻿using System;
+﻿using Order.Management.OrderDetails;
+using System;
 
 namespace Order.Management.Reports
 {
     class PaintingReport : IReport
     {
         private const int TableWidth = 73; 
-        private readonly OrderDetails.Order _order;
+        private readonly IOrder _order;
         private readonly ReportHelper _printReportHelper;
 
-        public PaintingReport(OrderDetails.Order order)
+        public PaintingReport(IOrder order)
         {
             _order = order ?? throw new ArgumentNullException(nameof(order));
             _printReportHelper = new ReportHelper(TableWidth);
