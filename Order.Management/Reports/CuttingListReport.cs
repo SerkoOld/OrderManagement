@@ -4,12 +4,12 @@ namespace Order.Management.Reports
 {
     class CuttingListReport : BaseReport
     {
+        private readonly OrderDetails.Order _order;
         protected override int TableWidth => 20;
-        OrderDetails.Order _order;
 
         public CuttingListReport(OrderDetails.Order order)
         {
-            _order = order;
+            _order = order ?? throw new ArgumentNullException(nameof(order));
         }
 
         public override void GenerateReport()
@@ -21,12 +21,22 @@ namespace Order.Management.Reports
         private void generateTable()
         {
             PrintLine();
-            PrintRow("        ", "   Qty   ");
+            PrintRow("", "Qty");
             PrintLine();
-            PrintRow("Square", _order.OrderedBlocks[0].TotalQuantityOfShape().ToString());
-            PrintRow("Triangle", _order.OrderedBlocks[1].TotalQuantityOfShape().ToString());
-            PrintRow("Circle", _order.OrderedBlocks[2].TotalQuantityOfShape().ToString());
+            PrintShapeInformationRow(_order.Square);
+            PrintShapeInformationRow(_order.Triangle);
+            PrintShapeInformationRow(_order.Circle);
             PrintLine();
+        }
+
+        private void PrintShapeInformationRow(Shapes.Shape shape)
+        {
+            if (shape is null)
+            {
+                throw new ArgumentNullException(nameof(shape));
+            }
+
+            PrintRow(shape.Name.ToString(), shape.TotalQuantityOfShape().ToString());
         }
     }
 }

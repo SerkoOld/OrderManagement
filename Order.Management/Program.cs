@@ -18,9 +18,7 @@ namespace Order.Management
             var order = new OrderDetails.Order(customerInfo, customerDueDate, orderedShapes);
 
             InvoiceReport(order);
-
             CuttingListReport(order);
-
             PaintingReport(order);
         }
         

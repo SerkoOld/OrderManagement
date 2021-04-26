@@ -4,12 +4,12 @@ namespace Order.Management.Reports
 {
     class PaintingReport : BaseReport
     {
+        private readonly OrderDetails.Order _order;
         protected override int TableWidth => 73; 
-        OrderDetails.Order _order;
 
         public PaintingReport(OrderDetails.Order order)
         {
-            _order = order;
+            _order = order ?? throw new ArgumentNullException(nameof(order));
         }
 
         public override void GenerateReport()
@@ -22,12 +22,22 @@ namespace Order.Management.Reports
         private void GenerateTable()
         {
             PrintLine();
-            PrintRow("        ", "   Red   ", "  Blue  ", " Yellow ");
+            PrintRow("", "Red", "Blue", "Yellow");
             PrintLine();
-            PrintRow("Square", _order.OrderedBlocks[0].NumberOfRedShape.ToString(), _order.OrderedBlocks[0].NumberOfBlueShape.ToString(), _order.OrderedBlocks[0].NumberOfYellowShape.ToString());
-            PrintRow("Triangle", _order.OrderedBlocks[1].NumberOfRedShape.ToString(), _order.OrderedBlocks[1].NumberOfBlueShape.ToString(), _order.OrderedBlocks[1].NumberOfYellowShape.ToString());
-            PrintRow("Circle", _order.OrderedBlocks[2].NumberOfRedShape.ToString(), _order.OrderedBlocks[2].NumberOfBlueShape.ToString(), _order.OrderedBlocks[2].NumberOfYellowShape.ToString());
+            PrintShapeInformationRow(_order.Square);
+            PrintShapeInformationRow(_order.Triangle);
+            PrintShapeInformationRow(_order.Circle);
             PrintLine();
+        }
+
+        private void PrintShapeInformationRow(Shapes.Shape shape)
+        {
+            if (shape is null)
+            {
+                throw new ArgumentNullException(nameof(shape));
+            }
+
+            PrintRow(shape.Name.ToString(), shape.NumberOfRedShape.ToString(), shape.NumberOfBlueShape.ToString(), shape.NumberOfYellowShape.ToString());
         }
     }
 }
