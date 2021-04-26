@@ -1,4 +1,6 @@
-﻿namespace Order.Management.Shapes
+﻿using Order.Management.Exceptions;
+
+namespace Order.Management.Shapes
 {
     public abstract class Shape
     {
@@ -12,9 +14,9 @@
 
         protected Shape(int numberOfRedShape, int numberOfBlueShape, int numberOfYellowShape)
         {
-            NumberOfRedShape = numberOfRedShape;
-            NumberOfBlueShape = numberOfBlueShape;
-            NumberOfYellowShape = numberOfYellowShape;
+            NumberOfRedShape = numberOfRedShape < 0 ? throw new ShapeNumberIsNegativeException() : numberOfRedShape;
+            NumberOfBlueShape = numberOfBlueShape < 0 ? throw new ShapeNumberIsNegativeException() : numberOfBlueShape;
+            NumberOfYellowShape = numberOfYellowShape < 0 ? throw new ShapeNumberIsNegativeException() : numberOfYellowShape;
         }
 
         public int TotalQuantityOfShape()

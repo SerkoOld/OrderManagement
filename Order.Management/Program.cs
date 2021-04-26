@@ -26,11 +26,11 @@ namespace Order.Management
         public static Circle OrderCirclesInput()
         {
             Console.Write("\nPlease input the number of Red Circle: ");
-            int redCircle = GetUserInputAsInteger();
+            int redCircle = GetUserInputAsPositiveInteger();
             Console.Write("Please input the number of Blue Circle: ");
-            int blueCircle = GetUserInputAsInteger();
+            int blueCircle = GetUserInputAsPositiveInteger();
             Console.Write("Please input the number of Yellow Circle: ");
-            int yellowCircle = GetUserInputAsInteger();
+            int yellowCircle = GetUserInputAsPositiveInteger();
 
             Circle circle = new Circle(redCircle, blueCircle, yellowCircle);
             return circle;
@@ -40,11 +40,11 @@ namespace Order.Management
         public static Square OrderSquaresInput()
         {
             Console.Write("\nPlease input the number of Red Squares: ");
-            int redSquare = GetUserInputAsInteger();
+            int redSquare = GetUserInputAsPositiveInteger();
             Console.Write("Please input the number of Blue Squares: ");
-            int blueSquare = GetUserInputAsInteger();
+            int blueSquare = GetUserInputAsPositiveInteger();
             Console.Write("Please input the number of Yellow Squares: ");
-            int yellowSquare = GetUserInputAsInteger();
+            int yellowSquare = GetUserInputAsPositiveInteger();
 
             Square square = new Square(redSquare, blueSquare, yellowSquare);
             return square;
@@ -54,11 +54,11 @@ namespace Order.Management
         public static Triangle OrderTrianglesInput()
         {
             Console.Write("\nPlease input the number of Red Triangles: ");
-            int redTriangle = GetUserInputAsInteger();
+            int redTriangle = GetUserInputAsPositiveInteger();
             Console.Write("Please input the number of Blue Triangles: ");
-            int blueTriangle = GetUserInputAsInteger();
+            int blueTriangle = GetUserInputAsPositiveInteger();
             Console.Write("Please input the number of Yellow Triangles: ");
-            int yellowTriangle = GetUserInputAsInteger();
+            int yellowTriangle = GetUserInputAsPositiveInteger();
 
             Triangle triangle = new Triangle(redTriangle, blueTriangle, yellowTriangle);
             return triangle;
@@ -80,10 +80,11 @@ namespace Order.Management
         }
 
         /// <summary>
-        /// Converts user input to integer. If nothing is provided, cosiders value as zero (as per example in the requirements). If user input cannot be converted into integer, gives an error and asks user to enter value again.
+        /// Converts user input to integer. If nothing is provided, cosiders value as zero (as per example in the requirements). 
+        /// If user input cannot be converted into integer or is a negative integer, it gives an error and asks user to enter value again.
         /// </summary>
         /// <returns></returns>
-        public static int GetUserInputAsInteger()
+        public static int GetUserInputAsPositiveInteger()
         {
             string input = Console.ReadLine();
             int result;
@@ -93,7 +94,7 @@ namespace Order.Management
                 return 0;
             }
 
-            while (!int.TryParse(input, out result))
+            while (!int.TryParse(input, out result) || result < 0)
             {
                 Console.WriteLine("please enter valid number");
                 input = Console.ReadLine();
