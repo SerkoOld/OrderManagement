@@ -3,16 +3,16 @@ using System;
 
 namespace Order.Management.Reports
 {
-    class InvoiceReport : BaseReport
+    class InvoiceReport : IReport
     {
-        const int FirstColumnWidth = 25;
+        private const int FirstColumnWidth = 25;
+        private const int TableWidth = 73;
         private readonly OrderDetails.Order _order;
+        private readonly ReportHelper _printReportHelper;
 
         private readonly Square _square;
         private readonly Triangle _triangle;
         private readonly Circle _circle;
-
-        protected override int TableWidth => 73;
 
         public InvoiceReport(OrderDetails.Order order)
         {
@@ -20,9 +20,10 @@ namespace Order.Management.Reports
             _square = order.Square ?? throw new ArgumentNullException(nameof(order.Square));
             _triangle = order.Triangle ?? throw new ArgumentNullException(nameof(order.Triangle));
             _circle = order.Circle ?? throw new ArgumentNullException(nameof(order.Circle));
+            _printReportHelper = new ReportHelper(TableWidth);
         }
 
-        public override void GenerateReport()
+        public void GenerateReport()
         {
             Console.WriteLine("\nYour invoice report has been generated: ");
             Console.WriteLine(_order.PrintOrderDetails());
@@ -36,18 +37,18 @@ namespace Order.Management.Reports
 
         private void GenerateTable()
         {
-            PrintLine();
-            PrintRow("", "Red", "Blue", "Yellow");
-            PrintLine();
+            _printReportHelper.PrintLine();
+            _printReportHelper.PrintRow("", "Red", "Blue", "Yellow");
+            _printReportHelper.PrintLine();
             PrintShapeInformationRow(_square);
             PrintShapeInformationRow(_triangle);
             PrintShapeInformationRow(_circle);
-            PrintLine();
+            _printReportHelper.PrintLine();
         }
 
         private void PrintShapeInformationRow(Shape shape)
         {
-            PrintRow(shape.Name.ToString(), shape.NumberOfRedShape.ToString(), shape.NumberOfBlueShape.ToString(), shape.NumberOfYellowShape.ToString());
+            _printReportHelper.PrintRow(shape.Name.ToString(), shape.NumberOfRedShape.ToString(), shape.NumberOfBlueShape.ToString(), shape.NumberOfYellowShape.ToString());
         }
 
         private void OrderShapeDetails(Shape shape)

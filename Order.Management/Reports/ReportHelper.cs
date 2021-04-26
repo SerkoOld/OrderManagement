@@ -2,18 +2,23 @@
 
 namespace Order.Management.Reports
 {
-    public abstract class BaseReport
+    public class ReportHelper
     {
-        abstract protected int TableWidth { get; }
+        private readonly int _tableWidth;
 
-        protected void PrintLine()
+        public ReportHelper(int tableWidth)
         {
-            Console.WriteLine(new string('-', TableWidth));
+            _tableWidth = tableWidth;
         }
 
-        protected void PrintRow(params string[] columns)
+        public void PrintLine()
         {
-            int width = (TableWidth - columns.Length) / columns.Length;
+            Console.WriteLine(new string('-', _tableWidth));
+        }
+
+        public void PrintRow(params string[] columns)
+        {
+            int width = (_tableWidth - columns.Length) / columns.Length;
             string row = "|";
 
             foreach (string column in columns)
@@ -24,7 +29,7 @@ namespace Order.Management.Reports
             Console.WriteLine(row);
         }
 
-        private string AlignCentre(string text, int width)
+        public string AlignCentre(string text, int width)
         {
             text = text.Length > width ? text.Substring(0, width - 3) + "..." : text;
 
@@ -37,7 +42,5 @@ namespace Order.Management.Reports
                 return text.PadRight(width - (width - text.Length) / 2).PadLeft(width);
             }
         }
-
-        public abstract void GenerateReport();
     }
 }

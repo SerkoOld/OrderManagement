@@ -2,17 +2,19 @@
 
 namespace Order.Management.Reports
 {
-    class PaintingReport : BaseReport
+    class PaintingReport : IReport
     {
+        private const int TableWidth = 73; 
         private readonly OrderDetails.Order _order;
-        protected override int TableWidth => 73; 
+        private readonly ReportHelper _printReportHelper;
 
         public PaintingReport(OrderDetails.Order order)
         {
             _order = order ?? throw new ArgumentNullException(nameof(order));
+            _printReportHelper = new ReportHelper(TableWidth);
         }
 
-        public override void GenerateReport()
+        public void GenerateReport()
         {
             Console.WriteLine("\nYour painting report has been generated: ");
             Console.WriteLine(_order.PrintOrderDetails());
@@ -21,13 +23,13 @@ namespace Order.Management.Reports
 
         private void GenerateTable()
         {
-            PrintLine();
-            PrintRow("", "Red", "Blue", "Yellow");
-            PrintLine();
+            _printReportHelper.PrintLine();
+            _printReportHelper.PrintRow("", "Red", "Blue", "Yellow");
+            _printReportHelper.PrintLine();
             PrintShapeInformationRow(_order.Square);
             PrintShapeInformationRow(_order.Triangle);
             PrintShapeInformationRow(_order.Circle);
-            PrintLine();
+            _printReportHelper.PrintLine();
         }
 
         private void PrintShapeInformationRow(Shapes.Shape shape)
@@ -37,7 +39,7 @@ namespace Order.Management.Reports
                 throw new ArgumentNullException(nameof(shape));
             }
 
-            PrintRow(shape.Name.ToString(), shape.NumberOfRedShape.ToString(), shape.NumberOfBlueShape.ToString(), shape.NumberOfYellowShape.ToString());
+            _printReportHelper.PrintRow(shape.Name.ToString(), shape.NumberOfRedShape.ToString(), shape.NumberOfBlueShape.ToString(), shape.NumberOfYellowShape.ToString());
         }
     }
 }

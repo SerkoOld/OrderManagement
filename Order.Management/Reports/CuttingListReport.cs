@@ -2,31 +2,33 @@
 
 namespace Order.Management.Reports
 {
-    class CuttingListReport : BaseReport
+    class CuttingListReport : IReport
     {
+        private const int TableWidth = 20;
         private readonly OrderDetails.Order _order;
-        protected override int TableWidth => 20;
+        private readonly ReportHelper _printReportHelper;
 
         public CuttingListReport(OrderDetails.Order order)
         {
             _order = order ?? throw new ArgumentNullException(nameof(order));
+            _printReportHelper = new ReportHelper(TableWidth);
         }
 
-        public override void GenerateReport()
+        public void GenerateReport()
         {
             Console.WriteLine("\nYour cutting list has been generated: ");
             Console.WriteLine(_order.PrintOrderDetails());
-            generateTable();
+            GenerateTable();
         }
-        private void generateTable()
+        private void GenerateTable()
         {
-            PrintLine();
-            PrintRow("", "Qty");
-            PrintLine();
+            _printReportHelper.PrintLine();
+            _printReportHelper.PrintRow("", "Qty");
+            _printReportHelper.PrintLine();
             PrintShapeInformationRow(_order.Square);
             PrintShapeInformationRow(_order.Triangle);
             PrintShapeInformationRow(_order.Circle);
-            PrintLine();
+            _printReportHelper.PrintLine();
         }
 
         private void PrintShapeInformationRow(Shapes.Shape shape)
@@ -36,7 +38,7 @@ namespace Order.Management.Reports
                 throw new ArgumentNullException(nameof(shape));
             }
 
-            PrintRow(shape.Name.ToString(), shape.TotalQuantityOfShape().ToString());
+            _printReportHelper.PrintRow(shape.Name.ToString(), shape.TotalQuantityOfShape().ToString());
         }
     }
 }
