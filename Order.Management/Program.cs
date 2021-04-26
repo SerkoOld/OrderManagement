@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Order.Management.OrderDetails;
+using Order.Management.Reports;
+using Order.Management.Shapes;
+using System;
 using System.Collections.Generic;
 
 namespace Order.Management
@@ -8,15 +11,17 @@ namespace Order.Management
         // Main entry
         static void Main(string[] args)
         {
-            var (customerName, address, dueDate) = CustomerInfoInput();
-
+            var customerInfo = CustomerInfoInput();
+            var customerDueDate = CustomerDueDateInput();
             var orderedShapes = CustomerOrderInput();
 
-            InvoiceReport(customerName, address, dueDate, orderedShapes);
+            var order = new OrderDetails.Order(customerInfo, customerDueDate, orderedShapes);
 
-            CuttingListReport(customerName, address, dueDate, orderedShapes);
+            InvoiceReport(order);
 
-            PaintingReport(customerName, address, dueDate, orderedShapes);
+            CuttingListReport(order);
+
+            PaintingReport(order);
         }
         
         // Order Circle Input
@@ -119,36 +124,45 @@ namespace Order.Management
         }
 
         // Generate Painting Report 
-        private static void PaintingReport(string customerName, string address, string dueDate, List<Shape> orderedShapes)
+        private static void PaintingReport(OrderDetails.Order order)
         {
-            PaintingReport paintingReport = new PaintingReport(customerName, address, dueDate, orderedShapes);
+            PaintingReport paintingReport = new PaintingReport(order);
             paintingReport.GenerateReport();
         }
 
         // Generate Painting Report 
-        private static void CuttingListReport(string customerName, string address, string dueDate, List<Shape> orderedShapes)
+        private static void CuttingListReport(OrderDetails.Order order)
         {
-            CuttingListReport cuttingListReport = new CuttingListReport(customerName, address, dueDate, orderedShapes);
+            CuttingListReport cuttingListReport = new CuttingListReport(order);
             cuttingListReport.GenerateReport();
         }
 
         // Generate Invoice Report 
-        private static void InvoiceReport(string customerName, string address, string dueDate, List<Shape> orderedShapes)
+        private static void InvoiceReport(OrderDetails.Order order)
         {
-            InvoiceReport invoiceReport = new InvoiceReport(customerName, address, dueDate, orderedShapes);
+            InvoiceReport invoiceReport = new InvoiceReport(order);
             invoiceReport.GenerateReport();
         }
 
         // Get customer Info
-        private static (string customerName, string address, string dueDate) CustomerInfoInput()
+        private static CustomerInfo CustomerInfoInput()
         {
             Console.Write("Please input your Name: ");
             string customerName = GetUserInputAsString();
             Console.Write("Please input your Address: ");
             string address = GetUserInputAsString();
+
+            var customerInfo = new CustomerInfo(customerName, address);
+
+            return customerInfo;
+        }
+
+        // Get due date
+        private static DateTime CustomerDueDateInput()
+        {
             Console.Write("Please input your Due Date: ");
             DateTime dueDate = GetUserInputAsDate();
-            return (customerName, address, dueDate.ToString("dd MMM yyyy"));
+            return dueDate;
         }
 
         // Get order input
