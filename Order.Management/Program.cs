@@ -23,25 +23,25 @@ namespace Order.Management
         public static Circle OrderCirclesInput()
         {
             Console.Write("\nPlease input the number of Red Circle: ");
-            int redCircle = Convert.ToInt32(userInput());
+            int redCircle = GetUserInputAsInteger();
             Console.Write("Please input the number of Blue Circle: ");
-            int blueCircle = Convert.ToInt32(userInput());
+            int blueCircle = GetUserInputAsInteger();
             Console.Write("Please input the number of Yellow Circle: ");
-            int yellowCircle = Convert.ToInt32(userInput());
+            int yellowCircle = GetUserInputAsInteger();
 
             Circle circle = new Circle(redCircle, blueCircle, yellowCircle);
             return circle;
         }
-        
+
         // Order Squares Input
         public static Square OrderSquaresInput()
         {
             Console.Write("\nPlease input the number of Red Squares: ");
-            int redSquare = Convert.ToInt32(userInput());
+            int redSquare = GetUserInputAsInteger();
             Console.Write("Please input the number of Blue Squares: ");
-            int blueSquare = Convert.ToInt32(userInput());
+            int blueSquare = GetUserInputAsInteger();
             Console.Write("Please input the number of Yellow Squares: ");
-            int yellowSquare = Convert.ToInt32(userInput());
+            int yellowSquare = GetUserInputAsInteger();
 
             Square square = new Square(redSquare, blueSquare, yellowSquare);
             return square;
@@ -51,18 +51,21 @@ namespace Order.Management
         public static Triangle OrderTrianglesInput()
         {
             Console.Write("\nPlease input the number of Red Triangles: ");
-            int redTriangle = Convert.ToInt32(userInput());
+            int redTriangle = GetUserInputAsInteger();
             Console.Write("Please input the number of Blue Triangles: ");
-            int blueTriangle = Convert.ToInt32(userInput());
+            int blueTriangle = GetUserInputAsInteger();
             Console.Write("Please input the number of Yellow Triangles: ");
-            int yellowTriangle = Convert.ToInt32(userInput());
+            int yellowTriangle = GetUserInputAsInteger();
 
             Triangle triangle = new Triangle(redTriangle, blueTriangle, yellowTriangle);
             return triangle;
         }
 
-        // User Console Input
-        public static string userInput()
+        /// <summary>
+        /// Validates user input. If nothing is provided, gives an error and asks user to enter a value again.
+        /// </summary>
+        /// <returns></returns>
+        public static string GetUserInputAsString()
         {
             string input = Console.ReadLine();
             while (string.IsNullOrEmpty(input))
@@ -72,6 +75,47 @@ namespace Order.Management
 
             }
             return input;
+        }
+
+        /// <summary>
+        /// Converts user input to integer. If nothing is provided, cosiders value as zero (as per example in the requirements). If user input cannot be converted into integer, gives an error and asks user to enter value again.
+        /// </summary>
+        /// <returns></returns>
+        public static int GetUserInputAsInteger()
+        {
+            string input = Console.ReadLine();
+            int result;
+
+            if (string.IsNullOrEmpty(input))
+            {
+                return 0;
+            }
+
+            while (!int.TryParse(input, out result))
+            {
+                Console.WriteLine("please enter valid number");
+                input = Console.ReadLine();
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// Converts user input to date. If user input cannot be converted into date, gives an error and asks user to enter value again.
+        /// </summary>
+        /// <returns></returns>
+        public static DateTime GetUserInputAsDate()
+        {
+            string input = Console.ReadLine();
+            DateTime result;
+
+            while (!DateTime.TryParse(input, out result))
+            {
+                Console.WriteLine("please enter valid date");
+                input = Console.ReadLine();
+            }
+
+            return result;
         }
 
         // Generate Painting Report 
@@ -99,12 +143,12 @@ namespace Order.Management
         private static (string customerName, string address, string dueDate) CustomerInfoInput()
         {
             Console.Write("Please input your Name: ");
-            string customerName = userInput();
+            string customerName = GetUserInputAsString();
             Console.Write("Please input your Address: ");
-            string address = userInput();
+            string address = GetUserInputAsString();
             Console.Write("Please input your Due Date: ");
-            string dueDate = userInput();
-            return (customerName, address, dueDate);
+            DateTime dueDate = GetUserInputAsDate();
+            return (customerName, address, dueDate.ToString("dd MMM yyyy"));
         }
 
         // Get order input
