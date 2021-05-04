@@ -1,27 +1,43 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace Order.Management
 {
-    abstract class Shape
+    public abstract class Shape
     {
-        public string Name { get; set; }
-        public int Price { get; set; }
-        public int AdditionalCharge { get; set; }
-        public int NumberOfRedShape { get; set; }
-        public int NumberOfBlueShape { get; set; }
-        public int NumberOfYellowShape { get; set; }
+        protected Shape(List<ShapeVariant> shapeVariants)
+        {
+            ShapeVariants = shapeVariants;
+        }
+
+        internal string Name { get; set; }
+        internal int Price { get; set; }
+        protected List<ShapeVariant> ShapeVariants { get; set; }
+
         public int TotalQuantityOfShape()
         {
-            return NumberOfRedShape + NumberOfBlueShape + NumberOfYellowShape;
+            return ShapeVariants?.Sum(v => v.Qty) ?? 0;
+        }
+
+        public int AdditionalChargeQty()
+        {
+            return (ShapeVariants?.Where(v => v.AdditionalCharge).Sum(v => v.Qty) ?? 0);
         }
 
         public int AdditionalChargeTotal()
         {
-            return NumberOfRedShape * AdditionalCharge;
+            return (ShapeVariants?.Where(v => v.AdditionalCharge).Sum(v => v.Qty) ?? 0) * Constants.AdditionalCharge;
         }
-        public abstract int Total();
+
+        public int TotalQtyByShapeColor(ShapeColors shapeColor)
+        {
+            return (ShapeVariants?.Where(v => v.ShapeColor == shapeColor).Sum(v => v.Qty) ?? '-');
+        }
+
+        public int Total()
+        {
+            return (ShapeVariants?.Sum(v => v.Qty) ?? 0) * Price;
+        }
 
     }
 }

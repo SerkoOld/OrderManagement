@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Order.Management
 {
     class Program
     {
-        // Main entry
-        static void Main(string[] args)
+        // Main entry 
+        private static void Main(string[] args)
         {
             var (customerName, address, dueDate) = CustomerInfoInput();
 
@@ -18,58 +19,33 @@ namespace Order.Management
 
             PaintingReport(customerName, address, dueDate, orderedShapes);
         }
-        
-        // Order Circle Input
-        public static Circle OrderCirclesInput()
-        {
-            Console.Write("\nPlease input the number of Red Circle: ");
-            int redCircle = Convert.ToInt32(userInput());
-            Console.Write("Please input the number of Blue Circle: ");
-            int blueCircle = Convert.ToInt32(userInput());
-            Console.Write("Please input the number of Yellow Circle: ");
-            int yellowCircle = Convert.ToInt32(userInput());
 
-            Circle circle = new Circle(redCircle, blueCircle, yellowCircle);
-            return circle;
-        }
-        
-        // Order Squares Input
-        public static Square OrderSquaresInput()
+        // Order Shape Input
+        public static Shape OrderShapeInput(ShapeTypes shapeType)
         {
-            Console.Write("\nPlease input the number of Red Squares: ");
-            int redSquare = Convert.ToInt32(userInput());
-            Console.Write("Please input the number of Blue Squares: ");
-            int blueSquare = Convert.ToInt32(userInput());
-            Console.Write("Please input the number of Yellow Squares: ");
-            int yellowSquare = Convert.ToInt32(userInput());
+            var shapeVariants = ShapeVariants();
 
-            Square square = new Square(redSquare, blueSquare, yellowSquare);
-            return square;
+            Console.WriteLine();
+            foreach (var variant in shapeVariants)
+            {
+                Console.Write($"Please input the number of {variant.ShapeColor.ToString()} {shapeType.ToString()}: ");
+                int.TryParse(UserInput(allowEmptyInput: true), out var qty);
+                variant.Qty = qty;
+            }
+
+            var shape = ShapeFactory.GetShape((int)shapeType, shapeVariants);
+            return shape;
         }
 
-        // Order Triangles Input
-        public static Triangle OrderTrianglesInput()
-        {
-            Console.Write("\nPlease input the number of Red Triangles: ");
-            int redTriangle = Convert.ToInt32(userInput());
-            Console.Write("Please input the number of Blue Triangles: ");
-            int blueTriangle = Convert.ToInt32(userInput());
-            Console.Write("Please input the number of Yellow Triangles: ");
-            int yellowTriangle = Convert.ToInt32(userInput());
-
-            Triangle triangle = new Triangle(redTriangle, blueTriangle, yellowTriangle);
-            return triangle;
-        }
 
         // User Console Input
-        public static string userInput()
+        public static string UserInput(bool allowEmptyInput = false)
         {
-            string input = Console.ReadLine();
-            while (string.IsNullOrEmpty(input))
+            var input = Console.ReadLine();
+            while (!allowEmptyInput && string.IsNullOrEmpty(input))
             {
                 Console.WriteLine("please enter valid details");
                 input = Console.ReadLine();
-
             }
             return input;
         }
@@ -77,21 +53,21 @@ namespace Order.Management
         // Generate Painting Report 
         private static void PaintingReport(string customerName, string address, string dueDate, List<Shape> orderedShapes)
         {
-            PaintingReport paintingReport = new PaintingReport(customerName, address, dueDate, orderedShapes);
+            var paintingReport = new PaintingReport(customerName, address, dueDate, orderedShapes);
             paintingReport.GenerateReport();
         }
 
         // Generate Painting Report 
         private static void CuttingListReport(string customerName, string address, string dueDate, List<Shape> orderedShapes)
         {
-            CuttingListReport cuttingListReport = new CuttingListReport(customerName, address, dueDate, orderedShapes);
+            var cuttingListReport = new CuttingListReport(customerName, address, dueDate, orderedShapes);
             cuttingListReport.GenerateReport();
         }
 
         // Generate Invoice Report 
         private static void InvoiceReport(string customerName, string address, string dueDate, List<Shape> orderedShapes)
         {
-            InvoiceReport invoiceReport = new InvoiceReport(customerName, address, dueDate, orderedShapes);
+            var invoiceReport = new InvoiceReport(customerName, address, dueDate, orderedShapes);
             invoiceReport.GenerateReport();
         }
 
@@ -99,26 +75,33 @@ namespace Order.Management
         private static (string customerName, string address, string dueDate) CustomerInfoInput()
         {
             Console.Write("Please input your Name: ");
-            string customerName = userInput();
+            var customerName = UserInput();
+
             Console.Write("Please input your Address: ");
-            string address = userInput();
+            var address = UserInput();
+
             Console.Write("Please input your Due Date: ");
-            string dueDate = userInput();
+            var dueDate = UserInput();
+
             return (customerName, address, dueDate);
         }
 
         // Get order input
         private static List<Shape> CustomerOrderInput()
         {
-            Square square = OrderSquaresInput();
-            Triangle triangle = OrderTrianglesInput();
-            Circle circle = OrderCirclesInput();
+            var shapeTypes = Enum.GetValues(typeof(ShapeTypes)).Cast<ShapeTypes>();
+            return shapeTypes.Select(OrderShapeInput).ToList();
+        }
 
-            var orderedShapes = new List<Shape>();
-            orderedShapes.Add(square);
-            orderedShapes.Add(triangle);
-            orderedShapes.Add(circle);
-            return orderedShapes;
+        // Generate Default Shape Variants
+        public static List<ShapeVariant> ShapeVariants()
+        {
+            var shapeVariants = Enum.GetValues(typeof(ShapeColors)).Cast<ShapeColors>()
+                .Select(v => new ShapeVariant(v, qty: 0, additionalCharge: v == ShapeColors.Red)).ToList();
+
+            // additionalCharge: Is Additional Charge Flag to Identify Surcharge Variants
+
+            return shapeVariants;
         }
     }
 }

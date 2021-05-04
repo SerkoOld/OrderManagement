@@ -1,37 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace Order.Management
 {
-    class Circle : Shape
+    internal class Circle : Shape
     {
-        public int circlePrice = 3;
-        public Circle(int red, int blue, int yellow)
+        private const int CirclePrice = 3;
+        public Circle(List<ShapeVariant> shapeVariants) : base(shapeVariants)
         {
             Name = "Circle";
-            base.Price = circlePrice;
-            AdditionalCharge = 1;
-            base.NumberOfRedShape = red;
-            base.NumberOfBlueShape = blue;
-            base.NumberOfYellowShape = yellow;
-        }
-        public override int Total()
-        {
-            return RedCirclesTotal() + BlueCirclesTotal() + YellowCirclesTotal();
-        }
-
-        public int RedCirclesTotal()
-        {
-            return (base.NumberOfRedShape * Price);
-        }
-        public int BlueCirclesTotal()
-        {
-            return (base.NumberOfBlueShape * Price);
-        }
-        public int YellowCirclesTotal()
-        {
-            return (base.NumberOfYellowShape * Price);
+            Price = CirclePrice;
         }
     }
 }

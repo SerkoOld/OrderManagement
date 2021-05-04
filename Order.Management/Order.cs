@@ -1,22 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Order.Management
 {
-    abstract class Order
+    internal class PaintingReport : Order
     {
-        public string CustomerName { get; set; }
-        public string Address { get; set; }
-        public string DueDate { get; set; }
-        public int OrderNumber { get; set; }
-        public List<Shape> OrderedBlocks { get; set; }
-
-        public abstract void GenerateReport();
-
-        public string ToString()
+        public PaintingReport(string customerName, string customerAddress, string dueDate, List<Shape> shapes)
+            : base(customerName, customerAddress, dueDate, shapes)
         {
-            return "\nName: " + CustomerName + " Address: " + Address + " Due Date: " + DueDate + " Order #: " + OrderNumber;
+        }
+        public override void GenerateReport()
+        {
+            Console.WriteLine("\nYour painting report has been generated: ");
+            Console.WriteLine(base.ToString());
+            GenerateTable();
+        }
+
+        public void GenerateTable()
+        {
+            ReportHelper.GenerateReport(OrderedBlocks);
         }
     }
 }
