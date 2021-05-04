@@ -1,21 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Order.Management
+﻿namespace Order.Management
 {
-    class Circle : Shape
+    internal class Circle : Shape
     {
-        public int circlePrice = 3;
-        public Circle(int red, int blue, int yellow)
+        private const int CirclePrice = 3;
+        public Circle(int numberOfRedCircles, int numberOfBlueCircles, int numberOfYellowCircles) 
+            :base(numberOfRedCircles, numberOfBlueCircles, numberOfYellowCircles)
         {
             Name = "Circle";
-            base.Price = circlePrice;
+            Price = CirclePrice;
             AdditionalCharge = 1;
-            base.NumberOfRedShape = red;
-            base.NumberOfBlueShape = blue;
-            base.NumberOfYellowShape = yellow;
         }
+
         public override int Total()
         {
             return RedCirclesTotal() + BlueCirclesTotal() + YellowCirclesTotal();
@@ -23,15 +18,15 @@ namespace Order.Management
 
         public int RedCirclesTotal()
         {
-            return (base.NumberOfRedShape * Price);
+            return NumberOfRedShape * Price;
         }
         public int BlueCirclesTotal()
         {
-            return (base.NumberOfBlueShape * Price);
+            return NumberOfBlueShape * Price;
         }
         public int YellowCirclesTotal()
         {
-            return (base.NumberOfYellowShape * Price);
+            return NumberOfYellowShape * Price;
         }
     }
 }

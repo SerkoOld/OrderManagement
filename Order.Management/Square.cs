@@ -1,22 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Order.Management
+﻿namespace Order.Management
 {
-    class Square : Shape
+    internal class Square : Shape
     {
-
-        public int SquarePrice = 1;
+        private const int SquarePrice = 1;
 
         public Square(int numberOfRedSquares, int numberOfBlueSquares, int numberOfYellowSquares)
+            : base(numberOfRedSquares, numberOfBlueSquares, numberOfYellowSquares)
         {
             Name = "Square";
-            base.Price = SquarePrice;
+            Price = SquarePrice;
             AdditionalCharge = 1;
-            base.NumberOfRedShape = numberOfRedSquares;
-            base.NumberOfBlueShape = numberOfBlueSquares;
-            base.NumberOfYellowShape = numberOfYellowSquares;
         }
 
         public override int Total()
@@ -26,15 +19,15 @@ namespace Order.Management
 
         public int RedSquaresTotal()
         {
-            return (base.NumberOfRedShape * Price);
+            return NumberOfRedShape * Price;
         }
         public int BlueSquaresTotal()
         {
-            return (base.NumberOfBlueShape * Price);
+            return NumberOfBlueShape * Price;
         }
         public int YellowSquaresTotal()
         {
-            return (base.NumberOfYellowShape * Price);
+            return NumberOfYellowShape * Price;
         }
     }
 }
