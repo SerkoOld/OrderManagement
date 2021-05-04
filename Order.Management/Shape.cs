@@ -1,33 +1,43 @@
-﻿namespace Order.Management
+﻿using System.Collections.Generic;
+using System.Linq;
+
+namespace Order.Management
 {
-    internal abstract class Shape
+    public abstract class Shape
     {
-        protected Shape(int numberOfRedShapes, int numberOfBlueShapes, int numberOfYellowShapes)
+        protected Shape(List<ShapeVariant> shapeVariants)
         {
-            NumberOfRedShape = numberOfRedShapes;
-            NumberOfBlueShape = numberOfBlueShapes;
-            NumberOfYellowShape = numberOfYellowShapes;
+            ShapeVariants = shapeVariants;
         }
 
         internal string Name { get; set; }
         internal int Price { get; set; }
-        internal int AdditionalCharge { get; set; }
-
-        public int NumberOfRedShape { get; set; }
-        public int NumberOfBlueShape { get; set; }
-        public int NumberOfYellowShape { get; set; }
+        protected List<ShapeVariant> ShapeVariants { get; set; }
 
         public int TotalQuantityOfShape()
         {
-            return NumberOfRedShape + NumberOfBlueShape + NumberOfYellowShape;
+            return ShapeVariants?.Sum(v => v.Qty) ?? 0;
+        }
+
+        public int AdditionalChargeQty()
+        {
+            return (ShapeVariants?.Where(v => v.AdditionalCharge).Sum(v => v.Qty) ?? 0);
         }
 
         public int AdditionalChargeTotal()
         {
-            return NumberOfRedShape * AdditionalCharge;
+            return (ShapeVariants?.Where(v => v.AdditionalCharge).Sum(v => v.Qty) ?? 0) * Constants.AdditionalCharge;
         }
 
-        public abstract int Total();
+        public int TotalQtyByShapeColor(ShapeColors shapeColor)
+        {
+            return (ShapeVariants?.Where(v => v.ShapeColor == shapeColor).Sum(v => v.Qty) ?? '-');
+        }
+
+        public int Total()
+        {
+            return (ShapeVariants?.Sum(v => v.Qty) ?? 0) * Price;
+        }
 
     }
 }
