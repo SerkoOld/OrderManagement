@@ -8,7 +8,7 @@ namespace Order.Management
         public string CustomerName { get; set; }
         public string Address { get; set; }
         public string DueDate { get; set; } // TODO: should probably be DateTime
-        public int OrderNumber => OrderedBlocks?.Count ?? 0;
+        public int OrderNumber { get; set; }
         public List<Shape> OrderedBlocks { get; set; } = new List<Shape>();
 
         public override string ToString()
