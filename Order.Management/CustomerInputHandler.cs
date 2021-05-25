@@ -10,13 +10,13 @@ namespace Order.Management
         public (string customerName, string address, string dueDate) GetCustomerInfoInput()
         {
             Console.Write("Please input your Name: ");
-            string customerName = GetUserInput();
+            string customerName = GetUserInputAsString();
 
             Console.Write("Please input your Address: ");
-            string address = GetUserInput();
+            string address = GetUserInputAsString();
 
-            Console.Write("Please input your Due Date: ");
-            string dueDate = GetUserInput();
+            Console.Write("Please input your Due Date: "); // TODO: should probably be DateTime with valid user input for DateTime
+            string dueDate = GetUserInputAsString();
 
             return (customerName, address, dueDate);
         }
@@ -38,13 +38,13 @@ namespace Order.Management
         private static Circle OrderCirclesInput()
         {
             Console.Write("\nPlease input the number of Red Circle: ");
-            int redCircle = Convert.ToInt32(GetUserInput());
+            int redCircle = GetUserInputAsInt();
 
             Console.Write("Please input the number of Blue Circle: ");
-            int blueCircle = Convert.ToInt32(GetUserInput());
+            int blueCircle = GetUserInputAsInt();
 
             Console.Write("Please input the number of Yellow Circle: ");
-            int yellowCircle = Convert.ToInt32(GetUserInput());
+            int yellowCircle = GetUserInputAsInt();
 
             Circle circle = new Circle(redCircle, blueCircle, yellowCircle);
 
@@ -54,13 +54,13 @@ namespace Order.Management
         private static Square OrderSquaresInput()
         {
             Console.Write("\nPlease input the number of Red Squares: ");
-            int redSquare = Convert.ToInt32(GetUserInput());
+            int redSquare = GetUserInputAsInt();
 
             Console.Write("Please input the number of Blue Squares: ");
-            int blueSquare = Convert.ToInt32(GetUserInput());
+            int blueSquare = GetUserInputAsInt();
 
             Console.Write("Please input the number of Yellow Squares: ");
-            int yellowSquare = Convert.ToInt32(GetUserInput());
+            int yellowSquare = GetUserInputAsInt();
 
             Square square = new Square(redSquare, blueSquare, yellowSquare);
             return square;
@@ -69,22 +69,22 @@ namespace Order.Management
         private static Triangle OrderTrianglesInput()
         {
             Console.Write("\nPlease input the number of Red Triangles: ");
-            int redTriangle = Convert.ToInt32(GetUserInput());
+            int redTriangle = GetUserInputAsInt();
 
             Console.Write("Please input the number of Blue Triangles: ");
-            int blueTriangle = Convert.ToInt32(GetUserInput());
+            int blueTriangle = GetUserInputAsInt();
 
             Console.Write("Please input the number of Yellow Triangles: ");
-            int yellowTriangle = Convert.ToInt32(GetUserInput());
+            int yellowTriangle = GetUserInputAsInt();
 
             Triangle triangle = new Triangle(redTriangle, blueTriangle, yellowTriangle);
 
             return triangle;
         }
 
-        private static string GetUserInput()
+        private static string GetUserInputAsString()
         {
-            string input = Console.ReadLine();
+            string input = Console.ReadLine().Trim();
             while (string.IsNullOrEmpty(input))
             {
                 Console.WriteLine("please enter valid details");
@@ -92,6 +92,19 @@ namespace Order.Management
             }
 
             return input;
+        }
+
+        private static int GetUserInputAsInt()
+        {
+            string input = GetUserInputAsString();
+
+            while (!int.TryParse(input, out var _))
+            {
+                Console.WriteLine("please enter valid details");
+                input = GetUserInputAsString();
+            }
+
+            return int.Parse(input);
         }
     }
 }
