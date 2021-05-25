@@ -1,35 +1,29 @@
-﻿using Order.Management.ToyBlocks;
-using System;
-using System.Collections.Generic;
+﻿using System;
 
 namespace Order.Management.Reports
 {
-    public class CuttingListReport : Order
+    public class CuttingListReport : Report
     {
         public int tableWidth = 20;
 
-        public CuttingListReport(string customerName, string customerAddress, string dueDate, List<Shape> shapes)
+        public CuttingListReport(Order order) : base(order)
         {
-            base.CustomerName = customerName;
-            base.Address = customerAddress;
-            base.DueDate = dueDate;
-            base.OrderedBlocks = shapes;
         }
 
         public override void GenerateReport()
         {
             Console.WriteLine("\nYour cutting list has been generated: ");
-            Console.WriteLine(base.ToString());
-            generateTable();
+            Console.WriteLine(Order.ToString());
+            GenerateTable();
         }
-        public void generateTable()
+        public void GenerateTable()
         {
             PrintLine();
             PrintRow("        ", "   Qty   ");
             PrintLine();
-            PrintRow("Square", base.OrderedBlocks[0].TotalQuantityOfShape().ToString());
-            PrintRow("Triangle", base.OrderedBlocks[1].TotalQuantityOfShape().ToString());
-            PrintRow("Circle", base.OrderedBlocks[2].TotalQuantityOfShape().ToString());
+            PrintRow("Square", Order.OrderedBlocks[0].TotalQuantityOfShape().ToString());
+            PrintRow("Triangle", Order.OrderedBlocks[1].TotalQuantityOfShape().ToString());
+            PrintRow("Circle", Order.OrderedBlocks[2].TotalQuantityOfShape().ToString());
             PrintLine();
         }
         public void PrintLine()

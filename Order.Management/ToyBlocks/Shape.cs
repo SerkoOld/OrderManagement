@@ -1,5 +1,6 @@
 ﻿namespace Order.Management.ToyBlocks
 {
+    // TODO: rename this to Block
     public abstract class Shape
     {
         public string Name { get; set; }

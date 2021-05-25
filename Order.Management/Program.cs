@@ -1,6 +1,4 @@
 ﻿using Order.Management.Reports;
-using Order.Management.ToyBlocks;
-using System.Collections.Generic;
 
 namespace Order.Management
 {
@@ -13,31 +11,39 @@ namespace Order.Management
             var (customerName, address, dueDate) = customerInput.GetCustomerInfoInput();
             var orderedShapes = customerInput.GetCustomerOrderInput();
 
-            InvoiceReport(customerName, address, dueDate, orderedShapes);
+            var order = new Order
+            {
+                CustomerName = customerName,
+                Address = address,
+                DueDate = dueDate,
+                OrderedBlocks = orderedShapes
+            };
 
-            CuttingListReport(customerName, address, dueDate, orderedShapes);
+            InvoiceReport(order);
 
-            PaintingReport(customerName, address, dueDate, orderedShapes);
+            CuttingListReport(order);
+
+            PaintingReport(order);
         }
 
         // Generate Painting Report
-        private static void PaintingReport(string customerName, string address, string dueDate, List<Shape> orderedShapes)
+        private static void PaintingReport(Order order)
         {
-            PaintingReport paintingReport = new PaintingReport(customerName, address, dueDate, orderedShapes);
+            PaintingReport paintingReport = new PaintingReport(order);
             paintingReport.GenerateReport();
         }
 
         // Generate Painting Report
-        private static void CuttingListReport(string customerName, string address, string dueDate, List<Shape> orderedShapes)
+        private static void CuttingListReport(Order order)
         {
-            CuttingListReport cuttingListReport = new CuttingListReport(customerName, address, dueDate, orderedShapes);
+            CuttingListReport cuttingListReport = new CuttingListReport(order);
             cuttingListReport.GenerateReport();
         }
 
         // Generate Invoice Report
-        private static void InvoiceReport(string customerName, string address, string dueDate, List<Shape> orderedShapes)
+        private static void InvoiceReport(Order order)
         {
-            InvoiceReport invoiceReport = new InvoiceReport(customerName, address, dueDate, orderedShapes);
+            InvoiceReport invoiceReport = new InvoiceReport(order);
             invoiceReport.GenerateReport();
         }
     }
