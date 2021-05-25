@@ -4,9 +4,10 @@ using System.Text;
 
 namespace Order.Management
 {
-    class CuttingListReport : Order
+    public class CuttingListReport : Order
     {
         public int tableWidth = 20;
+
         public CuttingListReport(string customerName, string customerAddress, string dueDate, List<Shape> shapes)
         {
             base.CustomerName = customerName;
@@ -26,7 +27,7 @@ namespace Order.Management
             PrintLine();
             PrintRow("        ", "   Qty   ");
             PrintLine();
-            PrintRow("Square",base.OrderedBlocks[0].TotalQuantityOfShape().ToString());
+            PrintRow("Square", base.OrderedBlocks[0].TotalQuantityOfShape().ToString());
             PrintRow("Triangle", base.OrderedBlocks[1].TotalQuantityOfShape().ToString());
             PrintRow("Circle", base.OrderedBlocks[2].TotalQuantityOfShape().ToString());
             PrintLine();
@@ -62,7 +63,5 @@ namespace Order.Management
                 return text.PadRight(width - (width - text.Length) / 2).PadLeft(width);
             }
         }
-
-
     }
 }

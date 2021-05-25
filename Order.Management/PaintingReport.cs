@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Order.Management
 {
-    class PaintingReport : Order
+    public class PaintingReport : Order
     {
         public int tableWidth = 73;
+
         public PaintingReport(string customerName, string customerAddress, string dueDate, List<Shape> shapes)
         {
             base.CustomerName = customerName;
@@ -14,14 +14,15 @@ namespace Order.Management
             base.DueDate = dueDate;
             base.OrderedBlocks = shapes;
         }
+
         public override void GenerateReport()
         {
             Console.WriteLine("\nYour painting report has been generated: ");
             Console.WriteLine(base.ToString());
-            generateTable();
+            GenerateTable();
         }
 
-        public void generateTable()
+        public void GenerateTable()
         {
             PrintLine();
             PrintRow("        ", "   Red   ", "  Blue  ", " Yellow ");
@@ -31,7 +32,7 @@ namespace Order.Management
             PrintRow("Circle", base.OrderedBlocks[2].NumberOfRedShape.ToString(), base.OrderedBlocks[2].NumberOfBlueShape.ToString(), base.OrderedBlocks[2].NumberOfYellowShape.ToString());
             PrintLine();
         }
-       
+
         public void PrintLine()
         {
             Console.WriteLine(new string('-', tableWidth));
