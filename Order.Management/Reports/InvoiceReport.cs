@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Order.Management
+namespace Order.Management.Reports
 {
     public class InvoiceReport : Order
     {
