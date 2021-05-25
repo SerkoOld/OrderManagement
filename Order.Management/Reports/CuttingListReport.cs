@@ -4,9 +4,9 @@ namespace Order.Management.Reports
 {
     public class CuttingListReport : Report
     {
-        public int tableWidth = 20;
+        private const int TABLE_WIDTH = 20;
 
-        public CuttingListReport(Order order) : base(order)
+        public CuttingListReport(Order order) : base(order, TABLE_WIDTH)
         {
         }
 
@@ -16,6 +16,7 @@ namespace Order.Management.Reports
             Console.WriteLine(Order.ToString());
             GenerateTable();
         }
+
         public void GenerateTable()
         {
             PrintLine();
@@ -25,37 +26,6 @@ namespace Order.Management.Reports
             PrintRow("Triangle", Order.OrderedBlocks[1].TotalQuantityOfShape().ToString());
             PrintRow("Circle", Order.OrderedBlocks[2].TotalQuantityOfShape().ToString());
             PrintLine();
-        }
-        public void PrintLine()
-        {
-            Console.WriteLine(new string('-', tableWidth));
-        }
-
-        public void PrintRow(params string[] columns)
-        {
-            int width = (tableWidth - columns.Length) / columns.Length;
-            string row = "|";
-
-            foreach (string column in columns)
-            {
-                row += AlignCentre(column, width) + "|";
-            }
-
-            Console.WriteLine(row);
-        }
-
-        public string AlignCentre(string text, int width)
-        {
-            text = text.Length > width ? text.Substring(0, width - 3) + "..." : text;
-
-            if (string.IsNullOrEmpty(text))
-            {
-                return new string(' ', width);
-            }
-            else
-            {
-                return text.PadRight(width - (width - text.Length) / 2).PadLeft(width);
-            }
         }
     }
 }

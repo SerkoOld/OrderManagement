@@ -4,9 +4,9 @@ namespace Order.Management.Reports
 {
     public class PaintingReport : Report
     {
-        public const int TABLE_WIDTH = 73;
+        private const int TABLE_WIDTH = 73;
 
-        public PaintingReport(Order order) : base(order)
+        public PaintingReport(Order order) : base(order, TABLE_WIDTH)
         {
         }
 
@@ -38,38 +38,6 @@ namespace Order.Management.Reports
                 Order.OrderedBlocks[2].NumberOfBlueShape.ToString(),
                 Order.OrderedBlocks[2].NumberOfYellowShape.ToString());
             PrintLine();
-        }
-
-        public void PrintLine()
-        {
-            Console.WriteLine(new string('-', TABLE_WIDTH));
-        }
-
-        public void PrintRow(params string[] columns)
-        {
-            int width = (TABLE_WIDTH - columns.Length) / columns.Length;
-            string row = "|";
-
-            foreach (string column in columns)
-            {
-                row += AlignCentre(column, width) + "|";
-            }
-
-            Console.WriteLine(row);
-        }
-
-        public string AlignCentre(string text, int width)
-        {
-            text = text.Length > width ? text.Substring(0, width - 3) + "..." : text;
-
-            if (string.IsNullOrEmpty(text))
-            {
-                return new string(' ', width);
-            }
-            else
-            {
-                return text.PadRight(width - (width - text.Length) / 2).PadLeft(width);
-            }
         }
     }
 }
