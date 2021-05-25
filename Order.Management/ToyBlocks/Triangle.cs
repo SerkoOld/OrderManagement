@@ -1,4 +1,4 @@
-﻿namespace Order.Management
+﻿namespace Order.Management.ToyBlocks
 {
     public class Triangle : Shape
     {

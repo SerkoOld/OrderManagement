@@ -1,4 +1,4 @@
-﻿namespace Order.Management
+﻿namespace Order.Management.ToyBlocks
 {
     public class Square : Shape
     {
@@ -23,10 +23,12 @@
         {
             return (base.NumberOfRedShape * Price);
         }
+
         public int BlueSquaresTotal()
         {
             return (base.NumberOfBlueShape * Price);
         }
+
         public int YellowSquaresTotal()
         {
             return (base.NumberOfYellowShape * Price);

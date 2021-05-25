@@ -1,4 +1,4 @@
-﻿namespace Order.Management
+﻿namespace Order.Management.ToyBlocks
 {
     public abstract class Shape
     {
@@ -8,6 +8,7 @@
         public int NumberOfRedShape { get; set; }
         public int NumberOfBlueShape { get; set; }
         public int NumberOfYellowShape { get; set; }
+
         public int TotalQuantityOfShape()
         {
             return NumberOfRedShape + NumberOfBlueShape + NumberOfYellowShape;
@@ -17,6 +18,7 @@
         {
             return NumberOfRedShape * AdditionalCharge;
         }
+
         public abstract int Total();
     }
 }
