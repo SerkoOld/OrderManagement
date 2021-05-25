@@ -9,14 +9,12 @@ namespace Order.Management
         // Get customer Info
         public (string customerName, string address, string dueDate) GetCustomerInfoInput()
         {
-            Console.Write("Please input your Name: ");
-            string customerName = GetUserInputAsString();
+            string customerName = GetUserInputAsString("Please input your Name: ");
 
-            Console.Write("Please input your Address: ");
-            string address = GetUserInputAsString();
+            string address = GetUserInputAsString("Please input your Address: ");
 
-            Console.Write("Please input your Due Date: "); // TODO: should probably be DateTime with valid user input for DateTime
-            string dueDate = GetUserInputAsString();
+            // TODO: should probably be DateTime with valid user input for DateTime
+            string dueDate = GetUserInputAsString("Please input your Due Date: ");
 
             return (customerName, address, dueDate);
         }
@@ -37,14 +35,10 @@ namespace Order.Management
 
         private static Circle OrderCirclesInput()
         {
-            Console.Write("\nPlease input the number of Red Circle: ");
-            int redCircle = GetUserInputAsInt();
-
-            Console.Write("Please input the number of Blue Circle: ");
-            int blueCircle = GetUserInputAsInt();
-
-            Console.Write("Please input the number of Yellow Circle: ");
-            int yellowCircle = GetUserInputAsInt();
+            Console.WriteLine();
+            int redCircle = GetUserInputAsInt("Please input the number of Red Circle: ");
+            int blueCircle = GetUserInputAsInt("Please input the number of Blue Circle: ");
+            int yellowCircle = GetUserInputAsInt("Please input the number of Yellow Circle: ");
 
             Circle circle = new Circle(redCircle, blueCircle, yellowCircle);
 
@@ -53,14 +47,10 @@ namespace Order.Management
 
         private static Square OrderSquaresInput()
         {
-            Console.Write("\nPlease input the number of Red Squares: ");
-            int redSquare = GetUserInputAsInt();
-
-            Console.Write("Please input the number of Blue Squares: ");
-            int blueSquare = GetUserInputAsInt();
-
-            Console.Write("Please input the number of Yellow Squares: ");
-            int yellowSquare = GetUserInputAsInt();
+            Console.WriteLine();
+            int redSquare = GetUserInputAsInt("Please input the number of Red Squares: ");
+            int blueSquare = GetUserInputAsInt("Please input the number of Blue Squares: ");
+            int yellowSquare = GetUserInputAsInt("Please input the number of Yellow Squares: ");
 
             Square square = new Square(redSquare, blueSquare, yellowSquare);
             return square;
@@ -68,40 +58,45 @@ namespace Order.Management
 
         private static Triangle OrderTrianglesInput()
         {
-            Console.Write("\nPlease input the number of Red Triangles: ");
-            int redTriangle = GetUserInputAsInt();
-
-            Console.Write("Please input the number of Blue Triangles: ");
-            int blueTriangle = GetUserInputAsInt();
-
-            Console.Write("Please input the number of Yellow Triangles: ");
-            int yellowTriangle = GetUserInputAsInt();
+            Console.WriteLine();
+            int redTriangle = GetUserInputAsInt("Please input the number of Red Triangles: ");
+            int blueTriangle = GetUserInputAsInt("Please input the number of Blue Triangles: ");
+            int yellowTriangle = GetUserInputAsInt("Please input the number of Yellow Triangles: ");
 
             Triangle triangle = new Triangle(redTriangle, blueTriangle, yellowTriangle);
 
             return triangle;
         }
 
-        private static string GetUserInputAsString()
+        private static string GetUserInputAsString(string message)
         {
+            if (string.IsNullOrWhiteSpace(message))
+            {
+                throw new ArgumentNullException(nameof(message));
+            }
+
+            Console.Write(message);
+
+            // Get user input
             string input = Console.ReadLine().Trim();
             while (string.IsNullOrEmpty(input))
             {
                 Console.WriteLine("please enter valid details");
+                Console.Write(message);
                 input = Console.ReadLine();
             }
 
             return input;
         }
 
-        private static int GetUserInputAsInt()
+        private static int GetUserInputAsInt(string message) //TODO: example had ints being nullable from input
         {
-            string input = GetUserInputAsString();
+            string input = GetUserInputAsString(message);
 
             while (!int.TryParse(input, out var _))
             {
                 Console.WriteLine("please enter valid details");
-                input = GetUserInputAsString();
+                input = GetUserInputAsString(message);
             }
 
             return int.Parse(input);
