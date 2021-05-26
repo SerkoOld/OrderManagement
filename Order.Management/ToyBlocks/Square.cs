@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Order.Management
+﻿namespace Order.Management.ToyBlocks
 {
-    class Square : Shape
+    public class Square : Shape
     {
-
         public int SquarePrice = 1;
 
         public Square(int numberOfRedSquares, int numberOfBlueSquares, int numberOfYellowSquares)
@@ -28,10 +23,12 @@ namespace Order.Management
         {
             return (base.NumberOfRedShape * Price);
         }
+
         public int BlueSquaresTotal()
         {
             return (base.NumberOfBlueShape * Price);
         }
+
         public int YellowSquaresTotal()
         {
             return (base.NumberOfYellowShape * Price);

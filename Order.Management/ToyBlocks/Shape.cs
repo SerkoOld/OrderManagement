@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Order.Management
+﻿namespace Order.Management.ToyBlocks
 {
-    abstract class Shape
+    // TODO: rename this to Block
+    public abstract class Shape
     {
         public string Name { get; set; }
         public int Price { get; set; }
@@ -12,6 +9,7 @@ namespace Order.Management
         public int NumberOfRedShape { get; set; }
         public int NumberOfBlueShape { get; set; }
         public int NumberOfYellowShape { get; set; }
+
         public int TotalQuantityOfShape()
         {
             return NumberOfRedShape + NumberOfBlueShape + NumberOfYellowShape;
@@ -21,7 +19,7 @@ namespace Order.Management
         {
             return NumberOfRedShape * AdditionalCharge;
         }
-        public abstract int Total();
 
+        public abstract int Total();
     }
 }

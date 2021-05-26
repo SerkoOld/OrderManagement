@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Order.Management
+﻿namespace Order.Management.ToyBlocks
 {
-    class Triangle : Shape
+    public class Triangle : Shape
     {
         public int TrianglePrice = 2;
         public Triangle(int numberOfRedTriangles, int numberOfBlueTriangles, int numberOfYellowTriangles)
@@ -34,6 +30,5 @@ namespace Order.Management
         {
             return (base.NumberOfYellowShape * Price);
         }
-    
-}
+    }
 }

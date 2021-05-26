@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Order.Management
+﻿namespace Order.Management.ToyBlocks
 {
-    class Circle : Shape
+    public class Circle : Shape
     {
         public int circlePrice = 3;
+
         public Circle(int red, int blue, int yellow)
         {
             Name = "Circle";
@@ -16,6 +13,7 @@ namespace Order.Management
             base.NumberOfBlueShape = blue;
             base.NumberOfYellowShape = yellow;
         }
+
         public override int Total()
         {
             return RedCirclesTotal() + BlueCirclesTotal() + YellowCirclesTotal();
@@ -25,10 +23,12 @@ namespace Order.Management
         {
             return (base.NumberOfRedShape * Price);
         }
+
         public int BlueCirclesTotal()
         {
             return (base.NumberOfBlueShape * Price);
         }
+
         public int YellowCirclesTotal()
         {
             return (base.NumberOfYellowShape * Price);
