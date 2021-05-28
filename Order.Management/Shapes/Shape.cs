@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Order.Management
+﻿namespace Order.Management
 {
-    abstract class Shape
+    internal abstract class Shape
     {
-        public string Name { get; set; }
         public int Price { get; set; }
         public int AdditionalCharge { get; set; }
         public int NumberOfRedShape { get; set; }

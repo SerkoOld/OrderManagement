@@ -9,12 +9,11 @@ namespace Order.Management
         public int circlePrice = 3;
         public Circle(int red, int blue, int yellow)
         {
-            Name = "Circle";
-            base.Price = circlePrice;
+            Price = circlePrice;
             AdditionalCharge = 1;
-            base.NumberOfRedShape = red;
-            base.NumberOfBlueShape = blue;
-            base.NumberOfYellowShape = yellow;
+            NumberOfRedShape = red;
+            NumberOfBlueShape = blue;
+            NumberOfYellowShape = yellow;
         }
         public override int Total()
         {
@@ -23,15 +22,15 @@ namespace Order.Management
 
         public int RedCirclesTotal()
         {
-            return (base.NumberOfRedShape * Price);
+            return (NumberOfRedShape * Price);
         }
         public int BlueCirclesTotal()
         {
-            return (base.NumberOfBlueShape * Price);
+            return (NumberOfBlueShape * Price);
         }
         public int YellowCirclesTotal()
         {
-            return (base.NumberOfYellowShape * Price);
+            return (NumberOfYellowShape * Price);
         }
     }
 }
