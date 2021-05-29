@@ -4,7 +4,7 @@ using Order.Management.Shapes;
 
 namespace Order.Management.Reports
 {
-    internal class CuttingListReport : Order
+    internal class CuttingListReport :BaseReport, Order 
     {
         private const int TableWidth = 20;
 
@@ -52,20 +52,7 @@ namespace Order.Management.Reports
             Console.WriteLine(row);
         }
 
-        public string AlignCentre(string text, int width)
-        {
-            text = text.Length > width ? text.Substring(0, width - 3) + "..." : text;
-
-            if (string.IsNullOrEmpty(text))
-            {
-                return new string(' ', width);
-            }
-            else
-            {
-                return text.PadRight(width - (width - text.Length) / 2).PadLeft(width);
-            }
-        }
-
+       
 
     }
 }
