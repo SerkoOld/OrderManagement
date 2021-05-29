@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Order.Management
+﻿namespace Order.Management.Shapes
 {
-    class Circle : Shape
+    internal class Circle : Shape
     {
-        public int circlePrice = 3;
+        private const int CirclePrice = 3;
+
         public Circle(int red, int blue, int yellow)
         {
-            Price = circlePrice;
+            Price = CirclePrice;
             AdditionalCharge = 1;
             NumberOfRedShape = red;
             NumberOfBlueShape = blue;

@@ -1,12 +1,13 @@
-﻿namespace Order.Management
+﻿namespace Order.Management.Shapes
 {
     internal abstract class Shape
     {
-        public int Price { get; set; }
-        public int AdditionalCharge { get; set; }
-        public int NumberOfRedShape { get; set; }
-        public int NumberOfBlueShape { get; set; }
-        public int NumberOfYellowShape { get; set; }
+        public int Price { get; protected set; }
+        public int AdditionalCharge { get; protected set; }
+        public int NumberOfRedShape { get; protected set; }
+        public int NumberOfBlueShape { get; protected set; }
+        public int NumberOfYellowShape { get; protected set; }
+
         public int TotalQuantityOfShape()
         {
             return NumberOfRedShape + NumberOfBlueShape + NumberOfYellowShape;
@@ -16,7 +17,7 @@
         {
             return NumberOfRedShape * AdditionalCharge;
         }
-        public abstract int Total();
 
+        public abstract int Total();
     }
 }
