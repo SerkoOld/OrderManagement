@@ -1,9 +1,13 @@
-﻿namespace Order.Management.Reports
+﻿using System;
+
+namespace Order.Management.Reports
 {
     public abstract class BaseReport : IReport
     {
-        private CustomerInfo CustomerInfo { get; }
-        private Order Order { get; }
+        protected CustomerInfo CustomerInfo { get; }
+        protected Order Order { get; }
+        public string ReportName { get; set; }
+        public int TableWidth { get; set; }
 
         public BaseReport(CustomerInfo customerInfo, Order order)
         {
@@ -11,7 +15,33 @@
             Order = order;
         }
 
-        public abstract void GenerateReport();
+        public virtual void GenerateReport()
+        {
+            Console.WriteLine($"\nYour {ReportName} has been generated: ");
+            Console.WriteLine(Order.ToString());
+
+            GenerateTable();
+        }
+
+        protected abstract void GenerateTable();
+
+        protected void PrintLine()
+        {
+            Console.WriteLine(new string('-', TableWidth));
+        }
+
+        protected void PrintRow(params string[] columns)
+        {
+            var width = (TableWidth - columns.Length) / columns.Length;
+            var row = "|";
+
+            foreach (var column in columns)
+            {
+                row += AlignCentre(column, width) + "|";
+            }
+
+            Console.WriteLine(row);
+        }
 
         protected static string AlignCentre(string text, int width)
         {

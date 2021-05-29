@@ -4,6 +4,7 @@
     {
         public Red()
         {
+            Name = nameof(Red);
             AdditionalCharge = 1;
         }
     }

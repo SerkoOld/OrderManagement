@@ -6,7 +6,7 @@ namespace Order.Management.Shapes
     {
         private const int SquarePrice = 1;
 
-        public Square(IColor color, int quantity) : base(color, quantity)
+        public Square(IColor color, int quantity) : base(color, quantity, nameof(Square))
         {
             Price = SquarePrice;
         }

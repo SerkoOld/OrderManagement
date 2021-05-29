@@ -1,58 +1,30 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Order.Management.Shapes;
 
 namespace Order.Management.Reports
 {
-    internal class CuttingListReport :BaseReport, Order 
+    internal class CuttingListReport : BaseReport
     {
-        private const int TableWidth = 20;
-
-        public CuttingListReport(string customerName, string customerAddress, string dueDate, List<Shape> shapes)
+        public CuttingListReport(CustomerInfo customerInfo, Order order) : base(customerInfo, order)
         {
-            CustomerName = customerName;
-            Address = customerAddress;
-            DueDate = dueDate;
-            OrderedBlocks = shapes;
+            TableWidth = 20;
+            ReportName = "cutting list";
         }
 
-        public override void GenerateReport()
-        {
-            Console.WriteLine("\nYour cutting list has been generated: ");
-            Console.WriteLine(ToString());
-            GenerateTable();
-        }
-
-        private void GenerateTable()
+        protected override void GenerateTable()
         {
             PrintLine();
             PrintRow("        ", "   Qty   ");
             PrintLine();
-            PrintRow("Square",OrderedBlocks[0].TotalQuantityOfShape().ToString());
-            PrintRow("Triangle", OrderedBlocks[1].TotalQuantityOfShape().ToString());
-            PrintRow("Circle", OrderedBlocks[2].TotalQuantityOfShape().ToString());
-            PrintLine();
-        }
 
-        private static void PrintLine()
-        {
-            Console.WriteLine(new string('-', TableWidth));
-        }
-
-        private void PrintRow(params string[] columns)
-        {
-            var width = (TableWidth - columns.Length) / columns.Length;
-            var row = "|";
-
-            foreach (var column in columns)
+            foreach (var groupedOrder in this.Order.OrderedBlocks.GroupBy(o => o.ShapeName))
             {
-                row += AlignCentre(column, width) + "|";
+                PrintRow(groupedOrder.Key, groupedOrder.Sum(o => o.Quantity).ToString());
             }
 
-            Console.WriteLine(row);
+            PrintLine();
         }
-
-       
-
     }
 }

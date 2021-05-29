@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using Order.Management.Colors;
+﻿using Order.Management.Colors;
 
 namespace Order.Management.Shapes
 {
@@ -8,11 +7,13 @@ namespace Order.Management.Shapes
         public double Price { get; set; }
         public int Quantity { get; set; }
         public IColor Color { get; set; }
+        public string ShapeName { get; set; }
 
-        public BaseShape(IColor color, int quantity)
+        protected BaseShape(IColor color, int quantity, string shapeName)
         {
             Color = color;
             Quantity = quantity;
+            ShapeName = shapeName;
         }
 
         public double Total()

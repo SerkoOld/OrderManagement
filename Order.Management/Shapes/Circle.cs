@@ -6,7 +6,7 @@ namespace Order.Management.Shapes
     {
         private const int CirclePrice = 3;
 
-        public Circle(IColor color, int quantity) : base(color, quantity)
+        public Circle(IColor color, int quantity) : base(color, quantity, nameof(Circle))
         {
             Price = CirclePrice;
         }

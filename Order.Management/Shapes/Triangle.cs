@@ -6,7 +6,7 @@ namespace Order.Management.Shapes
     {
         private const int TrianglePrice = 2;
 
-        public Triangle(IColor color, int quantity) : base(color, quantity)
+        public Triangle(IColor color, int quantity) : base(color, quantity, nameof(Triangle))
         {
             Price = TrianglePrice;
         }
