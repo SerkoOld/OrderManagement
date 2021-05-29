@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using Order.Management.Shapes;
 
-namespace Order.Management
+namespace Order.Management.Reports
 {
-    class CuttingListReport : Order
+    internal class CuttingListReport : Order
     {
-        public int tableWidth = 20;
+        private const int TableWidth = 20;
+
         public CuttingListReport(string customerName, string customerAddress, string dueDate, List<Shape> shapes)
         {
             CustomerName = customerName;
@@ -19,9 +20,10 @@ namespace Order.Management
         {
             Console.WriteLine("\nYour cutting list has been generated: ");
             Console.WriteLine(ToString());
-            generateTable();
+            GenerateTable();
         }
-        public void generateTable()
+
+        private void GenerateTable()
         {
             PrintLine();
             PrintRow("        ", "   Qty   ");
@@ -31,17 +33,18 @@ namespace Order.Management
             PrintRow("Circle", OrderedBlocks[2].TotalQuantityOfShape().ToString());
             PrintLine();
         }
-        public void PrintLine()
+
+        private static void PrintLine()
         {
-            Console.WriteLine(new string('-', tableWidth));
+            Console.WriteLine(new string('-', TableWidth));
         }
 
-        public void PrintRow(params string[] columns)
+        private void PrintRow(params string[] columns)
         {
-            int width = (tableWidth - columns.Length) / columns.Length;
-            string row = "|";
+            var width = (TableWidth - columns.Length) / columns.Length;
+            var row = "|";
 
-            foreach (string column in columns)
+            foreach (var column in columns)
             {
                 row += AlignCentre(column, width) + "|";
             }

@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using Order.Management.Shapes;
 
-namespace Order.Management
+namespace Order.Management.Reports
 {
     class InvoiceReport : Order
     {
@@ -70,10 +70,10 @@ namespace Order.Management
 
         public void PrintRow(params string[] columns)
         {
-            int width = (tableWidth - columns.Length) / columns.Length;
-            string row = "|";
+            var width = (tableWidth - columns.Length) / columns.Length;
+            var row = "|";
 
-            foreach (string column in columns)
+            foreach (var column in columns)
             {
                 row += AlignCentre(column, width) + "|";
             }
