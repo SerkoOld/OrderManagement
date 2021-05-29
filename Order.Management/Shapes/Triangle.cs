@@ -1,35 +1,14 @@
-﻿namespace Order.Management.Shapes
+﻿using Order.Management.Colors;
+
+namespace Order.Management.Shapes
 {
-    internal class Triangle : Shape
+    internal class Triangle : BaseShape
     {
         private const int TrianglePrice = 2;
 
-        public Triangle(int numberOfRedTriangles, int numberOfBlueTriangles, int numberOfYellowTriangles)
+        public Triangle(IColor color, int quantity) : base(color, quantity)
         {
             Price = TrianglePrice;
-            AdditionalCharge = 1;
-            NumberOfRedShape = numberOfRedTriangles;
-            NumberOfBlueShape = numberOfBlueTriangles;
-            NumberOfYellowShape = numberOfYellowTriangles;
         }
-
-        public override int Total()
-        {
-            return RedTrianglesTotal() + BlueTrianglesTotal() + YellowTrianglesTotal();
-        }
-
-        public int RedTrianglesTotal()
-        {
-            return (NumberOfRedShape * Price);
-        }
-        public int BlueTrianglesTotal()
-        {
-            return (NumberOfBlueShape * Price);
-        }
-        public int YellowTrianglesTotal()
-        {
-            return (NumberOfYellowShape * Price);
-        }
-    
-}
+    }
 }

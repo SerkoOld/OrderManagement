@@ -1,35 +1,14 @@
-﻿namespace Order.Management.Shapes
+﻿using Order.Management.Colors;
+
+namespace Order.Management.Shapes
 {
-    internal class Square : Shape
+    internal class Square : BaseShape
     {
+        private const int SquarePrice = 1;
 
-        public int SquarePrice = 1;
-
-        public Square(int numberOfRedSquares, int numberOfBlueSquares, int numberOfYellowSquares)
+        public Square(IColor color, int quantity) : base(color, quantity)
         {
             Price = SquarePrice;
-            AdditionalCharge = 1;
-            NumberOfRedShape = numberOfRedSquares;
-            NumberOfBlueShape = numberOfBlueSquares;
-            NumberOfYellowShape = numberOfYellowSquares;
-        }
-
-        public override int Total()
-        {
-            return RedSquaresTotal() + BlueSquaresTotal() + YellowSquaresTotal();
-        }
-
-        public int RedSquaresTotal()
-        {
-            return (NumberOfRedShape * Price);
-        }
-        public int BlueSquaresTotal()
-        {
-            return (NumberOfBlueShape * Price);
-        }
-        public int YellowSquaresTotal()
-        {
-            return (NumberOfYellowShape * Price);
         }
     }
 }
