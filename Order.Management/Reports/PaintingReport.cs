@@ -3,11 +3,12 @@ using Order.Management.Colors;
 
 namespace Order.Management.Reports
 {
-    class PaintingReport : BaseReport
+    internal class PaintingReport : BaseReport
     {
-        public PaintingReport(CustomerInfo customerInfo, Order order) : base(customerInfo, order)
+        public PaintingReport(Order order) : base(order)
         {
             TableWidth = 73;
+            ReportName = "painting report";
         }
 
         protected override void GenerateTable()

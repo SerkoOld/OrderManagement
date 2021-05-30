@@ -1,22 +1,28 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
+using System.Globalization;
+using Order.Management.Shapes;
 
 namespace Order.Management
 {
-    abstract class Order
+    public class Order
     {
-        public string CustomerName { get; set; }
-        public string Address { get; set; }
-        public string DueDate { get; set; }
-        public int OrderNumber { get; set; }
-        public List<Shape> OrderedBlocks { get; set; }
+        public CustomerInfo CustomerInfo { get; }
 
-        public abstract void GenerateReport();
+        private string OrderNumber { get; }
 
-        public string ToString()
+        public IEnumerable<IShape> OrderedBlocks { get; set; }
+
+        public Order(string orderNumber, CustomerInfo customerInfo, IEnumerable<IShape> blocks)
         {
-            return "\nName: " + CustomerName + " Address: " + Address + " Due Date: " + DueDate + " Order #: " + OrderNumber;
+            OrderNumber = orderNumber;
+            CustomerInfo = customerInfo;
+            OrderedBlocks = blocks;
+        }
+
+        public override string ToString()
+        {
+            return
+                $"\nName: {CustomerInfo.Name} Address: {CustomerInfo.Address} Due Date: {CustomerInfo.DueDate.ToString(CultureInfo.InvariantCulture)} Order #: {OrderNumber}";
         }
     }
 }

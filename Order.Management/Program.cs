@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using Order.Management.Colors;
+using Order.Management.Reports;
+using Order.Management.Shapes;
 
 namespace Order.Management
 {
@@ -8,116 +11,102 @@ namespace Order.Management
         // Main entry
         static void Main(string[] args)
         {
-            var (customerName, address, dueDate) = CustomerInfoInput();
+            var customerInfo = CustomerInfoInput();
 
             var orderedShapes = CustomerOrderInput();
 
-            InvoiceReport(customerName, address, dueDate, orderedShapes);
+            var order = new Order("0001", customerInfo, orderedShapes);
 
-            CuttingListReport(customerName, address, dueDate, orderedShapes);
 
-            PaintingReport(customerName, address, dueDate, orderedShapes);
+            InvoiceReport(order);
+
+            CuttingListReport(order);
+
+            PaintingReport(order);
         }
-        
-        // Order Circle Input
-        public static Circle OrderCirclesInput()
-        {
-            Console.Write("\nPlease input the number of Red Circle: ");
-            int redCircle = Convert.ToInt32(userInput());
-            Console.Write("Please input the number of Blue Circle: ");
-            int blueCircle = Convert.ToInt32(userInput());
-            Console.Write("Please input the number of Yellow Circle: ");
-            int yellowCircle = Convert.ToInt32(userInput());
 
-            Circle circle = new Circle(redCircle, blueCircle, yellowCircle);
-            return circle;
-        }
-        
         // Order Squares Input
-        public static Square OrderSquaresInput()
+        private static IEnumerable<IShape> OrderInput<T>(string shapeName) where T : IShape
         {
-            Console.Write("\nPlease input the number of Red Squares: ");
-            int redSquare = Convert.ToInt32(userInput());
-            Console.Write("Please input the number of Blue Squares: ");
-            int blueSquare = Convert.ToInt32(userInput());
-            Console.Write("Please input the number of Yellow Squares: ");
-            int yellowSquare = Convert.ToInt32(userInput());
+            var shapes = new List<IShape>();
 
-            Square square = new Square(redSquare, blueSquare, yellowSquare);
-            return square;
-        }
+            Console.Write($"\nPlease input the number of Red {shapeName}s: ");
+            var redShapeQuantity = Convert.ToInt32(UserInput());
+            var redShape = ShapeFactory.Create<T>(new Red(), redShapeQuantity);
+            shapes.Add(redShape);
 
-        // Order Triangles Input
-        public static Triangle OrderTrianglesInput()
-        {
-            Console.Write("\nPlease input the number of Red Triangles: ");
-            int redTriangle = Convert.ToInt32(userInput());
-            Console.Write("Please input the number of Blue Triangles: ");
-            int blueTriangle = Convert.ToInt32(userInput());
-            Console.Write("Please input the number of Yellow Triangles: ");
-            int yellowTriangle = Convert.ToInt32(userInput());
+            Console.Write($"Please input the number of Blue {shapeName}s: ");
+            var blueShapeQuantity = Convert.ToInt32(UserInput());
+            var blueShape = ShapeFactory.Create<T>(new Blue(), blueShapeQuantity);
+            shapes.Add(blueShape);
 
-            Triangle triangle = new Triangle(redTriangle, blueTriangle, yellowTriangle);
-            return triangle;
+            Console.Write($"Please input the number of Yellow {shapeName}s: ");
+            var yellowShapeQuantity = Convert.ToInt32(UserInput());
+            var yellowShape = ShapeFactory.Create<T>(new Yellow(), yellowShapeQuantity);
+            shapes.Add(yellowShape);
+
+            return shapes;
         }
 
         // User Console Input
-        public static string userInput()
+        // TODO: validations for user input should be required
+        private static string UserInput()
         {
-            string input = Console.ReadLine();
+            var input = Console.ReadLine();
+            // If whitespace is allowed, empty or null maybe also allowable
             while (string.IsNullOrEmpty(input))
             {
                 Console.WriteLine("please enter valid details");
                 input = Console.ReadLine();
-
             }
+
             return input;
         }
 
         // Generate Painting Report 
-        private static void PaintingReport(string customerName, string address, string dueDate, List<Shape> orderedShapes)
+        private static void PaintingReport(Order order)
         {
-            PaintingReport paintingReport = new PaintingReport(customerName, address, dueDate, orderedShapes);
+            var paintingReport = new PaintingReport(order);
             paintingReport.GenerateReport();
         }
 
         // Generate Painting Report 
-        private static void CuttingListReport(string customerName, string address, string dueDate, List<Shape> orderedShapes)
+        private static void CuttingListReport(Order order)
         {
-            CuttingListReport cuttingListReport = new CuttingListReport(customerName, address, dueDate, orderedShapes);
+            var cuttingListReport = new CuttingListReport(order);
             cuttingListReport.GenerateReport();
         }
 
         // Generate Invoice Report 
-        private static void InvoiceReport(string customerName, string address, string dueDate, List<Shape> orderedShapes)
+        private static void InvoiceReport(Order order)
         {
-            InvoiceReport invoiceReport = new InvoiceReport(customerName, address, dueDate, orderedShapes);
+            var invoiceReport = new InvoiceReport(order);
             invoiceReport.GenerateReport();
         }
 
         // Get customer Info
-        private static (string customerName, string address, string dueDate) CustomerInfoInput()
+        private static CustomerInfo CustomerInfoInput()
         {
             Console.Write("Please input your Name: ");
-            string customerName = userInput();
+            var customerName = UserInput();
             Console.Write("Please input your Address: ");
-            string address = userInput();
+            var address = UserInput();
             Console.Write("Please input your Due Date: ");
-            string dueDate = userInput();
-            return (customerName, address, dueDate);
+            var dueDate = UserInput();
+            return new CustomerInfo(customerName, address, dueDate);
         }
 
         // Get order input
-        private static List<Shape> CustomerOrderInput()
+        private static List<IShape> CustomerOrderInput()
         {
-            Square square = OrderSquaresInput();
-            Triangle triangle = OrderTrianglesInput();
-            Circle circle = OrderCirclesInput();
+            var squares = OrderInput<Square>(nameof(Square));
+            var triangles = OrderInput<Triangle>(nameof(Triangle));
+            var circles = OrderInput<Circle>(nameof(Circle));
 
-            var orderedShapes = new List<Shape>();
-            orderedShapes.Add(square);
-            orderedShapes.Add(triangle);
-            orderedShapes.Add(circle);
+            var orderedShapes = new List<IShape>();
+            orderedShapes.AddRange(squares);
+            orderedShapes.AddRange(triangles);
+            orderedShapes.AddRange(circles);
             return orderedShapes;
         }
     }

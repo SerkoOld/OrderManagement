@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Order.Management.Shapes;
+﻿using System.Linq;
 
 namespace Order.Management.Reports
 {
     internal class CuttingListReport : BaseReport
     {
-        public CuttingListReport(CustomerInfo customerInfo, Order order) : base(customerInfo, order)
+        public CuttingListReport(Order order) : base(order)
         {
             TableWidth = 20;
             ReportName = "cutting list";

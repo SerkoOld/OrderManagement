@@ -4,14 +4,12 @@ namespace Order.Management.Reports
 {
     public abstract class BaseReport : IReport
     {
-        protected CustomerInfo CustomerInfo { get; }
         protected Order Order { get; }
         public string ReportName { get; set; }
         public int TableWidth { get; set; }
 
-        public BaseReport(CustomerInfo customerInfo, Order order)
+        protected BaseReport(Order order)
         {
-            CustomerInfo = customerInfo;
             Order = order;
         }
 
@@ -43,7 +41,7 @@ namespace Order.Management.Reports
             Console.WriteLine(row);
         }
 
-        protected static string AlignCentre(string text, int width)
+        private static string AlignCentre(string text, int width)
         {
             text = text.Length > width ? text.Substring(0, width - 3) + "..." : text;
 

@@ -1,17 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using Order.Management.Colors;
-using Order.Management.Shapes;
 
 namespace Order.Management.Reports
 {
-    class InvoiceReport : PaintingReport
+    internal class InvoiceReport : PaintingReport
     {
-        public InvoiceReport(CustomerInfo customerInfo, Order order) : base(customerInfo, order)
+        public InvoiceReport(Order order) : base(order)
         {
             TableWidth = 73;
+            ReportName = "invoice report";
         }
 
         public override void GenerateReport()
