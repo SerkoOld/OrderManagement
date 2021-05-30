@@ -16,7 +16,6 @@ namespace Order.Management.Reports
         {
             base.GenerateReport();
 
-            base.GenerateTable();
             // paint all shapes
             PaintOrderDetails(Order);
 
@@ -31,8 +30,9 @@ namespace Order.Management.Reports
             {
                 foreach (var groupedOrder in ordersWithSurcharge.GroupBy(o => o.Color.Name))
                 {
+                    var text = groupedOrder.Key + " Color Surcharge";
                     Console.WriteLine(
-                        $"{groupedOrder.Key} Color Surcharge       {groupedOrder.Sum(o => o.Quantity).ToString()} @ "
+                        $"{text.PadRight(30)}{groupedOrder.Sum(o => o.Quantity).ToString()} @ "
                         + $"${groupedOrder.First().Color.AdditionalCharge.ToString()} ppi = "
                         + $"${groupedOrder.Sum(o => o.AdditionalChargeTotal()).ToString(CultureInfo.InvariantCulture)}");
                 }
@@ -56,7 +56,7 @@ namespace Order.Management.Reports
         private void PaintShapeDetails(string shapeName, int quantity, double price, double total)
         {
             Console.WriteLine(
-                $"\n{shapeName}  {quantity.ToString()} @ ${price.ToString(CultureInfo.InvariantCulture)} ppi = ${total.ToString(CultureInfo.InvariantCulture)}");
+                $"{shapeName.PadRight(30)}{quantity.ToString()} @ ${price.ToString(CultureInfo.InvariantCulture)} ppi = ${total.ToString(CultureInfo.InvariantCulture)}");
         }
     }
 }

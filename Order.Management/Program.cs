@@ -17,7 +17,7 @@ namespace Order.Management
 
             var order = new Order("0001", customerInfo, orderedShapes);
 
-
+            Console.WriteLine();
             InvoiceReport(order);
 
             CuttingListReport(order);
@@ -100,7 +100,9 @@ namespace Order.Management
         private static List<IShape> CustomerOrderInput()
         {
             var squares = OrderInput<Square>(nameof(Square));
+
             var triangles = OrderInput<Triangle>(nameof(Triangle));
+
             var circles = OrderInput<Circle>(nameof(Circle));
 
             var orderedShapes = new List<IShape>();

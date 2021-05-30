@@ -18,7 +18,7 @@ namespace Order.Management.Shapes
 
         public double Total()
         {
-            return Quantity * Price + AdditionalChargeTotal();
+            return Quantity * Price;
         }
 
         public double AdditionalChargeTotal()

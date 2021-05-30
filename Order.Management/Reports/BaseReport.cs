@@ -15,7 +15,7 @@ namespace Order.Management.Reports
 
         public virtual void GenerateReport()
         {
-            Console.WriteLine($"\nYour {ReportName} has been generated: ");
+            Console.WriteLine($"Your {ReportName} has been generated: ");
             Console.WriteLine(Order.ToString());
 
             GenerateTable();
