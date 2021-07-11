@@ -3,15 +3,19 @@ using System.Collections.Generic;
 
 namespace Order.Management
 {
+    // this class is too big and uncohesive should be decomposed
     class Program
     {
         // Main entry
         static void Main(string[] args)
         {
+            /* static methods are procedural, would be better to be decomposed into objects instead so can mock easier */
             var (customerName, address, dueDate) = CustomerInfoInput();
 
             var orderedShapes = CustomerOrderInput();
 
+
+            /* reports could be abstracted to share common interface */
             InvoiceReport(customerName, address, dueDate, orderedShapes);
 
             CuttingListReport(customerName, address, dueDate, orderedShapes);
@@ -19,9 +23,12 @@ namespace Order.Management
             PaintingReport(customerName, address, dueDate, orderedShapes);
         }
         
+
+        /* these comments are just noise and arent actually helpful, should be deleted */
         // Order Circle Input
-        public static Circle OrderCirclesInput()
+        public static Circle OrderCirclesInput()//too public
         {
+            /* probably shouled be DRYed up into an abstraction */
             Console.Write("\nPlease input the number of Red Circle: ");
             int redCircle = Convert.ToInt32(userInput());
             Console.Write("Please input the number of Blue Circle: ");

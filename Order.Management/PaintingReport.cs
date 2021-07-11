@@ -21,6 +21,7 @@ namespace Order.Management
             generateTable();
         }
 
+        //too public, exposing implementation details
         public void generateTable()
         {
             PrintLine();
