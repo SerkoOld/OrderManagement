@@ -4,6 +4,8 @@ using System.Text;
 
 namespace Order.Management
 {
+
+    /* I think Report HAS A Order rather than Report IS A Order would be better */
     abstract class Order
     {
         public string CustomerName { get; set; }
