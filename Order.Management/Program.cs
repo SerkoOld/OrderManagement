@@ -28,7 +28,7 @@ namespace Order.Management
         // Order Circle Input
         public static Circle OrderCirclesInput()//too public
         {
-            /* probably shouled be DRYed up into an abstraction */
+            /* probably shouled be DRYed up into an abstraction and use polymorphism */
             Console.Write("\nPlease input the number of Red Circle: ");
             int redCircle = Convert.ToInt32(userInput());
             Console.Write("Please input the number of Blue Circle: ");
@@ -117,6 +117,7 @@ namespace Order.Management
         // Get order input
         private static List<Shape> CustomerOrderInput()
         {
+            //would loosely couple if was talking to an interface like IShape instead of these concretions
             Square square = OrderSquaresInput();
             Triangle triangle = OrderTrianglesInput();
             Circle circle = OrderCirclesInput();

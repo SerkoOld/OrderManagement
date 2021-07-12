@@ -22,6 +22,8 @@ namespace Order.Management
         }
 
         //too public, exposing implementation details
+        //this class knows too much about shapes, if just knew about abstract idea of shape and told it to print common behaviour would be easy to add another shape implementation in future 
+        //at the moment all clients of shapes would need to be updated (Painting Report Invoice Report Cutting List Report) This is breaking Open Closed Principle
         public void generateTable()
         {
             PrintLine();
