@@ -1,21 +1,24 @@
-﻿using System.Collections.Generic;
-using Order.Management.Shapes;
+﻿using Order.Management.Shapes;
+using System.Collections.Generic;
 
 namespace Order.Management
 {
-    abstract class Order
+    public class Order
     {
-        public string CustomerName { get; set; }
-        public string Address { get; set; }
-        public string DueDate { get; set; }
-        public int OrderNumber { get; set; }
+        public Customer Customer { get; }
+        public string OrderNumber { get; }
         public List<Shape> OrderedBlocks { get; set; }
 
-        public abstract void GenerateReport();
+        public Order(string orderNumber, Customer customer, List<Shape> orderedBlocks)
+        {
+            OrderNumber = orderNumber; 
+            Customer = customer;
+            OrderedBlocks = orderedBlocks;
+        }
 
         public override string ToString()
         {
-            return $"\nName: {CustomerName} Address: {Address} Due Date: {DueDate} Order #: {OrderNumber}";
+            return $"\nName: {Customer.Name} Address: {Customer.Address} Due Date: {Customer.DueDate} Order #: {OrderNumber}";
         }
     }
 }

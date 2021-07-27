@@ -1,94 +1,58 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Order.Management.Shapes;
+using System.Globalization;
+using System.Linq;
 
 namespace Order.Management.Reports
 {
-    internal class InvoiceReport : Order
+    internal class InvoiceReport : BaseReport
     {
-        private const int TableWidth = 73;
-        public InvoiceReport(string customerName, string customerAddress, string dueDate, List<Shape> shapes)
+        public InvoiceReport(Order order) : base(order)
         {
-            CustomerName = customerName;
-            Address = customerAddress;
-            DueDate = dueDate;
-            OrderedBlocks = shapes;
+            TableWidth = 73;
+            ReportName = "invoice report";
         }
 
         public override void GenerateReport()
         {
-            Console.WriteLine("\nYour invoice report has been generated: ");
-            Console.WriteLine(ToString());
-            GenerateTable();
-            OrderSquareDetails();
-            OrderTriangleDetails();
-            OrderCircleDetails();
-            RedPaintSurcharge();
+            base.GenerateReport();
+            PaintOrderDetails(Order);
+            PaintSurcharge();
         }
 
-        private void RedPaintSurcharge()
+        protected void PaintOrderDetails(Order order)
         {
-            Console.WriteLine("Red Color Surcharge       " + TotalAmountOfRedShapes() + " @ $" + OrderedBlocks[0].AdditionalCharge + " ppi = $" + TotalPriceRedPaintSurcharge());
-        }
+            var groupedOrders = order.OrderedBlocks.GroupBy(o => o.Name);
 
-        private int TotalAmountOfRedShapes()
-        {
-            return OrderedBlocks[0].NumberOfRedShape + OrderedBlocks[1].NumberOfRedShape +
-                   OrderedBlocks[2].NumberOfRedShape;
-        }
-
-        private int TotalPriceRedPaintSurcharge()
-        {
-            return TotalAmountOfRedShapes() * OrderedBlocks[0].AdditionalCharge;
-        }
-        private void GenerateTable()
-        {
-            PrintLine();
-            PrintRow("        ", "   Red   ", "  Blue  ", " Yellow ");
-            PrintLine();
-            PrintRow("Square", OrderedBlocks[0].NumberOfRedShape.ToString(), OrderedBlocks[0].NumberOfBlueShape.ToString(), OrderedBlocks[0].NumberOfYellowShape.ToString());
-            PrintRow("Triangle", OrderedBlocks[1].NumberOfRedShape.ToString(), OrderedBlocks[1].NumberOfBlueShape.ToString(), OrderedBlocks[1].NumberOfYellowShape.ToString());
-            PrintRow("Circle", OrderedBlocks[2].NumberOfRedShape.ToString(), OrderedBlocks[2].NumberOfBlueShape.ToString(), OrderedBlocks[2].NumberOfYellowShape.ToString());
-            PrintLine();
-        }
-        private void OrderSquareDetails()
-        {
-            Console.WriteLine("\nSquares 		  " + OrderedBlocks[0].TotalQuantityOfShape() + " @ $" + OrderedBlocks[0].Price + " ppi = $" + OrderedBlocks[0].Total());
-        }
-        private void OrderTriangleDetails()
-        {
-            Console.WriteLine("Triangles 		  " + OrderedBlocks[1].TotalQuantityOfShape() + " @ $" + OrderedBlocks[1].Price + " ppi = $" + OrderedBlocks[1].Total());
-        }
-        private void OrderCircleDetails()
-        {
-            Console.WriteLine("Circles 		  " + OrderedBlocks[2].TotalQuantityOfShape() + " @ $" + OrderedBlocks[2].Price + " ppi = $" + OrderedBlocks[2].Total());
-        }
-        private void PrintLine()
-        {
-            Console.WriteLine(new string('-', TableWidth));
-        }
-
-        private void PrintRow(params string[] columns)
-        {
-            int width = (TableWidth - columns.Length) / columns.Length;
-            StringBuilder row = new StringBuilder("|");
-
-            foreach (string column in columns)
+            foreach (var groupedOrder in groupedOrders)
             {
-                row.Append($"{AlignCentre(column, width)}|");
+                PaintShapeDetails(groupedOrder.Key, groupedOrder.Sum(o => o.NumberOfShapes),
+                    groupedOrder.FirstOrDefault().Price,
+                    groupedOrder.Sum(o => o.Total()));
+            }
+        }
+
+        protected void PaintSurcharge()
+        {
+            var ordersWithSurcharge = Order.OrderedBlocks.Where(order => order.Color.Surcharge > 0).ToArray();
+            if (ordersWithSurcharge.Any())
+            {
+                foreach (var groupedOrder in ordersWithSurcharge.GroupBy(o => o.Color.Name))
+                {
+                    var text = groupedOrder.Key + " Color Surcharge";
+                    Console.WriteLine(
+                        $"{text.PadRight(30)}{groupedOrder.Sum(o => o.NumberOfShapes)} @ "
+                        + $"${groupedOrder.First().Color.Surcharge} ppi = "
+                        + $"${groupedOrder.Sum(o => o.SurchargeTotal())}");
+                }
             }
 
-            Console.WriteLine(row);
+            Console.WriteLine();
         }
 
-        private static string AlignCentre(string text, int width)
+        protected void PaintShapeDetails(string shapeName, int quantity, double price, decimal total)
         {
-            text = text.Length > width ? text[..(width - 3)] + "..." : text;
-
-            return string.IsNullOrEmpty(text)
-                ? new string(' ', width)
-                : text.PadRight(width - (width - text.Length) / 2).PadLeft(width);
+            Console.WriteLine(
+                $"{shapeName.PadRight(30)}{quantity} @ ${price} ppi = ${total}");
         }
     }
 }

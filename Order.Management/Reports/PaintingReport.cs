@@ -1,63 +1,34 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Order.Management.Shapes;
+﻿using Order.Management.Colors;
+using System.Linq;
 
 namespace Order.Management.Reports
 {
-    internal class PaintingReport : Order
+    internal class PaintingReport : BaseReport
     {
-        private const int TableWidth = 73;
-        public PaintingReport(string customerName, string customerAddress, string dueDate, List<Shape> shapes)
+        public PaintingReport(Order order) : base(order)
         {
-            base.CustomerName = customerName;
-            base.Address = customerAddress;
-            base.DueDate = dueDate;
-            base.OrderedBlocks = shapes;
-        }
-        public override void GenerateReport()
-        {
-            Console.WriteLine("\nYour painting report has been generated: ");
-            Console.WriteLine(base.ToString());
-            GenerateTable();
+            TableWidth = 73;
+            ReportName = "painting report";
         }
 
-        private void GenerateTable()
+        public override void GenerateTable()
         {
             PrintLine();
-            PrintRow("        ", "   Red   ", "  Blue  ", " Yellow ");
-            PrintLine();
-            PrintRow("Square", base.OrderedBlocks[0].NumberOfRedShape.ToString(), base.OrderedBlocks[0].NumberOfBlueShape.ToString(), base.OrderedBlocks[0].NumberOfYellowShape.ToString());
-            PrintRow("Triangle", base.OrderedBlocks[1].NumberOfRedShape.ToString(), base.OrderedBlocks[1].NumberOfBlueShape.ToString(), base.OrderedBlocks[1].NumberOfYellowShape.ToString());
-            PrintRow("Circle", base.OrderedBlocks[2].NumberOfRedShape.ToString(), base.OrderedBlocks[2].NumberOfBlueShape.ToString(), base.OrderedBlocks[2].NumberOfYellowShape.ToString());
-            PrintLine();
-        }
-       
-        private void PrintLine()
-        {
-            Console.WriteLine(new string('-', TableWidth));
-        }
 
-        private void PrintRow(params string[] columns)
-        {
-            int width = (TableWidth - columns.Length) / columns.Length;
-            StringBuilder row = new StringBuilder("|");
+            PrintRow("        ", $"   {nameof(Red)}   ", $"  {nameof(Blue)}  ", $" {nameof(Yellow)} ");
+            PrintLine();
 
-            foreach (string column in columns)
+            foreach (var groupedOrder in this.Order.OrderedBlocks.GroupBy(o => o.Name))
             {
-                row.Append($"{AlignCentre(column, width)}|");
+                var redQuantity = groupedOrder.Where(shape => shape.Color is Red).Sum(o => o.NumberOfShapes);
+                var yellowQuantity = groupedOrder.Where(shape => shape.Color is Yellow).Sum(o => o.NumberOfShapes);
+                var blueQuantity = groupedOrder.Where(shape => shape.Color is Blue).Sum(o => o.NumberOfShapes);
+
+                PrintRow(groupedOrder.Key, redQuantity.ToString(),
+                    blueQuantity.ToString(), yellowQuantity.ToString());
             }
 
-            Console.WriteLine(row);
-        }
-
-        private static string AlignCentre(string text, int width)
-        {
-            text = text.Length > width ? text[..(width - 3)] + "..." : text;
-
-            return string.IsNullOrEmpty(text)
-                ? new string(' ', width)
-                : text.PadRight(width - (width - text.Length) / 2).PadLeft(width);
+            PrintLine();
         }
     }
 }

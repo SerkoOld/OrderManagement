@@ -1,23 +1,29 @@
-﻿namespace Order.Management.Shapes
+﻿using Order.Management.Colors;
+
+namespace Order.Management.Shapes
 {
-    abstract class Shape
+    public abstract class Shape : IShape
     {
         public string Name { get; set; }
         public int Price { get; set; }
-        public int AdditionalCharge { get; set; }
-        public int NumberOfRedShape { get; set; }
-        public int NumberOfBlueShape { get; set; }
-        public int NumberOfYellowShape { get; set; }
-        public int TotalQuantityOfShape()
+        public BaseColor Color { get; set; }
+        public int NumberOfShapes { get; set; }
+
+        protected Shape(string name, BaseColor color, int numberOfShapes)
         {
-            return NumberOfRedShape + NumberOfBlueShape + NumberOfYellowShape;
+            Name = name;
+            Color = color;
+            NumberOfShapes = numberOfShapes;
         }
 
-        public int AdditionalChargeTotal()
+        public decimal SurchargeTotal()
         {
-            return NumberOfRedShape * AdditionalCharge;
+            return NumberOfShapes * Color.Surcharge;
         }
-        public abstract int Total();
 
+        public decimal Total()
+        {
+            return NumberOfShapes * Price;
+        }
     }
 }
