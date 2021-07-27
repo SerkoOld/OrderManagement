@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Order.Management.Shapes;
 
-namespace Order.Management
+namespace Order.Management.Reports
 {
     internal class CuttingListReport : Order
     {

@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using Order.Management.Reports;
+using Order.Management.Shapes;
 
 namespace Order.Management
 {

@@ -1,8 +1,9 @@
-﻿namespace Order.Management
+﻿namespace Order.Management.Shapes
 {
     internal class Triangle : Shape
     {
         private const int TrianglePrice = 2;
+
         public Triangle(int numberOfRedTriangles, int numberOfBlueTriangles, int numberOfYellowTriangles)
         {
             Name = "Triangle";
@@ -22,14 +23,16 @@
         {
             return (NumberOfRedShape * Price);
         }
+
         public int BlueTrianglesTotal()
         {
             return (NumberOfBlueShape * Price);
         }
+
         public int YellowTrianglesTotal()
         {
             return (NumberOfYellowShape * Price);
         }
-    
-}
+
+    }
 }
