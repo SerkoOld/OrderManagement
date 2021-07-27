@@ -4,9 +4,9 @@ using System.Text;
 
 namespace Order.Management
 {
-    class PaintingReport : Order
+    internal class PaintingReport : Order
     {
-        public int tableWidth = 73;
+        private const int TableWidth = 73;
         public PaintingReport(string customerName, string customerAddress, string dueDate, List<Shape> shapes)
         {
             base.CustomerName = customerName;
@@ -18,10 +18,10 @@ namespace Order.Management
         {
             Console.WriteLine("\nYour painting report has been generated: ");
             Console.WriteLine(base.ToString());
-            generateTable();
+            GenerateTable();
         }
 
-        public void generateTable()
+        private void GenerateTable()
         {
             PrintLine();
             PrintRow("        ", "   Red   ", "  Blue  ", " Yellow ");
@@ -32,36 +32,31 @@ namespace Order.Management
             PrintLine();
         }
        
-        public void PrintLine()
+        private void PrintLine()
         {
-            Console.WriteLine(new string('-', tableWidth));
+            Console.WriteLine(new string('-', TableWidth));
         }
 
-        public void PrintRow(params string[] columns)
+        private void PrintRow(params string[] columns)
         {
-            int width = (tableWidth - columns.Length) / columns.Length;
-            string row = "|";
+            int width = (TableWidth - columns.Length) / columns.Length;
+            StringBuilder row = new StringBuilder("|");
 
             foreach (string column in columns)
             {
-                row += AlignCentre(column, width) + "|";
+                row.Append($"{AlignCentre(column, width)}|");
             }
 
             Console.WriteLine(row);
         }
 
-        public string AlignCentre(string text, int width)
+        private static string AlignCentre(string text, int width)
         {
-            text = text.Length > width ? text.Substring(0, width - 3) + "..." : text;
+            text = text.Length > width ? text[..(width - 3)] + "..." : text;
 
-            if (string.IsNullOrEmpty(text))
-            {
-                return new string(' ', width);
-            }
-            else
-            {
-                return text.PadRight(width - (width - text.Length) / 2).PadLeft(width);
-            }
+            return string.IsNullOrEmpty(text)
+                ? new string(' ', width)
+                : text.PadRight(width - (width - text.Length) / 2).PadLeft(width);
         }
     }
 }
