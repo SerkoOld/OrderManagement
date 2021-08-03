@@ -6,6 +6,7 @@ namespace Order.Management
 {
     class PaintingReport : Order
     {
+        // private and prefix with underscore
         public int tableWidth = 73;
         public PaintingReport(string customerName, string customerAddress, string dueDate, List<Shape> shapes)
         {
@@ -21,6 +22,7 @@ namespace Order.Management
             generateTable();
         }
 
+        // Remove method after refactor, see Order.cs
         public void generateTable()
         {
             PrintLine();
@@ -32,13 +34,16 @@ namespace Order.Management
             PrintLine();
         }
        
+        // Can be in a helper class
         public void PrintLine()
         {
             Console.WriteLine(new string('-', tableWidth));
         }
 
+        // Can be in a helper class
         public void PrintRow(params string[] columns)
         {
+            // Validate columns parameter
             int width = (tableWidth - columns.Length) / columns.Length;
             string row = "|";
 
@@ -50,8 +55,10 @@ namespace Order.Management
             Console.WriteLine(row);
         }
 
+        // Private method in helper class
         public string AlignCentre(string text, int width)
         {
+            // Validate parameters
             text = text.Length > width ? text.Substring(0, width - 3) + "..." : text;
 
             if (string.IsNullOrEmpty(text))

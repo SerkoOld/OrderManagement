@@ -3,6 +3,9 @@ using System.Collections.Generic;
 
 namespace Order.Management
 {
+    // Can use declare variables as var for variables where their type can be inferred from their assignment
+    // (but this is probably just based on preference) E.g. var circle = new Circle(redCircle, blueCircle, yellowCircle);
+    // Can remove comments from method names as it's adding additional lines which are redundant
     class Program
     {
         // Main entry
@@ -19,16 +22,19 @@ namespace Order.Management
             PaintingReport(customerName, address, dueDate, orderedShapes);
         }
         
+        // Can change the access modifier to private as it's being used within this class (same as the other methods in this class)
         // Order Circle Input
         public static Circle OrderCirclesInput()
         {
             Console.Write("\nPlease input the number of Red Circle: ");
+            // More meaningful variable names (E.g. NumberOfRedCircles)
             int redCircle = Convert.ToInt32(userInput());
             Console.Write("Please input the number of Blue Circle: ");
             int blueCircle = Convert.ToInt32(userInput());
             Console.Write("Please input the number of Yellow Circle: ");
             int yellowCircle = Convert.ToInt32(userInput());
 
+            // Combine return and assignment
             Circle circle = new Circle(redCircle, blueCircle, yellowCircle);
             return circle;
         }
@@ -37,6 +43,7 @@ namespace Order.Management
         public static Square OrderSquaresInput()
         {
             Console.Write("\nPlease input the number of Red Squares: ");
+            // Need exception handling or an int.TryParse to avoid crashing on invalid input (E.g. abc)
             int redSquare = Convert.ToInt32(userInput());
             Console.Write("Please input the number of Blue Squares: ");
             int blueSquare = Convert.ToInt32(userInput());
@@ -61,19 +68,23 @@ namespace Order.Management
             return triangle;
         }
 
+        // Method names should be Pascal case
         // User Console Input
         public static string userInput()
         {
             string input = Console.ReadLine();
+            // Maybe use string.IsNullOrWhiteSpace()
             while (string.IsNullOrEmpty(input))
             {
                 Console.WriteLine("please enter valid details");
                 input = Console.ReadLine();
+                // Remove extra line
 
             }
             return input;
         }
 
+        // Can create a factory class/method to create an ReportOrder for the 3 types of reports so we don't need to repeat ourselves
         // Generate Painting Report 
         private static void PaintingReport(string customerName, string address, string dueDate, List<Shape> orderedShapes)
         {
@@ -107,6 +118,7 @@ namespace Order.Management
             return (customerName, address, dueDate);
         }
 
+        // Needs a better method name (E.g. OrderShapes)
         // Get order input
         private static List<Shape> CustomerOrderInput()
         {
@@ -114,6 +126,8 @@ namespace Order.Management
             Triangle triangle = OrderTrianglesInput();
             Circle circle = OrderCirclesInput();
 
+            // Can simplify into one statement by putting the shapes into the body of the shapes list
+            // E.g. new List<Shape> { s1, s3, s3};
             var orderedShapes = new List<Shape>();
             orderedShapes.Add(square);
             orderedShapes.Add(triangle);
