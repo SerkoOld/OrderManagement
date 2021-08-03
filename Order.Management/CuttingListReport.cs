@@ -21,6 +21,7 @@ namespace Order.Management
             Console.WriteLine(base.ToString());
             generateTable();
         }
+        //Override new base abstract method
         public void generateTable()
         {
             PrintLine();
