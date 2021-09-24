@@ -1,7 +1,13 @@
 ﻿Please input your Name: Please input your Address: Please input your Due Date: 
-Please input the number of Red Squares: Please input the number of Blue Squares: Please input the number of Yellow Squares: 
-Please input the number of Red Triangles: Please input the number of Blue Triangles: Please input the number of Yellow Triangles: 
-Please input the number of Red Circle: Please input the number of Blue Circle: Please input the number of Yellow Circle: 
+Please input the number of Red Square: 
+Please input the number of Blue Square: 
+Please input the number of Yellow Square: 
+Please input the number of Red Triangle: 
+Please input the number of Blue Triangle: 
+Please input the number of Yellow Triangle: 
+Please input the number of Red Circle: 
+Please input the number of Blue Circle: 
+Please input the number of Yellow Circle: 
 Your invoice report has been generated: 
 
 Name: David Wei Address: 26A Croydon Street, Sydenham, Christchurch 8024 Due Date: 29-09-2021 Order #: 0
