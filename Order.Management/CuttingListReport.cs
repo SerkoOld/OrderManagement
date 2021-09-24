@@ -6,9 +6,12 @@ namespace Order.Management
 {
     class CuttingListReport : Order
     {
+        // 1. Inconsistent name convention: it should change to TableWidth
+        // 2. This property could be readonly.
         public int tableWidth = 20;
         public CuttingListReport(string customerName, string customerAddress, string dueDate, List<Shape> shapes)
         {
+            // use base(parameters) instead of the `base.FieldName` way
             base.CustomerName = customerName;
             base.Address = customerAddress;
             base.DueDate = dueDate;
@@ -21,6 +24,7 @@ namespace Order.Management
             Console.WriteLine(base.ToString());
             generateTable();
         }
+        // 1. Inconsistent name convention: it should change to GenerateTable
         public void generateTable()
         {
             PrintLine();
@@ -31,11 +35,13 @@ namespace Order.Management
             PrintRow("Circle", base.OrderedBlocks[2].TotalQuantityOfShape().ToString());
             PrintLine();
         }
+        // 3. If a method could be private, make it private
         public void PrintLine()
         {
             Console.WriteLine(new string('-', tableWidth));
         }
 
+        // 3. If a method could be private, make it private
         public void PrintRow(params string[] columns)
         {
             int width = (tableWidth - columns.Length) / columns.Length;
@@ -49,10 +55,12 @@ namespace Order.Management
             Console.WriteLine(row);
         }
 
+        // 3. If a method could be private, make it private
         public string AlignCentre(string text, int width)
         {
             text = text.Length > width ? text.Substring(0, width - 3) + "..." : text;
 
+            // 4. this check should be the very first check
             if (string.IsNullOrEmpty(text))
             {
                 return new string(' ', width);
@@ -62,7 +70,5 @@ namespace Order.Management
                 return text.PadRight(width - (width - text.Length) / 2).PadLeft(width);
             }
         }
-
-
     }
 }

@@ -4,6 +4,7 @@
 local.appsettings.config
 
 # User-specific files
+.idea/
 *.suo
 *.user
 *.userosscache
