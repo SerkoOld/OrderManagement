@@ -68,6 +68,7 @@ namespace Order.Management
             Console.WriteLine(new string('-', tableWidth));
         }
 
+        // Duplicate Code, should move to a base Report Class
         public void PrintRow(params string[] columns)
         {
             int width = (tableWidth - columns.Length) / columns.Length;
@@ -81,8 +82,10 @@ namespace Order.Management
             Console.WriteLine(row);
         }
 
+        // Duplicate code
         public string AlignCentre(string text, int width)
         {
+            // Should extract into a getTrimmedText method
             text = text.Length > width ? text.Substring(0, width - 3) + "..." : text;
 
             if (string.IsNullOrEmpty(text))

@@ -3,10 +3,11 @@ using System.Collections.Generic;
 
 namespace Order.Management
 {
-    class Program
+
+    public static class Program
     {
         // Main entry
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
             var (customerName, address, dueDate) = CustomerInfoInput();
 
@@ -18,9 +19,9 @@ namespace Order.Management
 
             PaintingReport(customerName, address, dueDate, orderedShapes);
         }
-        
+
         // Order Circle Input
-        public static Circle OrderCirclesInput()
+        private static Circle OrderCirclesInput()
         {
             Console.Write("\nPlease input the number of Red Circle: ");
             int redCircle = Convert.ToInt32(userInput());
@@ -32,9 +33,9 @@ namespace Order.Management
             Circle circle = new Circle(redCircle, blueCircle, yellowCircle);
             return circle;
         }
-        
+
         // Order Squares Input
-        public static Square OrderSquaresInput()
+        private static Square OrderSquaresInput()
         {
             Console.Write("\nPlease input the number of Red Squares: ");
             int redSquare = Convert.ToInt32(userInput());
@@ -48,7 +49,7 @@ namespace Order.Management
         }
 
         // Order Triangles Input
-        public static Triangle OrderTrianglesInput()
+        private static Triangle OrderTrianglesInput()
         {
             Console.Write("\nPlease input the number of Red Triangles: ");
             int redTriangle = Convert.ToInt32(userInput());
@@ -74,21 +75,21 @@ namespace Order.Management
             return input;
         }
 
-        // Generate Painting Report 
+        // Generate Painting Report
         private static void PaintingReport(string customerName, string address, string dueDate, List<Shape> orderedShapes)
         {
             PaintingReport paintingReport = new PaintingReport(customerName, address, dueDate, orderedShapes);
             paintingReport.GenerateReport();
         }
 
-        // Generate Painting Report 
+        // Generate Painting Report
         private static void CuttingListReport(string customerName, string address, string dueDate, List<Shape> orderedShapes)
         {
             CuttingListReport cuttingListReport = new CuttingListReport(customerName, address, dueDate, orderedShapes);
             cuttingListReport.GenerateReport();
         }
 
-        // Generate Invoice Report 
+        // Generate Invoice Report
         private static void InvoiceReport(string customerName, string address, string dueDate, List<Shape> orderedShapes)
         {
             InvoiceReport invoiceReport = new InvoiceReport(customerName, address, dueDate, orderedShapes);
