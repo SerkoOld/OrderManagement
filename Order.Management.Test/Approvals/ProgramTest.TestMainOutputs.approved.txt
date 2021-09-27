@@ -1,0 +1,47 @@
+﻿Please input your Name: Please input your Address: Please input your Due Date: 
+Please input the number of Red Square: 
+Please input the number of Blue Square: 
+Please input the number of Yellow Square: 
+Please input the number of Red Triangle: 
+Please input the number of Blue Triangle: 
+Please input the number of Yellow Triangle: 
+Please input the number of Red Circle: 
+Please input the number of Blue Circle: 
+Please input the number of Yellow Circle: 
+Your invoice report has been generated: 
+
+Name: David Wei Address: 26A Croydon Street, Sydenham, Christchurch 8024 Due Date: 29-09-2021 Order #: 0
+-------------------------------------------------------------------------
+|                 |       Red       |      Blue       |     Yellow      |
+-------------------------------------------------------------------------
+|     Square      |        1        |        2        |        3        |
+|    Triangle     |        4        |        7        |        2        |
+|     Circle      |        5        |        8        |        1        |
+-------------------------------------------------------------------------
+
+Squares 		  6 @ $1 ppi = $6
+Triangles 		  13 @ $2 ppi = $26
+Circles 		  14 @ $3 ppi = $42
+Red Color Surcharge       10 @ $1 ppi = $10
+
+Your cutting list has been generated: 
+
+Name: David Wei Address: 26A Croydon Street, Sydenham, Christchurch 8024 Due Date: 29-09-2021 Order #: 0
+--------------------
+|         |   Qty   |
+--------------------
+| Square  |    6    |
+|Triangle |   13    |
+| Circle  |   14    |
+--------------------
+
+Your painting report has been generated: 
+
+Name: David Wei Address: 26A Croydon Street, Sydenham, Christchurch 8024 Due Date: 29-09-2021 Order #: 0
+-------------------------------------------------------------------------
+|                 |       Red       |      Blue       |     Yellow      |
+-------------------------------------------------------------------------
+|     Square      |        1        |        2        |        3        |
+|    Triangle     |        4        |        7        |        2        |
+|     Circle      |        5        |        8        |        1        |
+-------------------------------------------------------------------------
