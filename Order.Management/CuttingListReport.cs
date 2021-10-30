@@ -33,7 +33,7 @@ namespace Order.Management
         }
         public void PrintLine()
         {
-            Console.WriteLine(new string('-', tableWidth));
+            Console.WriteLine(new string('-', tableWidth)); 
         }
 
         public void PrintRow(params string[] columns)
