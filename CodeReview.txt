@@ -1,0 +1,17 @@
+1. Dupicated and scattered customers info appear in input paremeters of each method;
+I would like to define a Class CustomerInfo contains all the customer related info and operations;
+2. In concreate Report class, constructor should pass the value to 'this' rather than 'base'
+3. In real life logic, Order should be property of Report, shouldn't be a parent of report
+4. Duplicated methods appreas in the three Report classes, Better let the three reports inherit from an Abstract Report
+4. I would liek make GenerateTable virtual to use later-binding.
+5. I would like put Customer info into Order properties.
+6. ToString should be overrided.
+7.OrderNumber should be assigned a value.
+8. Rename to GenerateInvoiceReport rather than InvoiceReport in Main, and so on so forth.
+9. Only need one method Total() in Shape class, doesn't need Total method by colors
+10. Unnecessary specified name such as CirclePrice, just use Price from base class, and so on.
+11. As business requirement, AddtionalCharge doesn't care shape, need to only assign value at base class.
+12. InvoiceReport details method need to be private
+13. InvoiceReport lack of Total amount method
+14. I would 'd like use Factory Method to implement Shape logic, decouple the input and create logic.
+15.OrderXXXXInput is repeated pattern, I would like to put them into one method OrderShapeInput 

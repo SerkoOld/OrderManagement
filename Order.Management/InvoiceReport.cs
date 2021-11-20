@@ -1,98 +1,65 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Order.Management
 {
-    class InvoiceReport : Order
+    class InvoiceReport : Report
     {
-        public int tableWidth = 73;
-        public InvoiceReport(string customerName, string customerAddress, string dueDate, List<Shape> shapes)
+        public InvoiceReport(Order order, int tableWidth)
+        :base (order,"invoice",tableWidth)
         {
-            base.CustomerName = customerName;
-            base.Address = customerAddress;
-            base.DueDate = dueDate;
-            base.OrderedBlocks = shapes;
         }
 
         public override void GenerateReport()
         {
-            Console.WriteLine("\nYour invoice report has been generated: ");
-            Console.WriteLine(base.ToString());
-            GenerateTable();
+            base.GenerateReport();
             OrderSquareDetails();
             OrderTriangleDetails();
             OrderCircleDetails();
             RedPaintSurcharge();
+            GetTotalAmount();
         }
 
         public void RedPaintSurcharge()
         {
-            Console.WriteLine("Red Color Surcharge       " + TotalAmountOfRedShapes() + " @ $" + base.OrderedBlocks[0].AdditionalCharge + " ppi = $" + TotalPriceRedPaintSurcharge());
+            Console.WriteLine("Red Color Surcharge       " + TotalAmountOfRedShapes() + " @ $" + Order.CustomerInfo.OrderedShape[0].AdditionalCharge + " ppi = $" + TotalPriceRedPaintSurcharge());
         }
 
         public int TotalAmountOfRedShapes()
         {
-            return base.OrderedBlocks[0].NumberOfRedShape + base.OrderedBlocks[1].NumberOfRedShape +
-                   base.OrderedBlocks[2].NumberOfRedShape;
+            return Order.CustomerInfo.OrderedShape[0].NumberOfRedShape + Order.CustomerInfo.OrderedShape[1].NumberOfRedShape +
+                   Order.CustomerInfo.OrderedShape[2].NumberOfRedShape;
         }
 
         public int TotalPriceRedPaintSurcharge()
         {
-            return TotalAmountOfRedShapes() * base.OrderedBlocks[0].AdditionalCharge;
+            return TotalAmountOfRedShapes() * Order.CustomerInfo.OrderedShape[0].AdditionalCharge;
         }
-        public void GenerateTable()
+        protected override void GenerateTable()
         {
             PrintLine();
             PrintRow("        ", "   Red   ", "  Blue  ", " Yellow ");
             PrintLine();
-            PrintRow("Square", base.OrderedBlocks[0].NumberOfRedShape.ToString(), base.OrderedBlocks[0].NumberOfBlueShape.ToString(), base.OrderedBlocks[0].NumberOfYellowShape.ToString());
-            PrintRow("Triangle", base.OrderedBlocks[1].NumberOfRedShape.ToString(), base.OrderedBlocks[1].NumberOfBlueShape.ToString(), base.OrderedBlocks[1].NumberOfYellowShape.ToString());
-            PrintRow("Circle", base.OrderedBlocks[2].NumberOfRedShape.ToString(), base.OrderedBlocks[2].NumberOfBlueShape.ToString(), base.OrderedBlocks[2].NumberOfYellowShape.ToString());
+            PrintRow("Square", Order.CustomerInfo.OrderedShape[0].NumberOfRedShape.ToString(), Order.CustomerInfo.OrderedShape[0].NumberOfBlueShape.ToString(), Order.CustomerInfo.OrderedShape[0].NumberOfYellowShape.ToString());
+            PrintRow("Triangle", Order.CustomerInfo.OrderedShape[1].NumberOfRedShape.ToString(), Order.CustomerInfo.OrderedShape[1].NumberOfBlueShape.ToString(), Order.CustomerInfo.OrderedShape[1].NumberOfYellowShape.ToString());
+            PrintRow("Circle", Order.CustomerInfo.OrderedShape[2].NumberOfRedShape.ToString(), Order.CustomerInfo.OrderedShape[2].NumberOfBlueShape.ToString(), Order.CustomerInfo.OrderedShape[2].NumberOfYellowShape.ToString());
             PrintLine();
         }
-        public void OrderSquareDetails()
+        private void OrderSquareDetails()
         {
-            Console.WriteLine("\nSquares 		  " + base.OrderedBlocks[0].TotalQuantityOfShape() + " @ $" + base.OrderedBlocks[0].Price + " ppi = $" + base.OrderedBlocks[0].Total());
+            Console.WriteLine("\nSquares 		  " + Order.CustomerInfo.OrderedShape[0].TotalQuantityOfShape() + " @ $" + Order.CustomerInfo.OrderedShape[0].Price + " ppi = $" + Order.CustomerInfo.OrderedShape[0].Total());
         }
-        public void OrderTriangleDetails()
+        private void OrderTriangleDetails()
         {
-            Console.WriteLine("Triangles 		  " + base.OrderedBlocks[1].TotalQuantityOfShape() + " @ $" + base.OrderedBlocks[1].Price + " ppi = $" + base.OrderedBlocks[1].Total());
+            Console.WriteLine("Triangles 		  " + Order.CustomerInfo.OrderedShape[1].TotalQuantityOfShape() + " @ $" + Order.CustomerInfo.OrderedShape[1].Price + " ppi = $" + Order.CustomerInfo.OrderedShape[1].Total());
         }
-        public void OrderCircleDetails()
+        private void OrderCircleDetails()
         {
-            Console.WriteLine("Circles 		  " + base.OrderedBlocks[2].TotalQuantityOfShape() + " @ $" + base.OrderedBlocks[2].Price + " ppi = $" + base.OrderedBlocks[2].Total());
-        }
-        public void PrintLine()
-        {
-            Console.WriteLine(new string('-', tableWidth));
+            Console.WriteLine("Circles 		  " + Order.CustomerInfo.OrderedShape[2].TotalQuantityOfShape() + " @ $" + Order.CustomerInfo.OrderedShape[2].Price + " ppi = $" + Order.CustomerInfo.OrderedShape[2].Total());
         }
 
-        public void PrintRow(params string[] columns)
+        private void GetTotalAmount()
         {
-            int width = (tableWidth - columns.Length) / columns.Length;
-            string row = "|";
-
-            foreach (string column in columns)
-            {
-                row += AlignCentre(column, width) + "|";
-            }
-
-            Console.WriteLine(row);
-        }
-
-        public string AlignCentre(string text, int width)
-        {
-            text = text.Length > width ? text.Substring(0, width - 3) + "..." : text;
-
-            if (string.IsNullOrEmpty(text))
-            {
-                return new string(' ', width);
-            }
-            else
-            {
-                return text.PadRight(width - (width - text.Length) / 2).PadLeft(width);
-            }
+            Console.WriteLine($"Total: ${TotalAmountOfRedShapes() + Order.CustomerInfo.OrderedShape[0].Total() + Order.CustomerInfo.OrderedShape[1].Total() + Order.CustomerInfo.OrderedShape[2].Total()}");
         }
     }
 }

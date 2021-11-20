@@ -6,6 +6,13 @@ namespace Order.Management
 {
     abstract class Shape
     {
+        public Shape(int numberOfRedSquares, int numberOfBlueSquares, int numberOfYellowSquares)
+        {
+            this.NumberOfRedShape = numberOfRedSquares;
+            this.NumberOfBlueShape = numberOfBlueSquares;
+            this.NumberOfYellowShape = numberOfYellowSquares;
+            this.AdditionalCharge = 1;
+        }
         public string Name { get; set; }
         public int Price { get; set; }
         public int AdditionalCharge { get; set; }
@@ -21,7 +28,12 @@ namespace Order.Management
         {
             return NumberOfRedShape * AdditionalCharge;
         }
-        public abstract int Total();
+        
+        public int Total()
+        {
+            return TotalQuantityOfShape() * this.Price;
+        }
+   
 
     }
 }
