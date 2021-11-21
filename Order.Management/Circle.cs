@@ -6,8 +6,8 @@ namespace Order.Management
 {
     class Circle : Shape
     {
-        public Circle(int numberOfRedCircle, int numberOfBlueCircle, int numberOfYellowCircle)
-        :base(numberOfRedCircle, numberOfBlueCircle, numberOfYellowCircle)
+        public Circle(Dictionary<Color, int> colorNumbers)
+        :base(colorNumbers)
         {
             Name = "Circle";
             this.Price = 3;

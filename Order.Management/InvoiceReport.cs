@@ -26,23 +26,17 @@ namespace Order.Management
 
         public int TotalAmountOfRedShapes()
         {
-            return Order.CustomerInfo.OrderedShape[0].NumberOfRedShape + Order.CustomerInfo.OrderedShape[1].NumberOfRedShape +
-                   Order.CustomerInfo.OrderedShape[2].NumberOfRedShape;
+            var total = 0;
+            foreach (var orderedShape in Order.CustomerInfo.OrderedShape)
+            {
+                total += orderedShape.ColorNumbers[Color.Red];
+            }
+            return total;
         }
 
         public int TotalPriceRedPaintSurcharge()
         {
             return TotalAmountOfRedShapes() * Order.CustomerInfo.OrderedShape[0].AdditionalCharge;
-        }
-        protected override void GenerateTable()
-        {
-            PrintLine();
-            PrintRow("        ", "   Red   ", "  Blue  ", " Yellow ");
-            PrintLine();
-            PrintRow("Square", Order.CustomerInfo.OrderedShape[0].NumberOfRedShape.ToString(), Order.CustomerInfo.OrderedShape[0].NumberOfBlueShape.ToString(), Order.CustomerInfo.OrderedShape[0].NumberOfYellowShape.ToString());
-            PrintRow("Triangle", Order.CustomerInfo.OrderedShape[1].NumberOfRedShape.ToString(), Order.CustomerInfo.OrderedShape[1].NumberOfBlueShape.ToString(), Order.CustomerInfo.OrderedShape[1].NumberOfYellowShape.ToString());
-            PrintRow("Circle", Order.CustomerInfo.OrderedShape[2].NumberOfRedShape.ToString(), Order.CustomerInfo.OrderedShape[2].NumberOfBlueShape.ToString(), Order.CustomerInfo.OrderedShape[2].NumberOfYellowShape.ToString());
-            PrintLine();
         }
         private void OrderSquareDetails()
         {

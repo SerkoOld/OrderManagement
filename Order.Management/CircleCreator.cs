@@ -6,9 +6,13 @@ namespace Order.Management
 {
     class CircleCreator:ShapeFactory
     {
-        public override Shape CreateShape(int numberOfRedBlock, int numberOfBlueBlock, int numberOfYellowBlock)
+        public override Shape CreateShape(Dictionary<Color, int> colorNumbers)
         {
-            return new Circle(numberOfRedBlock, numberOfBlueBlock, numberOfYellowBlock);
+            return new Circle(colorNumbers);
+        }
+        public override string GetShapeName()
+        {
+            return "Circle";
         }
     }
 }

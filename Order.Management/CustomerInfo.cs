@@ -24,9 +24,9 @@ namespace Order.Management
         }
         public void CustomerOrderInput()
         {
-            var square = (Square)OrderShapeInput(new SquareCreator(),typeof(Square).ToString());
-            var triangle = (Triangle)OrderShapeInput(new TriangleCreator(), typeof(Triangle).ToString());
-            var circle = (Circle)OrderShapeInput(new CircleCreator(), typeof(Circle).ToString());
+            var square = (Square)OrderShapeInput(new SquareCreator());
+            var triangle = (Triangle)OrderShapeInput(new TriangleCreator());
+            var circle = (Circle)OrderShapeInput(new CircleCreator());
 
             var orderedShapes = new List<Shape>();
             orderedShapes.Add(square);
@@ -35,15 +35,19 @@ namespace Order.Management
             OrderedShape = orderedShapes;
         }
 
-        private Shape OrderShapeInput(ShapeFactory creator, string shapeName)
+        private Shape OrderShapeInput(ShapeFactory creator)
         {
-            Console.Write($"\nPlease input the number of Red {shapeName}: ");
+            var colorNumbers = new Dictionary<Color, int>();
+            Console.Write($"\nPlease input the number of Red {creator.GetShapeName()}: ");
             int redNumber = Convert.ToInt32(UserInput());
-            Console.Write($"Please input the number of Blue {shapeName}: ");
+            colorNumbers.Add(Color.Red, redNumber);
+            Console.Write($"Please input the number of Blue {creator.GetShapeName()}: ");
             int blueNumber = Convert.ToInt32(UserInput());
-            Console.Write($"Please input the number of Yellow {shapeName}: ");
+            colorNumbers.Add(Color.Blue, blueNumber);
+            Console.Write($"Please input the number of Yellow {creator.GetShapeName()}: ");
             int yellowNumber = Convert.ToInt32(UserInput());
-            return creator.CreateShape(redNumber,blueNumber,yellowNumber);
+            colorNumbers.Add(Color.Yellow, yellowNumber);
+            return creator.CreateShape(colorNumbers);
         }
        
         private string UserInput()

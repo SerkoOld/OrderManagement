@@ -6,6 +6,10 @@ namespace Order.Management
 {
     abstract class ShapeFactory
     {
-        public abstract Shape CreateShape(int numberOfRedBlock, int numberOfBlueBlock, int numberOfYellowBlock);
+        public abstract Shape CreateShape(Dictionary<Color, int> colorNumbers);
+        public virtual string GetShapeName() 
+        { 
+            return ""; 
+        }
     }
 }

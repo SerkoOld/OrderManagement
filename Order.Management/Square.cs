@@ -1,10 +1,11 @@
-﻿
+﻿using System.Collections.Generic;
+
 namespace Order.Management
 {
     class Square : Shape
     {
-        public Square(int numberOfRedSquares, int numberOfBlueSquares, int numberOfYellowSquares)
-        :base (numberOfRedSquares,numberOfBlueSquares,numberOfYellowSquares){
+        public Square(Dictionary<Color, int> colorNumbers)
+        :base (colorNumbers){
             Name = "Square";
             this.Price = 1;
         }

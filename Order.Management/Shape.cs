@@ -6,34 +6,37 @@ namespace Order.Management
 {
     abstract class Shape
     {
-        public Shape(int numberOfRedSquares, int numberOfBlueSquares, int numberOfYellowSquares)
+        public Shape(Dictionary<Color, int> colorNumbers)
         {
-            this.NumberOfRedShape = numberOfRedSquares;
-            this.NumberOfBlueShape = numberOfBlueSquares;
-            this.NumberOfYellowShape = numberOfYellowSquares;
+            this.ColorNumbers = colorNumbers;
             this.AdditionalCharge = 1;
         }
         public string Name { get; set; }
         public int Price { get; set; }
         public int AdditionalCharge { get; set; }
-        public int NumberOfRedShape { get; set; }
-        public int NumberOfBlueShape { get; set; }
-        public int NumberOfYellowShape { get; set; }
+
+        public  Dictionary<Color, int> ColorNumbers { get; set; }
+        
         public int TotalQuantityOfShape()
         {
-            return NumberOfRedShape + NumberOfBlueShape + NumberOfYellowShape;
+            return ColorNumbers[Color.Red] + ColorNumbers[Color.Blue] + ColorNumbers[Color.Yellow];
         }
 
         public int AdditionalChargeTotal()
         {
-            return NumberOfRedShape * AdditionalCharge;
+            return ColorNumbers[Color.Red] * AdditionalCharge;
         }
         
         public int Total()
         {
             return TotalQuantityOfShape() * this.Price;
         }
-   
+    }
 
+    public enum Color
+    { 
+        Red = 1,
+        Blue = 2,
+        Yellow = 3
     }
 }

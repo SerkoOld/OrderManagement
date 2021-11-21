@@ -6,7 +6,7 @@ namespace Order.Management
 {
     abstract class Report  // Handle common report properties and methods
     {
-        private int TableWidth;// Property name format keep constant with other class, better not to use magic number
+        private int TableWidth;
         protected Order Order;
         protected string ReportName;
         
@@ -22,7 +22,16 @@ namespace Order.Management
             Console.WriteLine(Order.ToString());
             GenerateTable();
         }
-        protected virtual void GenerateTable() { } // Using late binding, because want it call during runtime in the derived class.
+        protected virtual void GenerateTable() // Using late binding, because want it call during runtime in the derived class.
+        {
+            PrintLine();
+            PrintRow("        ", "   Red   ", "  Blue  ", " Yellow ");
+            PrintLine();
+            PrintRow("Square", Order.CustomerInfo.OrderedShape[0].ColorNumbers[Color.Red].ToString(), Order.CustomerInfo.OrderedShape[0].ColorNumbers[Color.Blue].ToString(), Order.CustomerInfo.OrderedShape[0].ColorNumbers[Color.Yellow].ToString());
+            PrintRow("Triangle", Order.CustomerInfo.OrderedShape[1].ColorNumbers[Color.Red].ToString(), Order.CustomerInfo.OrderedShape[1].ColorNumbers[Color.Blue].ToString(), Order.CustomerInfo.OrderedShape[1].ColorNumbers[Color.Yellow].ToString());
+            PrintRow("Circle", Order.CustomerInfo.OrderedShape[2].ColorNumbers[Color.Red].ToString(), Order.CustomerInfo.OrderedShape[2].ColorNumbers[Color.Blue].ToString(), Order.CustomerInfo.OrderedShape[2].ColorNumbers[Color.Yellow].ToString());
+            PrintLine();
+        } 
 
         protected void PrintLine()
         {

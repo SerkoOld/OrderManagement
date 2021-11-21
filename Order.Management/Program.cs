@@ -2,10 +2,10 @@
 
 namespace Order.Management
 {
-    class Program
+    public class Program
     {
         // Main entry
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
             var customerInfo = new CustomerInfo();
             customerInfo.CustomerInfoInput();

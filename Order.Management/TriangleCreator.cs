@@ -6,9 +6,14 @@ namespace Order.Management
 {
     class TriangleCreator:ShapeFactory
     {
-        public override Shape CreateShape(int numberOfRedBlock, int numberOfBlueBlock, int numberOfYellowBlock)
+        public override Shape CreateShape(Dictionary<Color, int> colorNumbers)
         {
-            return new Triangle(numberOfRedBlock, numberOfBlueBlock, numberOfYellowBlock);
+            return new Triangle(colorNumbers);
         }
+        public override string GetShapeName()
+        {
+            return "Triangle";
+        }
+
     }
 }

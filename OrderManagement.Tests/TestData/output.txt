@@ -1,0 +1,42 @@
+Please input your Name: Please input your Address: Please input your Due Date: 
+Please input the number of Red Square: Please input the number of Blue Square: Please input the number of Yellow Square: 
+Please input the number of Red Triangle: Please input the number of Blue Triangle: Please input the number of Yellow Triangle: 
+Please input the number of Red Circle: Please input the number of Blue Circle: Please input the number of Yellow Circle: 
+Your invoice has been generated: 
+
+Name: Jessie Bai Address: 12 Queen St, Acukland Due Date: 12-12-2021 Order #: 0
+-------------------------------------------------------------------------
+|                 |       Red       |      Blue       |     Yellow      |
+-------------------------------------------------------------------------
+|     Square      |        1        |        2        |        3        |
+|    Triangle     |        4        |        5        |        6        |
+|     Circle      |        7        |        8        |        9        |
+-------------------------------------------------------------------------
+
+Squares 		  6 @ $1 ppi = $6
+Triangles 		  15 @ $2 ppi = $30
+Circles 		  24 @ $3 ppi = $72
+Red Color Surcharge       12 @ $1 ppi = $12
+Total: $120
+
+Your cutting list has been generated: 
+
+Name: Jessie Bai Address: 12 Queen St, Acukland Due Date: 12-12-2021 Order #: 0
+--------------------
+|         |   Qty   |
+--------------------
+| Square  |    6    |
+|Triangle |   15    |
+| Circle  |   24    |
+--------------------
+
+Your painting has been generated: 
+
+Name: Jessie Bai Address: 12 Queen St, Acukland Due Date: 12-12-2021 Order #: 0
+-------------------------------------------------------------------------
+|                 |       Red       |      Blue       |     Yellow      |
+-------------------------------------------------------------------------
+|     Square      |        1        |        2        |        3        |
+|    Triangle     |        4        |        5        |        6        |
+|     Circle      |        7        |        8        |        9        |
+-------------------------------------------------------------------------

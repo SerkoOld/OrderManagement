@@ -6,9 +6,14 @@ namespace Order.Management
 {
     class SquareCreator : ShapeFactory
     {
-        public override Shape CreateShape(int numberOfRedBlock, int numberOfBlueBlock, int numberOfYellowBlock)
+        public override Shape CreateShape(Dictionary<Color, int> colorNumbers)
         {
-            return new Square(numberOfRedBlock,numberOfBlueBlock,numberOfYellowBlock);
+            return new Square(colorNumbers);
+        }
+
+        public override string GetShapeName()
+        {
+            return "Square";
         }
     }
 }

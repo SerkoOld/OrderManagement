@@ -11,7 +11,7 @@ namespace Order.Management
         public Order(CustomerInfo customerInfo)
         {
             this.CustomerInfo = customerInfo;
-            this.OrderNumber = new Random().Next();
+            //this.OrderNumber = new Random().Next();
         }
 
         public override string ToString()
