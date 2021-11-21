@@ -38,13 +38,13 @@ namespace Order.Management
         private Shape OrderShapeInput(ShapeFactory creator)
         {
             var colorNumbers = new Dictionary<Color, int>();
-            Console.Write($"\nPlease input the number of Red {creator.GetShapeName()}: ");
+            Console.Write($"\nPlease input the number of Red {creator.Name}: ");
             int redNumber = Convert.ToInt32(UserInput());
             colorNumbers.Add(Color.Red, redNumber);
-            Console.Write($"Please input the number of Blue {creator.GetShapeName()}: ");
+            Console.Write($"Please input the number of Blue {creator.Name}: ");
             int blueNumber = Convert.ToInt32(UserInput());
             colorNumbers.Add(Color.Blue, blueNumber);
-            Console.Write($"Please input the number of Yellow {creator.GetShapeName()}: ");
+            Console.Write($"Please input the number of Yellow {creator.Name}: ");
             int yellowNumber = Convert.ToInt32(UserInput());
             colorNumbers.Add(Color.Yellow, yellowNumber);
             return creator.CreateShape(colorNumbers);
