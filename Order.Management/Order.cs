@@ -4,19 +4,19 @@ using System.Text;
 
 namespace Order.Management
 {
-    abstract class Order
+    class Order
     {
-        public string CustomerName { get; set; }
-        public string Address { get; set; }
-        public string DueDate { get; set; }
-        public int OrderNumber { get; set; }
-        public List<Shape> OrderedBlocks { get; set; }
-
-        public abstract void GenerateReport();
-
-        public string ToString()
+        private int OrderNumber;
+        public CustomerInfo CustomerInfo { get; set; }
+        public Order(CustomerInfo customerInfo)
         {
-            return "\nName: " + CustomerName + " Address: " + Address + " Due Date: " + DueDate + " Order #: " + OrderNumber;
+            this.CustomerInfo = customerInfo;
+            //this.OrderNumber = new Random().Next();
+        }
+
+        public override string ToString()
+        {
+            return "Name: " + CustomerInfo.Name + " Address: " + CustomerInfo.Address + " Due Date: " + CustomerInfo.DueDate + " Order #: " + OrderNumber;
         }
     }
 }
