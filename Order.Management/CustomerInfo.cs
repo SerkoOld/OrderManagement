@@ -37,8 +37,9 @@ namespace Order.Management
 
         private Shape OrderShapeInput(ShapeFactory creator)
         {
+            Console.Write(Environment.NewLine);
             var colorNumbers = new Dictionary<Color, int>();
-            Console.Write($"\nPlease input the number of Red {creator.Name}: ");
+            Console.Write($"Please input the number of Red {creator.Name}: ");
             int redNumber = Convert.ToInt32(UserInput());
             colorNumbers.Add(Color.Red, redNumber);
             Console.Write($"Please input the number of Blue {creator.Name}: ");

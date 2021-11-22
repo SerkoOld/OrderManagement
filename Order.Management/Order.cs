@@ -16,7 +16,7 @@ namespace Order.Management
 
         public override string ToString()
         {
-            return "\nName: " + CustomerInfo.Name + " Address: " + CustomerInfo.Address + " Due Date: " + CustomerInfo.DueDate + " Order #: " + OrderNumber;
+            return "Name: " + CustomerInfo.Name + " Address: " + CustomerInfo.Address + " Due Date: " + CustomerInfo.DueDate + " Order #: " + OrderNumber;
         }
     }
 }

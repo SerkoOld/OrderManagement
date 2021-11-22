@@ -18,7 +18,9 @@ namespace Order.Management
         }
         public virtual void GenerateReport()
         {
-            Console.WriteLine($"\nYour {this._reportName} has been generated: ");
+            Console.WriteLine("");
+            Console.WriteLine($"Your {this._reportName} has been generated: ");
+            Console.WriteLine("");
             Console.WriteLine(_order.ToString());
             GenerateTable();
         }
@@ -27,9 +29,10 @@ namespace Order.Management
             PrintLine();
             PrintRow("        ", "   Red   ", "  Blue  ", " Yellow ");
             PrintLine();
-            PrintRow("Square", _order.CustomerInfo.OrderedShape[0].ColorNumbers[Color.Red].ToString(), _order.CustomerInfo.OrderedShape[0].ColorNumbers[Color.Blue].ToString(), _order.CustomerInfo.OrderedShape[0].ColorNumbers[Color.Yellow].ToString());
-            PrintRow("Triangle", _order.CustomerInfo.OrderedShape[1].ColorNumbers[Color.Red].ToString(), _order.CustomerInfo.OrderedShape[1].ColorNumbers[Color.Blue].ToString(), _order.CustomerInfo.OrderedShape[1].ColorNumbers[Color.Yellow].ToString());
-            PrintRow("Circle", _order.CustomerInfo.OrderedShape[2].ColorNumbers[Color.Red].ToString(), _order.CustomerInfo.OrderedShape[2].ColorNumbers[Color.Blue].ToString(), _order.CustomerInfo.OrderedShape[2].ColorNumbers[Color.Yellow].ToString());
+            foreach (var block in _order.CustomerInfo.OrderedShape)
+            {
+                PrintRow(block.Name, block.ColorNumbers[Color.Red].ToString(), block.ColorNumbers[Color.Blue].ToString(), block.ColorNumbers[Color.Yellow].ToString());
+            }
             PrintLine();
         } 
 

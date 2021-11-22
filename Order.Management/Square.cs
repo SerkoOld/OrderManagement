@@ -6,7 +6,7 @@ namespace Order.Management
     {
         public Square(Dictionary<Color, int> colorNumbers)
         :base (colorNumbers){
-            Name = "Square";
+            Name = "Squares";
             this.Price = 1;
         }
     }

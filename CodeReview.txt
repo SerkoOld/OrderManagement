@@ -4,7 +4,7 @@
 3. In real life logic, Order should be property of Report, shouldn't be a parent of report.
 4. Duplicated methods appreas in the three Report classes, Better let the three reports inherit from an Abstract Report.
 5. I would liek make GenerateTable virtual to use later-binding.
-6. I would liek to put GenerateTable() into base class Report , and make it virtual to let cutting list report to override.
+6. I would liek to put GenerateTable() into base class Report , and make it virtual to let CuttingListReport to override.
 7. I would like put Customer info into Order properties.
 8. ToString should be overrided.
 9. OrderNumber should be assigned a value.
@@ -12,7 +12,7 @@
 11. Only need one method Total() in Shape class, doesn't need Total method by colors
 12. Unnecessary specified name such as CirclePrice, just use Price from base class, and so on.
 13. As business requirement, AddtionalCharge doesn't care shape, need to only assign value at base class.
-14. InvoiceReport details method need to be private
+14. InvoiceReport details method need to be private, and similar issue in Program classes
 15. InvoiceReport lack of Total amount method
 16. I would 'd like use Factory Method to implement Shape logic, decouple the input and create logic.
 17.OrderXXXXInput is repeated pattern, I would like to put them into one method OrderShapeInput 

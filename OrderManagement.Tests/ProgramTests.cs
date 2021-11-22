@@ -7,7 +7,7 @@ using System.Text;
 
 namespace OrderManagement.Tests
 {
-    public class Tests
+    public class ProgramTests
     {
         [Test]
         public void ProgramTest()
@@ -24,8 +24,8 @@ namespace OrderManagement.Tests
             using var fs = new FileStream($"{currentDir}\\TestData\\output.txt", FileMode.Open, FileAccess.Read);
             using var sr = new StreamReader(fs, Encoding.UTF8);
             string expectedOutput = sr.ReadToEnd();
-
-            Assert.That(actualOutput.ToString().Replace("\n",Environment.NewLine).Replace("\r\r","\r"), Is.EqualTo(expectedOutput));
+            var temp = actualOutput.ToString();
+            Assert.That(actualOutput.ToString(), Is.EqualTo(expectedOutput));
         }
     }
 }

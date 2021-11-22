@@ -9,7 +9,7 @@ namespace Order.Management
         public Circle(Dictionary<Color, int> colorNumbers)
         :base(colorNumbers)
         {
-            Name = "Circle";
+            Name = "Circles";
             this.Price = 3;
         }
     }

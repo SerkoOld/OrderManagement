@@ -7,7 +7,7 @@ namespace Order.Management
         public Triangle(Dictionary<Color, int> colorNumbers)
         : base(colorNumbers)
         {
-            Name = "Triangle";
+            Name = "Triangles";
             this.Price = 2;
         }
     }

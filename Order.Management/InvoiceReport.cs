@@ -12,9 +12,7 @@ namespace Order.Management
         public override void GenerateReport()
         {
             base.GenerateReport();
-            OrderSquareDetails();
-            OrderTriangleDetails();
-            OrderCircleDetails();
+            OrderShapeDetails();
             RedPaintSurcharge();
             GetTotalAmount();
         }
@@ -38,17 +36,14 @@ namespace Order.Management
         {
             return TotalAmountOfRedShapes() * _order.CustomerInfo.OrderedShape[0].AdditionalCharge;
         }
-        private void OrderSquareDetails()
+
+        private void OrderShapeDetails()
         {
-            Console.WriteLine("\nSquares 		  " + _order.CustomerInfo.OrderedShape[0].TotalQuantityOfShape() + " @ $" + _order.CustomerInfo.OrderedShape[0].Price + " ppi = $" + _order.CustomerInfo.OrderedShape[0].Total());
-        }
-        private void OrderTriangleDetails()
-        {
-            Console.WriteLine("Triangles 		  " + _order.CustomerInfo.OrderedShape[1].TotalQuantityOfShape() + " @ $" + _order.CustomerInfo.OrderedShape[1].Price + " ppi = $" + _order.CustomerInfo.OrderedShape[1].Total());
-        }
-        private void OrderCircleDetails()
-        {
-            Console.WriteLine("Circles 		  " + _order.CustomerInfo.OrderedShape[2].TotalQuantityOfShape() + " @ $" + _order.CustomerInfo.OrderedShape[2].Price + " ppi = $" + _order.CustomerInfo.OrderedShape[2].Total());
+            Console.WriteLine("");
+            foreach (var block in _order.CustomerInfo.OrderedShape)
+            {
+                Console.WriteLine(block.Name + " 		  " + block.TotalQuantityOfShape() + " @ $" + block.Price + " ppi = $" + block.Total());
+            }
         }
 
         private void GetTotalAmount()
