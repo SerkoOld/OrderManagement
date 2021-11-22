@@ -17,12 +17,12 @@ namespace Order.Management
             GetTotalAmount();
         }
 
-        public void RedPaintSurcharge()
+        private void RedPaintSurcharge()
         {
             Console.WriteLine("Red Color Surcharge       " + TotalAmountOfRedShapes() + " @ $" + _order.CustomerInfo.OrderedShape[0].AdditionalCharge + " ppi = $" + TotalPriceRedPaintSurcharge());
         }
 
-        public int TotalAmountOfRedShapes()
+        private int TotalAmountOfRedShapes()
         {
             var total = 0;
             foreach (var orderedShape in _order.CustomerInfo.OrderedShape)
@@ -32,7 +32,7 @@ namespace Order.Management
             return total;
         }
 
-        public int TotalPriceRedPaintSurcharge()
+        private int TotalPriceRedPaintSurcharge()
         {
             return TotalAmountOfRedShapes() * _order.CustomerInfo.OrderedShape[0].AdditionalCharge;
         }
@@ -48,7 +48,17 @@ namespace Order.Management
 
         private void GetTotalAmount()
         {
-            Console.WriteLine($"Total: ${TotalAmountOfRedShapes() + _order.CustomerInfo.OrderedShape[0].Total() + _order.CustomerInfo.OrderedShape[1].Total() + _order.CustomerInfo.OrderedShape[2].Total()}");
+            Console.WriteLine($"Total: ${TotalPriceRedPaintSurcharge() + GetTotalBasedOnShape()}");
+        }
+
+        private decimal GetTotalBasedOnShape()
+        {
+            var total = 0;
+            foreach (var block in _order.CustomerInfo.OrderedShape)
+            {
+                total += block.Total();
+            }
+            return total;
         }
     }
 }
