@@ -2,7 +2,7 @@
 
 namespace Order.Management
 {
-    class InvoiceReport : Report
+    class InvoiceReport : ReportBase
     {
         public InvoiceReport(Order order, int tableWidth)
         :base (order,"invoice",tableWidth)
@@ -21,13 +21,13 @@ namespace Order.Management
 
         public void RedPaintSurcharge()
         {
-            Console.WriteLine("Red Color Surcharge       " + TotalAmountOfRedShapes() + " @ $" + Order.CustomerInfo.OrderedShape[0].AdditionalCharge + " ppi = $" + TotalPriceRedPaintSurcharge());
+            Console.WriteLine("Red Color Surcharge       " + TotalAmountOfRedShapes() + " @ $" + _order.CustomerInfo.OrderedShape[0].AdditionalCharge + " ppi = $" + TotalPriceRedPaintSurcharge());
         }
 
         public int TotalAmountOfRedShapes()
         {
             var total = 0;
-            foreach (var orderedShape in Order.CustomerInfo.OrderedShape)
+            foreach (var orderedShape in _order.CustomerInfo.OrderedShape)
             {
                 total += orderedShape.ColorNumbers[Color.Red];
             }
@@ -36,24 +36,24 @@ namespace Order.Management
 
         public int TotalPriceRedPaintSurcharge()
         {
-            return TotalAmountOfRedShapes() * Order.CustomerInfo.OrderedShape[0].AdditionalCharge;
+            return TotalAmountOfRedShapes() * _order.CustomerInfo.OrderedShape[0].AdditionalCharge;
         }
         private void OrderSquareDetails()
         {
-            Console.WriteLine("\nSquares 		  " + Order.CustomerInfo.OrderedShape[0].TotalQuantityOfShape() + " @ $" + Order.CustomerInfo.OrderedShape[0].Price + " ppi = $" + Order.CustomerInfo.OrderedShape[0].Total());
+            Console.WriteLine("\nSquares 		  " + _order.CustomerInfo.OrderedShape[0].TotalQuantityOfShape() + " @ $" + _order.CustomerInfo.OrderedShape[0].Price + " ppi = $" + _order.CustomerInfo.OrderedShape[0].Total());
         }
         private void OrderTriangleDetails()
         {
-            Console.WriteLine("Triangles 		  " + Order.CustomerInfo.OrderedShape[1].TotalQuantityOfShape() + " @ $" + Order.CustomerInfo.OrderedShape[1].Price + " ppi = $" + Order.CustomerInfo.OrderedShape[1].Total());
+            Console.WriteLine("Triangles 		  " + _order.CustomerInfo.OrderedShape[1].TotalQuantityOfShape() + " @ $" + _order.CustomerInfo.OrderedShape[1].Price + " ppi = $" + _order.CustomerInfo.OrderedShape[1].Total());
         }
         private void OrderCircleDetails()
         {
-            Console.WriteLine("Circles 		  " + Order.CustomerInfo.OrderedShape[2].TotalQuantityOfShape() + " @ $" + Order.CustomerInfo.OrderedShape[2].Price + " ppi = $" + Order.CustomerInfo.OrderedShape[2].Total());
+            Console.WriteLine("Circles 		  " + _order.CustomerInfo.OrderedShape[2].TotalQuantityOfShape() + " @ $" + _order.CustomerInfo.OrderedShape[2].Price + " ppi = $" + _order.CustomerInfo.OrderedShape[2].Total());
         }
 
         private void GetTotalAmount()
         {
-            Console.WriteLine($"Total: ${TotalAmountOfRedShapes() + Order.CustomerInfo.OrderedShape[0].Total() + Order.CustomerInfo.OrderedShape[1].Total() + Order.CustomerInfo.OrderedShape[2].Total()}");
+            Console.WriteLine($"Total: ${TotalAmountOfRedShapes() + _order.CustomerInfo.OrderedShape[0].Total() + _order.CustomerInfo.OrderedShape[1].Total() + _order.CustomerInfo.OrderedShape[2].Total()}");
         }
     }
 }

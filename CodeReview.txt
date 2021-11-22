@@ -1,13 +1,13 @@
-1. Dupicated and scattered customers info appear in input paremeters of each method;
-    I would like to define a Class CustomerInfo contains all the customer related info and operations;
-2. In concreate Report class, constructor should pass the value to 'this' rather than 'base'
-3. In real life logic, Order should be property of Report, shouldn't be a parent of report
-4. Duplicated methods appreas in the three Report classes, Better let the three reports inherit from an Abstract Report
+1. Duplicated and scattered customers info appear in input paremeters of each method.
+    I would like to define a Class CustomerInfo contains all the customer related info and operations.
+2. In concreate Report class, constructor should pass the value to 'this' rather than 'base'.
+3. In real life logic, Order should be property of Report, shouldn't be a parent of report.
+4. Duplicated methods appreas in the three Report classes, Better let the three reports inherit from an Abstract Report.
 5. I would liek make GenerateTable virtual to use later-binding.
 6. I would liek to put GenerateTable() into base class Report , and make it virtual to let cutting list report to override.
 7. I would like put Customer info into Order properties.
 8. ToString should be overrided.
-9.OrderNumber should be assigned a value.
+9. OrderNumber should be assigned a value.
 10. Rename to GenerateInvoiceReport rather than InvoiceReport in Main, and so on so forth.
 11. Only need one method Total() in Shape class, doesn't need Total method by colors
 12. Unnecessary specified name such as CirclePrice, just use Price from base class, and so on.
@@ -18,4 +18,4 @@
 17.OrderXXXXInput is repeated pattern, I would like to put them into one method OrderShapeInput 
 18. Shape's number of colored block is not extendable,use Dictionary<Color,int> instead of three int types.
 19. In method TotalAmountOfRedShapes should use foreach in case have more types of shape.
-20. Should have a unit tests
+20. Should have a unit tests.

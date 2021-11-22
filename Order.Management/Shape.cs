@@ -11,7 +11,7 @@ namespace Order.Management
             this.ColorNumbers = colorNumbers;
             this.AdditionalCharge = 1;
         }
-        public string Name { get; set; }
+        public string Name { get; protected set; }
         public int Price { get; set; }
         public int AdditionalCharge { get; set; }
 

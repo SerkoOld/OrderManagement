@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Order.Management
 {
-    class CuttingListReport : Report
+    class CuttingListReport : ReportBase
     {
         public CuttingListReport(Order order, int tableWidth)
         : base(order,"cutting list",tableWidth)
@@ -16,9 +16,9 @@ namespace Order.Management
             PrintLine();
             PrintRow("        ", "   Qty   ");
             PrintLine();
-            PrintRow("Square", Order.CustomerInfo.OrderedShape[0].TotalQuantityOfShape().ToString());
-            PrintRow("Triangle", Order.CustomerInfo.OrderedShape[1].TotalQuantityOfShape().ToString());
-            PrintRow("Circle", Order.CustomerInfo.OrderedShape[2].TotalQuantityOfShape().ToString());
+            PrintRow("Square", _order.CustomerInfo.OrderedShape[0].TotalQuantityOfShape().ToString());
+            PrintRow("Triangle", _order.CustomerInfo.OrderedShape[1].TotalQuantityOfShape().ToString());
+            PrintRow("Circle", _order.CustomerInfo.OrderedShape[2].TotalQuantityOfShape().ToString());
             PrintLine();
         }
     }
