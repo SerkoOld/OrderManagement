@@ -1,12 +1,12 @@
-﻿namespace Order.Management
+﻿namespace Order.Management.Model
 {
     class Triangle : Shape
     {
         public Triangle(int numberOfRedTriangles, int numberOfBlueTriangles, int numberOfYellowTriangles)
         {
-            base.NumberOfRedShape = numberOfRedTriangles;
-            base.NumberOfBlueShape = numberOfBlueTriangles;
-            base.NumberOfYellowShape = numberOfYellowTriangles;
+            NumberOfRedShape = numberOfRedTriangles;
+            NumberOfBlueShape = numberOfBlueTriangles;
+            NumberOfYellowShape = numberOfYellowTriangles;
         }
         public override string Name { get => "Triangle"; }
         public override int Price { get => 2; }
@@ -17,15 +17,15 @@
 
         public int RedTrianglesTotal()
         {
-            return (base.NumberOfRedShape * Price);
+            return NumberOfRedShape * Price;
         }
         public int BlueTrianglesTotal()
         {
-            return (base.NumberOfBlueShape * Price);
+            return NumberOfBlueShape * Price;
         }
         public int YellowTrianglesTotal()
         {
-            return (base.NumberOfYellowShape * Price);
+            return NumberOfYellowShape * Price;
         }
 
     }

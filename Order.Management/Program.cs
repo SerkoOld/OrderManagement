@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Order.Management.Model;
+using System;
 using System.Collections.Generic;
 
 namespace Order.Management
@@ -18,7 +19,7 @@ namespace Order.Management
 
             PaintingReport(customerName, address, dueDate, orderedShapes);
         }
-        
+
         // Order Circle Input
         public static Circle OrderCirclesInput()
         {
@@ -35,7 +36,7 @@ namespace Order.Management
             //circle.Name = "Square";
             return circle;
         }
-        
+
         // Order Squares Input
         public static Square OrderSquaresInput()
         {
@@ -121,10 +122,12 @@ namespace Order.Management
             Triangle triangle = OrderTrianglesInput();
             Circle circle = OrderCirclesInput();
 
-            var orderedShapes = new List<Shape>();
-            orderedShapes.Add(square);
-            orderedShapes.Add(triangle);
-            orderedShapes.Add(circle);
+            var orderedShapes = new List<Shape>
+            {
+                square,
+                triangle,
+                circle
+            };
             return orderedShapes;
         }
     }

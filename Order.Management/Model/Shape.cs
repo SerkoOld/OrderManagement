@@ -1,4 +1,4 @@
-﻿namespace Order.Management
+﻿namespace Order.Management.Model
 {
     abstract class Shape
     {

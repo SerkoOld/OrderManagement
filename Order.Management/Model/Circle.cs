@@ -1,15 +1,15 @@
-﻿namespace Order.Management
+﻿namespace Order.Management.Model
 {
     class Circle : Shape
     {
         public Circle(int red, int blue, int yellow)
         {
-            base.NumberOfRedShape = red;
-            base.NumberOfBlueShape = blue;
-            base.NumberOfYellowShape = yellow;
+            NumberOfRedShape = red;
+            NumberOfBlueShape = blue;
+            NumberOfYellowShape = yellow;
         }
         public override int Price { get => 3; }
-        
+
         public override string Name { get => "Circle"; }
 
         public override int Total()
@@ -19,15 +19,15 @@
 
         public int RedCirclesTotal()
         {
-            return (base.NumberOfRedShape * Price);
+            return NumberOfRedShape * Price;
         }
         public int BlueCirclesTotal()
         {
-            return (base.NumberOfBlueShape * Price);
+            return NumberOfBlueShape * Price;
         }
         public int YellowCirclesTotal()
         {
-            return (base.NumberOfYellowShape * Price);
+            return NumberOfYellowShape * Price;
         }
     }
 }

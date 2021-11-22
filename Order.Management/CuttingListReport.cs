@@ -1,9 +1,10 @@
-﻿using System;
+﻿using Order.Management.Model;
+using System;
 using System.Collections.Generic;
 
 namespace Order.Management
 {
-    class CuttingListReport : Order
+    class CuttingListReport : Model.Order
     {
         public int tableWidth = 20;
         public CuttingListReport(string customerName, string customerAddress, DateTime dueDate, List<Shape> shapes)

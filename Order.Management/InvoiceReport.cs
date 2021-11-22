@@ -1,9 +1,10 @@
-﻿using System;
+﻿using Order.Management.Model;
+using System;
 using System.Collections.Generic;
 
 namespace Order.Management
 {
-    class InvoiceReport : Order
+    class InvoiceReport : Model.Order
     {
         public int tableWidth = 73;
         public InvoiceReport(string customerName, string customerAddress, DateTime dueDate, List<Shape> shapes)

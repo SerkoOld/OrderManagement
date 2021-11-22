@@ -1,33 +1,31 @@
-﻿namespace Order.Management
+﻿namespace Order.Management.Model
 {
     class Square : Shape
     {
         public Square(int numberOfRedSquares, int numberOfBlueSquares, int numberOfYellowSquares)
         {
 
-            base.NumberOfRedShape = numberOfRedSquares;
-            base.NumberOfBlueShape = numberOfBlueSquares;
-            base.NumberOfYellowShape = numberOfYellowSquares;
+            NumberOfRedShape = numberOfRedSquares;
+            NumberOfBlueShape = numberOfBlueSquares;
+            NumberOfYellowShape = numberOfYellowSquares;
         }
         public override int Price { get => 1; }
         public override string Name { get => "Square"; }
-
         public override int Total()
         {
             return RedSquaresTotal() + BlueSquaresTotal() + YellowSquaresTotal();
         }
-
         public int RedSquaresTotal()
         {
-            return (base.NumberOfRedShape * Price);
+            return NumberOfRedShape * Price;
         }
         public int BlueSquaresTotal()
         {
-            return (base.NumberOfBlueShape * Price);
+            return NumberOfBlueShape * Price;
         }
         public int YellowSquaresTotal()
         {
-            return (base.NumberOfYellowShape * Price);
+            return NumberOfYellowShape * Price;
         }
     }
 }
