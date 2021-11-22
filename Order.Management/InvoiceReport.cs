@@ -53,15 +53,15 @@ namespace Order.Management
         }
         public void OrderSquareDetails()
         {
-            Console.WriteLine("\nSquares 		  " + base.OrderedBlocks[0].TotalQuantityOfShape() + " @ $" + base.OrderedBlocks[0].Price + " ppi = $" + base.OrderedBlocks[0].Total());
+            Console.WriteLine($"\nSquares 		  {base.OrderedBlocks[0].TotalQuantityOfShape()} @ ${base.OrderedBlocks[0].Price} ppi = ${base.OrderedBlocks[0].Total()}");
         }
         public void OrderTriangleDetails()
         {
-            Console.WriteLine("Triangles 		  " + base.OrderedBlocks[1].TotalQuantityOfShape() + " @ $" + base.OrderedBlocks[1].Price + " ppi = $" + base.OrderedBlocks[1].Total());
+            Console.WriteLine($"Triangles 		  {base.OrderedBlocks[1].TotalQuantityOfShape()} @ ${base.OrderedBlocks[1].Price} ppi = ${base.OrderedBlocks[1].Total()}");
         }
         public void OrderCircleDetails()
         {
-            Console.WriteLine("Circles 		  " + base.OrderedBlocks[2].TotalQuantityOfShape() + " @ $" + base.OrderedBlocks[2].Price + " ppi = $" + base.OrderedBlocks[2].Total());
+            Console.WriteLine($"Circles 		  {base.OrderedBlocks[2].TotalQuantityOfShape()} @ ${base.OrderedBlocks[2].Price} ppi = ${base.OrderedBlocks[2].Total()}");
         }
         public void PrintLine()
         {
@@ -85,14 +85,7 @@ namespace Order.Management
         {
             text = text.Length > width ? text.Substring(0, width - 3) + "..." : text;
 
-            if (string.IsNullOrEmpty(text))
-            {
-                return new string(' ', width);
-            }
-            else
-            {
-                return text.PadRight(width - (width - text.Length) / 2).PadLeft(width);
-            }
+            return string.IsNullOrEmpty(text) ? new string(' ', width) : text.PadRight(width - (width - text.Length) / 2).PadLeft(width);
         }
     }
 }

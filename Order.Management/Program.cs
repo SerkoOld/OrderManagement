@@ -9,15 +9,22 @@ namespace Order.Management
         // Main entry
         static void Main(string[] args)
         {
-            var (customerName, address, dueDate) = CustomerInfoInput();
+            try
+            {
+                var (customerName, address, dueDate) = CustomerInfoInput();
 
-            var orderedShapes = CustomerOrderInput();
+                var orderedShapes = CustomerOrderInput();
 
-            InvoiceReport(customerName, address, dueDate, orderedShapes);
+                InvoiceReport(customerName, address, dueDate, orderedShapes);
 
-            CuttingListReport(customerName, address, dueDate, orderedShapes);
+                CuttingListReport(customerName, address, dueDate, orderedShapes);
 
-            PaintingReport(customerName, address, dueDate, orderedShapes);
+                PaintingReport(customerName, address, dueDate, orderedShapes);
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine($"Order.Management: Error, {ex.Message}");
+            }
         }
 
         // Order Circle Input
