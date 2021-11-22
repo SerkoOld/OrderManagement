@@ -21,7 +21,7 @@ namespace Order.Management
 
                 PaintingReport(customerName, address, dueDate, orderedShapes);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Console.WriteLine($"Order.Management: Error, {ex.Message}");
             }
@@ -30,16 +30,14 @@ namespace Order.Management
         // Order Circle Input
         public static Circle OrderCirclesInput()
         {
-            Console.Write("\nPlease input the number of Red Circle: ");
-            int redCircle = Convert.ToInt32(userInput());
+            int redCircle = GetShapesInput("\nPlease input the number of Red Circle: ");
             Console.Write("Please input the number of Blue Circle: ");
             int blueCircle = Convert.ToInt32(userInput());
             Console.Write("Please input the number of Yellow Circle: ");
             int yellowCircle = Convert.ToInt32(userInput());
 
             Circle circle = new Circle(redCircle, blueCircle, yellowCircle);
-            //circle.Price = 10;
-            //circle.Price = 10;
+            //circle.Price = 10; 
             //circle.Name = "Square";
             return circle;
         }
@@ -47,15 +45,13 @@ namespace Order.Management
         // Order Squares Input
         public static Square OrderSquaresInput()
         {
-            Console.Write("\nPlease input the number of Red Squares: ");
-            int redSquare = Convert.ToInt32(userInput());
+            int redSquare = GetShapesInput("\nPlease input the number of Red Squares: ");
+
             Console.Write("Please input the number of Blue Squares: ");
             int blueSquare = Convert.ToInt32(userInput());
             Console.Write("Please input the number of Yellow Squares: ");
             int yellowSquare = Convert.ToInt32(userInput());
-
-            Square square = new Square(redSquare, blueSquare, yellowSquare);
-            return square;
+            return new Square(redSquare, blueSquare, yellowSquare);
         }
 
         // Order Triangles Input
@@ -83,6 +79,22 @@ namespace Order.Management
 
             }
             return input;
+        }
+
+        public static int GetShapesInput(string label)
+        {
+            Console.Write(label);
+            while (true)
+            {
+                try
+                {
+                    return (int)Convert.ToUInt32(userInput());
+                }
+                catch
+                {
+                    Console.WriteLine($"Order.Management.ShapesInput, Input error, please enter a valid number");
+                }
+            }
         }
 
         // Generate Painting Report 
@@ -125,17 +137,16 @@ namespace Order.Management
         // Get order input
         private static List<Shape> CustomerOrderInput()
         {
-            Square square = OrderSquaresInput();
-            Triangle triangle = OrderTrianglesInput();
-            Circle circle = OrderCirclesInput();
-
-            var orderedShapes = new List<Shape>
+            try
             {
-                square,
-                triangle,
-                circle
-            };
-            return orderedShapes;
+                var orderedShapes = new List<Shape> { OrderSquaresInput(), OrderTrianglesInput(), OrderCirclesInput() };
+                return orderedShapes;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Order.Management.CustomerOrderInput, Input error  {ex}");
+                throw;
+            }
         }
     }
 }
