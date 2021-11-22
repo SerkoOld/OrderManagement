@@ -53,7 +53,7 @@ namespace Order.Management
 
         private decimal GetTotalBasedOnShape()
         {
-            var total = 0;
+            decimal total = 0;
             foreach (var block in _order.CustomerInfo.OrderedShape)
             {
                 total += block.Total();

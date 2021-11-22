@@ -12,7 +12,7 @@ namespace Order.Management
             this.AdditionalCharge = 1;
         }
         public string Name { get; protected set; }
-        public int Price { get; set; }
+        public decimal Price { get; set; }
         public int AdditionalCharge { get; set; }
 
         public  Dictionary<Color, int> ColorNumbers { get; set; }
@@ -27,7 +27,7 @@ namespace Order.Management
             return ColorNumbers[Color.Red] * AdditionalCharge;
         }
         
-        public int Total()
+        public decimal Total()
         {
             return TotalQuantityOfShape() * this.Price;
         }
