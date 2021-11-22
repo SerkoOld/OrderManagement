@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Order.Management
 {
     class CuttingListReport : Order
     {
         public int tableWidth = 20;
-        public CuttingListReport(string customerName, string customerAddress, string dueDate, List<Shape> shapes)
+        public CuttingListReport(string customerName, string customerAddress, DateTime dueDate, List<Shape> shapes)
         {
             base.CustomerName = customerName;
             base.Address = customerAddress;
@@ -62,7 +61,5 @@ namespace Order.Management
                 return text.PadRight(width - (width - text.Length) / 2).PadLeft(width);
             }
         }
-
-
     }
 }

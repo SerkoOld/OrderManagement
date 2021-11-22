@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Order.Management
+﻿namespace Order.Management
 {
     abstract class Shape
     {
-        public string Name { get; set; }
-        public int Price { get; set; }
-        public int AdditionalCharge { get; set; }
+        public abstract string Name { get; }// Name & Price & AdditionalCharge cannot be allowed to be changed by the consumer
+        public abstract int Price { get; }
+        public int AdditionalCharge { get; }
         public int NumberOfRedShape { get; set; }
         public int NumberOfBlueShape { get; set; }
         public int NumberOfYellowShape { get; set; }
@@ -16,12 +12,10 @@ namespace Order.Management
         {
             return NumberOfRedShape + NumberOfBlueShape + NumberOfYellowShape;
         }
-
         public int AdditionalChargeTotal()
         {
             return NumberOfRedShape * AdditionalCharge;
         }
         public abstract int Total();
-
     }
 }

@@ -30,6 +30,9 @@ namespace Order.Management
             int yellowCircle = Convert.ToInt32(userInput());
 
             Circle circle = new Circle(redCircle, blueCircle, yellowCircle);
+            //circle.Price = 10;
+            //circle.Price = 10;
+            //circle.Name = "Square";
             return circle;
         }
         
@@ -75,28 +78,28 @@ namespace Order.Management
         }
 
         // Generate Painting Report 
-        private static void PaintingReport(string customerName, string address, string dueDate, List<Shape> orderedShapes)
+        private static void PaintingReport(string customerName, string address, DateTime dueDate, List<Shape> orderedShapes)
         {
             PaintingReport paintingReport = new PaintingReport(customerName, address, dueDate, orderedShapes);
             paintingReport.GenerateReport();
         }
 
         // Generate Painting Report 
-        private static void CuttingListReport(string customerName, string address, string dueDate, List<Shape> orderedShapes)
+        private static void CuttingListReport(string customerName, string address, DateTime dueDate, List<Shape> orderedShapes)
         {
             CuttingListReport cuttingListReport = new CuttingListReport(customerName, address, dueDate, orderedShapes);
             cuttingListReport.GenerateReport();
         }
 
         // Generate Invoice Report 
-        private static void InvoiceReport(string customerName, string address, string dueDate, List<Shape> orderedShapes)
+        private static void InvoiceReport(string customerName, string address, DateTime dueDate, List<Shape> orderedShapes)
         {
             InvoiceReport invoiceReport = new InvoiceReport(customerName, address, dueDate, orderedShapes);
             invoiceReport.GenerateReport();
         }
 
         // Get customer Info
-        private static (string customerName, string address, string dueDate) CustomerInfoInput()
+        private static (string customerName, string address, DateTime dueDate) CustomerInfoInput()
         {
             Console.Write("Please input your Name: ");
             string customerName = userInput();
@@ -104,7 +107,11 @@ namespace Order.Management
             string address = userInput();
             Console.Write("Please input your Due Date: ");
             string dueDate = userInput();
-            return (customerName, address, dueDate);
+
+            if (!DateTime.TryParse(dueDate, out DateTime dateValue))
+                Console.WriteLine("  Unable to parse '{0}'.", dateValue);
+
+            return (customerName, address, dateValue);
         }
 
         // Get order input

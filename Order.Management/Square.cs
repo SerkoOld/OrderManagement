@@ -1,23 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Order.Management
+﻿namespace Order.Management
 {
     class Square : Shape
     {
-
-        public int SquarePrice = 1;
-
         public Square(int numberOfRedSquares, int numberOfBlueSquares, int numberOfYellowSquares)
         {
-            Name = "Square";
-            base.Price = SquarePrice;
-            AdditionalCharge = 1;
+
             base.NumberOfRedShape = numberOfRedSquares;
             base.NumberOfBlueShape = numberOfBlueSquares;
             base.NumberOfYellowShape = numberOfYellowSquares;
         }
+        public override int Price { get => 1; }
+        public override string Name { get => "Square"; }
 
         public override int Total()
         {
