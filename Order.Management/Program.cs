@@ -18,8 +18,10 @@ namespace Order.Management
 
             PaintingReport(customerName, address, dueDate, orderedShapes);
         }
-        
+
         // Order Circle Input
+        // OrderCirclesInput()、OrderSquaresInput()、OrderTrianglesInput()
+        // The above three methods can be merged as one method by passing parameters(e.g.OrderInput(shape)).
         public static Circle OrderCirclesInput()
         {
             Console.Write("\nPlease input the number of Red Circle: ");
@@ -48,9 +50,11 @@ namespace Order.Management
         }
 
         // Order Triangles Input
+        // Use private to replace public,unless special reasons.
         public static Triangle OrderTrianglesInput()
         {
             Console.Write("\nPlease input the number of Red Triangles: ");
+            // User input validity check(e.g.Regex reg = new Regex("^[0-9]+$"))
             int redTriangle = Convert.ToInt32(userInput());
             Console.Write("Please input the number of Blue Triangles: ");
             int blueTriangle = Convert.ToInt32(userInput());
@@ -103,6 +107,7 @@ namespace Order.Management
             Console.Write("Please input your Address: ");
             string address = userInput();
             Console.Write("Please input your Due Date: ");
+            //Convert user input to DateTime type.
             string dueDate = userInput();
             return (customerName, address, dueDate);
         }

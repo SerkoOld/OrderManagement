@@ -63,6 +63,8 @@ namespace Order.Management
         {
             Console.WriteLine("Circles 		  " + base.OrderedBlocks[2].TotalQuantityOfShape() + " @ $" + base.OrderedBlocks[2].Price + " ppi = $" + base.OrderedBlocks[2].Total());
         }
+
+        // PrintLine、PrintRow、AlignCentre can be moved into another class(e.g.help.cs)
         public void PrintLine()
         {
             Console.WriteLine(new string('-', tableWidth));

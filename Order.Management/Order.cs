@@ -14,6 +14,7 @@ namespace Order.Management
 
         public abstract void GenerateReport();
 
+        // Override ToString(), because it is inherited from Object.ToString(). 
         public string ToString()
         {
             return "\nName: " + CustomerName + " Address: " + Address + " Due Date: " + DueDate + " Order #: " + OrderNumber;

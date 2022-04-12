@@ -17,6 +17,7 @@ namespace Order.Management
             return NumberOfRedShape + NumberOfBlueShape + NumberOfYellowShape;
         }
 
+        // This method isn't used, can be removed.
         public int AdditionalChargeTotal()
         {
             return NumberOfRedShape * AdditionalCharge;
