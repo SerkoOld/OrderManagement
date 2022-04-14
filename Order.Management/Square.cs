@@ -9,32 +9,22 @@ namespace Order.Management
 
         public int SquarePrice = 1;
 
-        public Square(int numberOfRedSquares, int numberOfBlueSquares, int numberOfYellowSquares)
+        public Square()
         {
             Name = "Square";
             base.Price = SquarePrice;
             AdditionalCharge = 1;
-            base.NumberOfRedShape = numberOfRedSquares;
-            base.NumberOfBlueShape = numberOfBlueSquares;
-            base.NumberOfYellowShape = numberOfYellowSquares;
         }
 
-        public override int Total()
+        public override int Total(Order order)
         {
-            return RedSquaresTotal() + BlueSquaresTotal() + YellowSquaresTotal();
+            return ColorCirclesTotal(order, "Red") + ColorCirclesTotal(order, "Blue") + ColorCirclesTotal(order, "Yellow");
         }
 
-        public int RedSquaresTotal()
+        public int ColorCirclesTotal(Order order, string color)
         {
-            return (base.NumberOfRedShape * Price);
-        }
-        public int BlueSquaresTotal()
-        {
-            return (base.NumberOfBlueShape * Price);
-        }
-        public int YellowSquaresTotal()
-        {
-            return (base.NumberOfYellowShape * Price);
+            int TotalPrice = order.NumberOfColorShape[color] * Price;
+            return TotalPrice;
         }
     }
 }

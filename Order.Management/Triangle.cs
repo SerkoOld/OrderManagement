@@ -7,33 +7,22 @@ namespace Order.Management
     class Triangle : Shape
     {
         public int TrianglePrice = 2;
-        public Triangle(int numberOfRedTriangles, int numberOfBlueTriangles, int numberOfYellowTriangles)
+        public Triangle()
         {
             Name = "Triangle";
             base.Price = TrianglePrice;
             AdditionalCharge = 1;
-            base.NumberOfRedShape = numberOfRedTriangles;
-            base.NumberOfBlueShape = numberOfBlueTriangles;
-            base.NumberOfYellowShape = numberOfYellowTriangles;
         }
 
-        public override int Total()
+        public override int Total(Order order)
         {
-            return RedTrianglesTotal() + BlueTrianglesTotal() + YellowTrianglesTotal();
+            return ColorCirclesTotal(order, "Red") + ColorCirclesTotal(order, "Blue") + ColorCirclesTotal(order, "Yellow");
         }
 
-        public int RedTrianglesTotal()
+        public int ColorCirclesTotal(Order order, string color)
         {
-            return (base.NumberOfRedShape * Price);
+            int TotalPrice = order.NumberOfColorShape[color] * Price;
+            return TotalPrice;
         }
-        public int BlueTrianglesTotal()
-        {
-            return (base.NumberOfBlueShape * Price);
-        }
-        public int YellowTrianglesTotal()
-        {
-            return (base.NumberOfYellowShape * Price);
-        }
-    
-}
+    }
 }

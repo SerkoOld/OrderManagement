@@ -4,17 +4,25 @@ using System.Text;
 
 namespace Order.Management
 {
-    abstract class Order
+    public class Order
     {
         public string CustomerName { get; set; }
         public string Address { get; set; }
         public string DueDate { get; set; }
         public int OrderNumber { get; set; }
-        public List<Shape> OrderedBlocks { get; set; }
+        public int NumberOfRedShape { get; set; }
 
-        public abstract void GenerateReport();
+        public Dictionary<string, int> NumberOfColorShape{ get; set; }
 
-        public string ToString()
+        public List<Order> OrderedBlocks { get; set; }
+
+        public int TotalQuantityOfShape()
+        {
+            return NumberOfColorShape["Red"] + NumberOfColorShape["Blue"] + NumberOfColorShape["Yellow"];
+        }
+
+        //override ToString()
+        public override string ToString()
         {
             return "\nName: " + CustomerName + " Address: " + Address + " Due Date: " + DueDate + " Order #: " + OrderNumber;
         }

@@ -7,31 +7,42 @@ namespace Order.Management
     class Circle : Shape
     {
         public int circlePrice = 3;
-        public Circle(int red, int blue, int yellow)
+        //public Circle(int red, int blue, int yellow)
+        //{
+        //    Name = "Circle";
+        //    base.Price = circlePrice;
+        //    AdditionalCharge = 1;
+        //    base.NumberOfRedShape = red;
+        //    base.NumberOfBlueShape = blue;
+        //    base.NumberOfYellowShape = yellow;
+        //}
+        public Circle()
         {
             Name = "Circle";
             base.Price = circlePrice;
             AdditionalCharge = 1;
-            base.NumberOfRedShape = red;
-            base.NumberOfBlueShape = blue;
-            base.NumberOfYellowShape = yellow;
         }
-        public override int Total()
+        public override int Total(Order order)
         {
-            return RedCirclesTotal() + BlueCirclesTotal() + YellowCirclesTotal();
+            return ColorCirclesTotal(order, "Red") + ColorCirclesTotal(order, "Blue") + ColorCirclesTotal(order, "Yellow");
         }
 
-        public int RedCirclesTotal()
+        public int ColorCirclesTotal(Order order, string color)
         {
-            return (base.NumberOfRedShape * Price);
+            int TotalPrice = order.NumberOfColorShape[color] * Price;
+            return TotalPrice;
         }
-        public int BlueCirclesTotal()
-        {
-            return (base.NumberOfBlueShape * Price);
-        }
-        public int YellowCirclesTotal()
-        {
-            return (base.NumberOfYellowShape * Price);
-        }
+        //public int RedCirclesTotal()
+        //{
+        //    return (Order.NumberOfRedShape * Price);
+        //}
+        //public int BlueCirclesTotal()
+        //{
+        //    return (base.NumberOfBlueShape * Price);
+        //}
+        //public int YellowCirclesTotal()
+        //{
+        //    return (base.NumberOfYellowShape * Price);
+        //}
     }
 }
