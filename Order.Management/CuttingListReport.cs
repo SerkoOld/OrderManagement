@@ -4,65 +4,33 @@ using System.Text;
 
 namespace Order.Management
 {
-    class CuttingListReport : Order
+    class CuttingListReport : Report
     {
         public int tableWidth = 20;
-        public CuttingListReport(string customerName, string customerAddress, string dueDate, List<Shape> shapes)
+        Order order = new Order();
+        public CuttingListReport(string customerName, string address, string dueDate, List<Order> shapes)
         {
-            base.CustomerName = customerName;
-            base.Address = customerAddress;
-            base.DueDate = dueDate;
-            base.OrderedBlocks = shapes;
+            order.CustomerName = customerName;
+            order.Address = address;
+            order.DueDate = dueDate;
+            order.OrderedBlocks = shapes;
         }
 
         public override void GenerateReport()
         {
             Console.WriteLine("\nYour cutting list has been generated: ");
-            Console.WriteLine(base.ToString());
+            Console.WriteLine(order.ToString());
             generateTable();
         }
         public void generateTable()
         {
-            PrintLine();
-            PrintRow("        ", "   Qty   ");
-            PrintLine();
-            PrintRow("Square",base.OrderedBlocks[0].TotalQuantityOfShape().ToString());
-            PrintRow("Triangle", base.OrderedBlocks[1].TotalQuantityOfShape().ToString());
-            PrintRow("Circle", base.OrderedBlocks[2].TotalQuantityOfShape().ToString());
-            PrintLine();
+            PrintLine(tableWidth);
+            PrintRow(tableWidth, "        ", "   Qty   ");
+            PrintLine(tableWidth);
+            PrintRow(tableWidth, "Square", order.OrderedBlocks[0].TotalQuantityOfShape().ToString());
+            PrintRow(tableWidth, "Triangle", order.OrderedBlocks[1].TotalQuantityOfShape().ToString());
+            PrintRow(tableWidth, "Circle", order.OrderedBlocks[2].TotalQuantityOfShape().ToString());
+            PrintLine(tableWidth);
         }
-        public void PrintLine()
-        {
-            Console.WriteLine(new string('-', tableWidth));
-        }
-
-        public void PrintRow(params string[] columns)
-        {
-            int width = (tableWidth - columns.Length) / columns.Length;
-            string row = "|";
-
-            foreach (string column in columns)
-            {
-                row += AlignCentre(column, width) + "|";
-            }
-
-            Console.WriteLine(row);
-        }
-
-        public string AlignCentre(string text, int width)
-        {
-            text = text.Length > width ? text.Substring(0, width - 3) + "..." : text;
-
-            if (string.IsNullOrEmpty(text))
-            {
-                return new string(' ', width);
-            }
-            else
-            {
-                return text.PadRight(width - (width - text.Length) / 2).PadLeft(width);
-            }
-        }
-
-
     }
 }
