@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Order.Management
+﻿namespace Order.Management
 {
-    class Square : Shape
+    public class Square : Shape
     {
 
         public int SquarePrice = 1;

@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace Order.Management
 {
-    abstract class Order
+    public abstract class Order
     {
         public string CustomerName { get; set; }
         public string Address { get; set; }
@@ -14,9 +12,9 @@ namespace Order.Management
 
         public abstract void GenerateReport();
 
-        public string ToString()
+        public override string ToString()
         {
-            return "\nName: " + CustomerName + " Address: " + Address + " Due Date: " + DueDate + " Order #: " + OrderNumber;
+            return $"\nName: {CustomerName}  Address: {Address} Due Date: {DueDate} Order #: {OrderNumber}";
         }
     }
 }
