@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-
-namespace Order.Management
+using Order.Management.Shapes;
+namespace Order.Management.Reports
 {
     public class InvoiceReport : Order
     {

@@ -1,4 +1,4 @@
-﻿namespace Order.Management
+﻿namespace Order.Management.Shapes
 {
     public class Circle : Shape
     {

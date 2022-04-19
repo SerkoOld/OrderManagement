@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using Order.Management.Shapes;
 
-namespace Order.Management
+namespace Order.Management.Reports
 {
     public class PaintingReport : Order
     {
