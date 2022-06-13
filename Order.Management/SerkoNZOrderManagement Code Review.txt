@@ -1,0 +1,41 @@
+1.  The is no exception handling anywhere in the code 
+
+2.  Input validation would make sense  
+
+3.  Should allow to input empty value for numbers and treated as 0 
+
+4.  As a suggestion input could be simplified by separating number of colors with delimiter 
+
+5.  Do you want make pricing configurable? 
+
+6.  Ability to cancel at any time would be nice to have 
+
+7.  Class Shape could have a constructor. 
+
+8.  Why AdditionalCharge is part of Shape class? It’s a feature of color not shape 
+
+9.  Shape.Name and Price should be readonly 
+
+10. There is no point of having SquarePrice, TrianglePrice, circlePrice as they duplicate Price property of base class
+
+11. Order class probably should have a constructor and properies be set in it and made readonly   
+
+12. Do we need some mechanism generate Order number? 
+
+13. ToString is virtual method of object class and should use override modifier.  
+
+14. All methods in main class probably should be private or protected 
+
+15. Why Report classes derived from Order? Does not make any sense. Reports should have their own base class and user order as a parameter 
+
+16. Invoice report could be derived from Painting report 
+
+17. Functions in main class could be grouped better 
+
+18. Attention to details in reports: Total is missing in invoice report, use of dashes instead of 0 
+
+19. There is no really need for Square, Triangle and Circle classes as they only differ by Name and Price. Reports on another hand could use a proper base class. 
+
+20. A lot of repeated code that could be incapsulated in base classes 
+
+21. Some alternative example of that program could be found here https://github.com/Slava0467/MyOrderManager
