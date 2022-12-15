@@ -1,8 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 
+// INSP RS Add testing coverage.
+// INSP RS Organize project into folders.
 namespace Order.Management
 {
+    // INSP RS For Single Responsibility principle, move input parsing, report generation and output printing to separate classes.
+    // Keep Program.cs as strictly an entry point and high level overview of what this application does.
     class Program
     {
         // Main entry
@@ -20,6 +24,10 @@ namespace Order.Management
         }
         
         // Order Circle Input
+        // INSP RS Add input validation to avoid exception thrown when non-integer values are passed and print an error prompt asking the user to try again instead.
+        // INSP RS Also make sure numbers are non negative.
+        // INSP RS Liskov Substitution. Use generics to create factory method that doesn't know about the type of shape that it is creating.
+        // Also we want to make more types of shapes without making changes in other place such as here.
         public static Circle OrderCirclesInput()
         {
             Console.Write("\nPlease input the number of Red Circle: ");
@@ -75,6 +83,7 @@ namespace Order.Management
         }
 
         // Generate Painting Report 
+        // INSP RS Move these to different class and combine three report methods into one factory that isn't aware of the type of reports it is generating.
         private static void PaintingReport(string customerName, string address, string dueDate, List<Shape> orderedShapes)
         {
             PaintingReport paintingReport = new PaintingReport(customerName, address, dueDate, orderedShapes);
@@ -96,6 +105,7 @@ namespace Order.Management
         }
 
         // Get customer Info
+        // INSP RS Validate that the Due Date that is passed in is an valid date and time, and store the result in a DateTime object.
         private static (string customerName, string address, string dueDate) CustomerInfoInput()
         {
             Console.Write("Please input your Name: ");
