@@ -7,6 +7,7 @@ namespace Order.Management
     class Circle : Shape
     {
         public int circlePrice = 3;
+        // INSP RS This constructor could be moved to base class. References to "base" or "this" could be removed too.
         public Circle(int red, int blue, int yellow)
         {
             Name = "Circle";
@@ -16,6 +17,7 @@ namespace Order.Management
             base.NumberOfBlueShape = blue;
             base.NumberOfYellowShape = yellow;
         }
+        // INSP RS Four "Total" methods below are duplicated across subclasses. Move them to Shape.cs.
         public override int Total()
         {
             return RedCirclesTotal() + BlueCirclesTotal() + YellowCirclesTotal();
