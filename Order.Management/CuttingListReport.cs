@@ -4,8 +4,10 @@ using System.Text;
 
 namespace Order.Management
 {
+    // INSP RS Consider naming this and other Report classes in a way that self documents relationship with Order superclass.
     class CuttingListReport : Order
     {
+        // INSP RS This should be private and maybe const. Possibly defined by constructor instead of magic number.
         public int tableWidth = 20;
         public CuttingListReport(string customerName, string customerAddress, string dueDate, List<Shape> shapes)
         {
@@ -14,7 +16,8 @@ namespace Order.Management
             base.DueDate = dueDate;
             base.OrderedBlocks = shapes;
         }
-
+        // INSP RS Code for report generation and printing is duplicated across subclasses. Consider moving to superclass or better yet a dedicated UI class. 
+        // GenerateReport, generateTable, PrintLine, PrintRow, AlignCentre methods are all duplicated.
         public override void GenerateReport()
         {
             Console.WriteLine("\nYour cutting list has been generated: ");
