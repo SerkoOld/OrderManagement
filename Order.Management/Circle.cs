@@ -1,37 +1,17 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 
 namespace Order.Management
 {
-    class Circle : Shape
+    public class Circle : Shape
     {
-        public int circlePrice = 3;
-        public Circle(int red, int blue, int yellow)
-        {
-            Name = "Circle";
-            base.Price = circlePrice;
-            AdditionalCharge = 1;
-            base.NumberOfRedShape = red;
-            base.NumberOfBlueShape = blue;
-            base.NumberOfYellowShape = yellow;
-        }
-        public override int Total()
-        {
-            return RedCirclesTotal() + BlueCirclesTotal() + YellowCirclesTotal();
-        }
+        public Circle(string name, int price, int additionalCharge,Dictionary<string, int> colourCounts): base(name, price, additionalCharge, colourCounts)
+        { }
 
-        public int RedCirclesTotal()
-        {
-            return (base.NumberOfRedShape * Price);
-        }
-        public int BlueCirclesTotal()
-        {
-            return (base.NumberOfBlueShape * Price);
-        }
-        public int YellowCirclesTotal()
-        {
-            return (base.NumberOfYellowShape * Price);
-        }
+
+        public override int Total() => TotalNoOfShapes() * Price;
+
     }
 }

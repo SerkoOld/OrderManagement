@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Order.Management
@@ -7,12 +8,9 @@ namespace Order.Management
     class PaintingReport : Order
     {
         public int tableWidth = 73;
-        public PaintingReport(string customerName, string customerAddress, string dueDate, List<Shape> shapes)
+        public PaintingReport(Customer customer)
         {
-            base.CustomerName = customerName;
-            base.Address = customerAddress;
-            base.DueDate = dueDate;
-            base.OrderedBlocks = shapes;
+            base.customer = customer;
         }
         public override void GenerateReport()
         {
@@ -23,45 +21,25 @@ namespace Order.Management
 
         public void generateTable()
         {
-            PrintLine();
-            PrintRow("        ", "   Red   ", "  Blue  ", " Yellow ");
-            PrintLine();
-            PrintRow("Square", base.OrderedBlocks[0].NumberOfRedShape.ToString(), base.OrderedBlocks[0].NumberOfBlueShape.ToString(), base.OrderedBlocks[0].NumberOfYellowShape.ToString());
-            PrintRow("Triangle", base.OrderedBlocks[1].NumberOfRedShape.ToString(), base.OrderedBlocks[1].NumberOfBlueShape.ToString(), base.OrderedBlocks[1].NumberOfYellowShape.ToString());
-            PrintRow("Circle", base.OrderedBlocks[2].NumberOfRedShape.ToString(), base.OrderedBlocks[2].NumberOfBlueShape.ToString(), base.OrderedBlocks[2].NumberOfYellowShape.ToString());
-            PrintLine();
-        }
-       
-        public void PrintLine()
-        {
-            Console.WriteLine(new string('-', tableWidth));
-        }
-
-        public void PrintRow(params string[] columns)
-        {
-            int width = (tableWidth - columns.Length) / columns.Length;
-            string row = "|";
-
-            foreach (string column in columns)
+            Helpers.PrintLine(tableWidth);
+            var colours = ColourConfig.Colours;
+            Helpers.PrintRow(tableWidth,colours.ToArray());
+            Helpers.PrintLine(tableWidth);
+            foreach (var shapeType in customer.Shapes)
             {
-                row += AlignCentre(column, width) + "|";
+                var shapeName = shapeType.Name;
+                var shape = customer.GetShape(shapeName);
+                var shapeRecord = new List<string> { shapeName };
+                foreach (var colour in ColourConfig.Colours)
+                {
+                    if (!string.IsNullOrWhiteSpace(colour))
+                    {
+                        shapeRecord.Add(shape.ShapeColourCount(colour).ToString());
+                    }
+                }
+                Helpers.PrintRow(tableWidth, shapeRecord.ToArray());
             }
-
-            Console.WriteLine(row);
-        }
-
-        public string AlignCentre(string text, int width)
-        {
-            text = text.Length > width ? text.Substring(0, width - 3) + "..." : text;
-
-            if (string.IsNullOrEmpty(text))
-            {
-                return new string(' ', width);
-            }
-            else
-            {
-                return text.PadRight(width - (width - text.Length) / 2).PadLeft(width);
-            }
+            Helpers.PrintLine(tableWidth);
         }
     }
 }

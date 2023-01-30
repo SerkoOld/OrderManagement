@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Order.Management
@@ -7,12 +8,9 @@ namespace Order.Management
     class InvoiceReport : Order
     {
         public int tableWidth = 73;
-        public InvoiceReport(string customerName, string customerAddress, string dueDate, List<Shape> shapes)
-        {
-            base.CustomerName = customerName;
-            base.Address = customerAddress;
-            base.DueDate = dueDate;
-            base.OrderedBlocks = shapes;
+        public InvoiceReport(Customer customer)
+        { 
+            base.customer = customer;
         }
 
         public override void GenerateReport()
@@ -20,78 +18,68 @@ namespace Order.Management
             Console.WriteLine("\nYour invoice report has been generated: ");
             Console.WriteLine(base.ToString());
             GenerateTable();
-            OrderSquareDetails();
-            OrderTriangleDetails();
-            OrderCircleDetails();
+            OrderDetails();
             RedPaintSurcharge();
         }
 
         public void RedPaintSurcharge()
         {
-            Console.WriteLine("Red Color Surcharge       " + TotalAmountOfRedShapes() + " @ $" + base.OrderedBlocks[0].AdditionalCharge + " ppi = $" + TotalPriceRedPaintSurcharge());
+            Console.WriteLine("Red Color Surcharge       " + TotalAmountOfRedShapes() + " @ $" + base.customer.GetShape("Circle").AdditionalCharge + " ppi = $" + TotalPriceRedPaintSurcharge());
         }
 
         public int TotalAmountOfRedShapes()
         {
-            return base.OrderedBlocks[0].NumberOfRedShape + base.OrderedBlocks[1].NumberOfRedShape +
-                   base.OrderedBlocks[2].NumberOfRedShape;
+            int amount = 0;
+            foreach (var shape in customer.Shapes)
+            {
+                var shapeName = shape.Name;
+                amount += customer.GetShape(shapeName).ShapeColourCount("Red");
+            }
+            return amount;
         }
 
         public int TotalPriceRedPaintSurcharge()
         {
-            return TotalAmountOfRedShapes() * base.OrderedBlocks[0].AdditionalCharge;
+            return TotalAmountOfRedShapes() * base.customer.GetShape("Circle").AdditionalCharge;
         }
         public void GenerateTable()
         {
-            PrintLine();
-            PrintRow("        ", "   Red   ", "  Blue  ", " Yellow ");
-            PrintLine();
-            PrintRow("Square", base.OrderedBlocks[0].NumberOfRedShape.ToString(), base.OrderedBlocks[0].NumberOfBlueShape.ToString(), base.OrderedBlocks[0].NumberOfYellowShape.ToString());
-            PrintRow("Triangle", base.OrderedBlocks[1].NumberOfRedShape.ToString(), base.OrderedBlocks[1].NumberOfBlueShape.ToString(), base.OrderedBlocks[1].NumberOfYellowShape.ToString());
-            PrintRow("Circle", base.OrderedBlocks[2].NumberOfRedShape.ToString(), base.OrderedBlocks[2].NumberOfBlueShape.ToString(), base.OrderedBlocks[2].NumberOfYellowShape.ToString());
-            PrintLine();
-        }
-        public void OrderSquareDetails()
-        {
-            Console.WriteLine("\nSquares 		  " + base.OrderedBlocks[0].TotalQuantityOfShape() + " @ $" + base.OrderedBlocks[0].Price + " ppi = $" + base.OrderedBlocks[0].Total());
-        }
-        public void OrderTriangleDetails()
-        {
-            Console.WriteLine("Triangles 		  " + base.OrderedBlocks[1].TotalQuantityOfShape() + " @ $" + base.OrderedBlocks[1].Price + " ppi = $" + base.OrderedBlocks[1].Total());
-        }
-        public void OrderCircleDetails()
-        {
-            Console.WriteLine("Circles 		  " + base.OrderedBlocks[2].TotalQuantityOfShape() + " @ $" + base.OrderedBlocks[2].Price + " ppi = $" + base.OrderedBlocks[2].Total());
-        }
-        public void PrintLine()
-        {
-            Console.WriteLine(new string('-', tableWidth));
-        }
-
-        public void PrintRow(params string[] columns)
-        {
-            int width = (tableWidth - columns.Length) / columns.Length;
-            string row = "|";
-
-            foreach (string column in columns)
+            Helpers.PrintLine(tableWidth);
+            var colours = ColourConfig.Colours;
+            colours.ForEach(a =>
             {
-                row += AlignCentre(column, width) + "|";
+                string v = $" {a} ";
+            });
+            colours.Insert(0, "        ");
+            Helpers.PrintRow(tableWidth, colours.ToArray());
+            Helpers.PrintLine(tableWidth);
+            foreach (var shapeType in customer.Shapes)
+            {
+                var shapeName = shapeType.Name;
+                var shape = customer.GetShape(shapeName);
+                var shapeRecord = new List<string> { shapeName };
+                foreach (var colour in ColourConfig.Colours)
+                {
+                    if (!string.IsNullOrWhiteSpace(colour))
+                    {
+                        shapeRecord.Add(shape.ShapeColourCount(colour).ToString());
+                    }
+                }
+                Helpers.PrintRow(tableWidth, shapeRecord.ToArray());
             }
-
-            Console.WriteLine(row);
+            Helpers.PrintLine(tableWidth);
         }
-
-        public string AlignCentre(string text, int width)
+        public void OrderDetails()
         {
-            text = text.Length > width ? text.Substring(0, width - 3) + "..." : text;
-
-            if (string.IsNullOrEmpty(text))
+            int rowWidth = 73;
+            Console.WriteLine("\n");
+            foreach (var shape in customer.Shapes)
             {
-                return new string(' ', width);
-            }
-            else
-            {
-                return text.PadRight(width - (width - text.Length) / 2).PadLeft(width);
+                var shapeName = shape.Name;
+                var count = customer.GetShape(shapeName).TotalNoOfShapes();
+                var price = customer.GetShape(shapeName).Price;
+                var total = customer.GetShape(shapeName).Total();
+                Console.WriteLine($"{shapeName} 		  " + count + " @ $" + price + " ppi = $" + total);
             }
         }
     }
