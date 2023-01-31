@@ -10,7 +10,7 @@
 - Order class should override ToString as inherites from System.Object by default.
 - Customer class can implement an IShapeFactory to follow factory pattern to create all shapes while taking in user prompt.
 - Would introduce a ColourConfig object which can be static to be extensible and allow adding of more colours in future.
-- Input prompts fro colours can be also handled by this config class.
+- Input prompts using Generic Paramter that accept a typeof Shape for colours can be also handled by this config class.
 - All Report classes need to use `this` instead of `base` keyword.
 - GenerateTable method can be dynamic to accomadate and handle any introduction of new shape and colour.
 - Solution lacks effective exeption handling.
