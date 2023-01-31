@@ -10,7 +10,7 @@ namespace Order.Management
         public int tableWidth = 73;
         public PaintingReport(Customer customer)
         {
-            base.customer = customer;
+            this.customer = customer;
         }
         public override void GenerateReport()
         {

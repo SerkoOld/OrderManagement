@@ -11,7 +11,7 @@ namespace Order.Management
         public int tableWidth = 20;
         public CuttingListReport(Customer customer)
         {
-            base.customer = customer;
+            this.customer = customer;
         }
 
         public override void GenerateReport()
