@@ -17,7 +17,6 @@
 - GenerateTable method can be dynamic to accomadate and handle any introduction of new shape and colour.
 - Solution lacks effective exeption handling.
 - Code should be commented
-- 
 - Unit testing
   - Scenarios:
 	- Validation of inputs fields such as Name should only have alphabets.
