@@ -10,25 +10,20 @@ namespace Order.Management
     {
         public string Name { get; set; }
         public int Price { get; set; }
-        public int AdditionalCharge { get; set; }
-        public Dictionary<string, int> ColourCounts { get; set; }
+        public Dictionary<string, Colour> Colours { get; set; }
 
-        public Shape(string name, int price, int additionalCharge, Dictionary<string, int> colourCounts)
+        public Shape(string name, int price, Dictionary<string, Colour> colours)
         {
             Name = name;
             Price = price;
-            AdditionalCharge = additionalCharge;
-            ColourCounts = colourCounts;
+            Colours = colours;
         }
 
-        public int TotalNoOfShapes() => ColourCounts.Select(a => a.Value).ToList().Sum();
+        public int TotalNoOfShapes() => Colours.Select(a => a.Value.ColourNos).ToList().Sum();
 
-        public int ShapeColourCount(string colour) => ColourCounts.TryGetValue(colour, out var val) ? val : 0;
+        public int ShapeColourCount(string colour) => Colours.TryGetValue(colour, out var val) ? val.ColourNos : 0;
 
         public abstract int Total();
-
-        //TODO: Maybe need accuracy 
-        public int AdditionalChargeTotal() => ColourCounts.TryGetValue("Red", out var val) ? val : 0  * AdditionalCharge;
 
     }
 }

@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.Diagnostics;
+using System.Drawing;
 
-namespace Order.Management
+namespace Order.Management.Reports
 {
     class InvoiceReport : Order
     {
         public int tableWidth = 73;
-        public InvoiceReport(Customer customer)
+        public InvoiceReport(ICustomer customer)
         { 
             this.customer = customer;
         }
@@ -24,13 +24,17 @@ namespace Order.Management
 
         public void RedPaintSurcharge()
         {
-            Console.WriteLine("Red Color Surcharge       " + TotalAmountOfRedShapes() + " @ $" + base.customer.GetShape("Circle").AdditionalCharge + " ppi = $" + TotalPriceRedPaintSurcharge());
+            var shapeAmount = TotalAmountOfRedShapes();
+            if (shapeAmount > 0)
+            {
+                Helpers.PrintRow(tableWidth, new string[] { "Red Color Surcharge", TotalAmountOfRedShapes().ToString(), " @ $" + (ColourConfig.ColoursDict.TryGetValue("Red", out var colourVal) ? colourVal.AdditionalCharge : 0) + " ppi = $" + TotalPriceRedPaintSurcharge() });
+            }
         }
 
         public int TotalAmountOfRedShapes()
         {
             int amount = 0;
-            foreach (var shape in customer.Shapes)
+            foreach (var shape in base.Shapes)
             {
                 var shapeName = shape.Name;
                 amount += customer.GetShape(shapeName).ShapeColourCount("Red");
@@ -40,7 +44,7 @@ namespace Order.Management
 
         public int TotalPriceRedPaintSurcharge()
         {
-            return TotalAmountOfRedShapes() * base.customer.GetShape("Circle").AdditionalCharge;
+            return TotalAmountOfRedShapes() * (ColourConfig.ColoursDict.TryGetValue("Red", out var colourVal) ? colourVal.AdditionalCharge : 0);
         }
         public void GenerateTable()
         {
@@ -53,7 +57,7 @@ namespace Order.Management
             colours.Insert(0, "        ");
             Helpers.PrintRow(tableWidth, colours.ToArray());
             Helpers.PrintLine(tableWidth);
-            foreach (var shapeType in customer.Shapes)
+            foreach (var shapeType in base.Shapes)
             {
                 var shapeName = shapeType.Name;
                 var shape = customer.GetShape(shapeName);
@@ -71,15 +75,16 @@ namespace Order.Management
         }
         public void OrderDetails()
         {
-            int rowWidth = 73;
-            Console.WriteLine("\n");
-            foreach (var shape in customer.Shapes)
+            Console.WriteLine("\nOrder Price structure:\n");
+            Helpers.PrintRow(tableWidth, new string[] { "Shape", "Count", "Price" });
+            Helpers.PrintLine(tableWidth);    
+            foreach (var shape in base.Shapes)
             {
                 var shapeName = shape.Name;
                 var count = customer.GetShape(shapeName).TotalNoOfShapes();
                 var price = customer.GetShape(shapeName).Price;
                 var total = customer.GetShape(shapeName).Total();
-                Console.WriteLine($"{shapeName} 		  " + count + " @ $" + price + " ppi = $" + total);
+                Helpers.PrintRow(tableWidth, new string[] { shapeName, count.ToString(), " @ $" + price + " ppi = $" + total });
             }
         }
     }

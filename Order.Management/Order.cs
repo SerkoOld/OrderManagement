@@ -1,18 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using Order.Management.Reports;
 
 namespace Order.Management
 {
     abstract class Order
     {
         // Convert Properties to a class
-        public Customer customer { get; set; }
+        public ICustomer customer { get; set; }
+
+        public readonly IEnumerable<Type> Shapes = Helpers.GetAllSubclassOf(typeof(Shape));
         public abstract void GenerateReport();
         // need override keyword
         public override string ToString()
         {
-            return "\nName: " + customer.CustomerName + " Address: " + customer.Address + " Due Date: " + customer.DueDate + " Order #: " + customer.OrderNumber;
+            return customer.ToString();
         }
     }
 }

@@ -1,15 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 
-namespace Order.Management
+namespace Order.Management.Reports
 {
     class CuttingListReport : Order
     {
         public int tableWidth = 20;
-        public CuttingListReport(Customer customer)
+        public CuttingListReport(ICustomer customer)
         {
             this.customer = customer;
         }
@@ -25,7 +22,7 @@ namespace Order.Management
             Helpers.PrintLine(tableWidth);
             Helpers.PrintRow(tableWidth,"        ", "   Qty   ");
             Helpers.PrintLine(tableWidth);
-            foreach (var shapeType in customer.Shapes)
+            foreach (var shapeType in base.Shapes)
             {
                 var shapeName = shapeType.Name;
                 var shape = customer.GetShape(shapeName);

@@ -1,14 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
-namespace Order.Management
+namespace Order.Management.Reports
 {
     class PaintingReport : Order
     {
         public int tableWidth = 73;
-        public PaintingReport(Customer customer)
+        public PaintingReport(ICustomer customer)
         {
             this.customer = customer;
         }
@@ -25,7 +23,7 @@ namespace Order.Management
             var colours = ColourConfig.Colours;
             Helpers.PrintRow(tableWidth,colours.ToArray());
             Helpers.PrintLine(tableWidth);
-            foreach (var shapeType in customer.Shapes)
+            foreach (var shapeType in base.Shapes)
             {
                 var shapeName = shapeType.Name;
                 var shape = customer.GetShape(shapeName);
