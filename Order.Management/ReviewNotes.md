@@ -1,0 +1,25 @@
+﻿- Shape class can be responsible for properties that are agnostic to any type of shape.
+- Introduce a method to GetColour for a particular shape for using in report generation.
+- AdditionalChargeTotal can be agnostic to colour to change in future, this can be moved to Colour class as more relevant.
+- Currency can be decimal instead of int
+- Only show sucharge if amount of shapes > 0 
+- OrderNumber can be unique sequential `int` or `guid`
+- Input fields need validation checks according to business requirement.
+- The total method can be reduced to one rather than based on colour. Extensibile to add more colour.
+- Input prompts and other commonly used such as printing/formatting methods can be contained in Helpers class to be maintainable and reduces logic duplication.
+- Customer object can be used to pass into the report classes. Will responsible for holding order information.
+- Order class should override ToString as inherites from System.Object by default.
+- Customer class can implement an IShapeFactory to follow factory pattern to create all shapes while taking in user prompt.
+- Would introduce a ColourConfig object which can be static to be extensible and allow adding of more colours in future.
+- Input prompts using Generic Paramter that accept a typeof Shape for colours can be also handled by this config class.
+- User can be given option to quit out of application.
+- All Report classes need to use `this` instead of `base` keyword.
+- GenerateTable method can be dynamic to accomadate and handle any introduction of new shape and colour.
+- Solution lacks effective exeption handling.
+- Code should be commented
+- Unit testing
+  - Scenarios:
+	- Validation of inputs fields such as Name should only have alphabets.
+	- Validating if actual results for items ordered in generated reports are equal to ordered inputs for all shapes.
+	- Check Valid Dates, not in past or distant future.
+	- Validating if amount for each item is correct including the total for each item.
