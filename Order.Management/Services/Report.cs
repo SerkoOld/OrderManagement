@@ -66,9 +66,17 @@ namespace Order.Management.Services
       return job.Select(item => (item.Key, item.Value)).ToArray();
     }
 
-    public static Matrix<ToyShape, ToyColor, int> GenerateMatrix(OrderInfo orderInfo)
+    public static Matrix<ToyShape, ToyColor, int> GenerateMatrix(OrderInfo order)
     {
-      throw new NotImplementedException();
+      // TODO: is there a better way to get all values of an enum?
+      var shapes = Enum.GetValues(typeof(ToyShape)).Cast<ToyShape>().ToArray();
+      var colors = Enum.GetValues(typeof(ToyColor)).Cast<ToyColor>().ToArray();
+      var table = new Matrix<ToyShape, ToyColor, int>(rows: shapes, columns: colors);
+      foreach (var item in order.Items)
+      {
+        table[item.Shape, item.Color] += 1;
+      }
+      return table;
     }
   }
 }
