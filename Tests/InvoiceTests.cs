@@ -65,7 +65,7 @@ namespace Tests
       };
 
       Assert.AreEqual(expectedItems, invoice.Items);
-      Assert.AreEqual(19, invoice.Total);
+      Assert.AreEqual(16, invoice.Total);
     }
   }
 }

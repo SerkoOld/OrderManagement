@@ -17,7 +17,7 @@ namespace Order.Management.Services
       {
         ToyShape.Square => 1,
         ToyShape.Triangle => 2,
-        ToyShape.Circle => (decimal) 3.4,
+        ToyShape.Circle => 3,
         _ => throw new Exception("Unknown shape")
       };
     }
