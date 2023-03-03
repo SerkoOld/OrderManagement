@@ -16,7 +16,14 @@ namespace Order.Management.Services
 
     public static (ToyShape, int)[] GenerateCuttingList(OrderInfo order)
     {
-      throw new NotImplementedException();
+      var job = new Dictionary<ToyShape, int>();
+      foreach (var item in order.Items)
+      {
+        var count = job.GetValueOrDefault(item.Shape, 0);
+        job[item.Shape] = count + 1;
+      }
+
+      return job.Select(item => (item.Key, item.Value)).ToArray();
     }
 
     public static Matrix<ToyShape, ToyColor, int> GenerateMatrix(OrderInfo orderInfo)
