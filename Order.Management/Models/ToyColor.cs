@@ -1,9 +1,9 @@
 namespace Order.Management.Models
 {
-  public enum ToyColor
-  {
-    Red,
-    Blue,
-    Yellow
-  }
+    public enum ToyColor
+    {
+        Red,
+        Blue,
+        Yellow
+    }
 }
