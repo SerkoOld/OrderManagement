@@ -68,10 +68,7 @@ namespace Order.Management.Services
 
     public static Matrix<ToyShape, ToyColor, int> GenerateMatrix(OrderInfo order)
     {
-      // TODO: is there a better way to get all values of an enum?
-      var shapes = Enum.GetValues(typeof(ToyShape)).Cast<ToyShape>().ToArray();
-      var colors = Enum.GetValues(typeof(ToyColor)).Cast<ToyColor>().ToArray();
-      var table = new Matrix<ToyShape, ToyColor, int>(rows: shapes, columns: colors);
+      var table = new Matrix<ToyShape, ToyColor, int>(rows: CommonUtils.GetAllShapes(), columns: CommonUtils.GetAllColors());
       foreach (var item in order.Items)
       {
         table[item.Shape, item.Color] += 1;

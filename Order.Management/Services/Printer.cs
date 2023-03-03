@@ -49,7 +49,7 @@ namespace Order.Management.Services
 
     private static string PrintCustomerInfo(OrderInfo order)
     {
-      return $"Name: {order.Name} Address: {order.Address} Due Date: {order.DueDate} Order #: {order.OrderNumber}";
+      return $"Name: {order.Name} Address: {order.Address} Due Date: {order.DueDate:d MMM yyyy} Order #: {order.OrderNumber}";
     }
 
     private static string PrintTable(IEnumerable<(ToyShape, int)> tuples, string kLabel, string vLabel)

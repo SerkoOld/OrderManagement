@@ -17,8 +17,6 @@ namespace Tests
       {
         Name = "John Doe",
         Address = "123 Main St",
-        OrderNumber = 123,
-        DueDate = DateTime.Now,
         Items = new List<Toy>
         {
           new Toy(ToyShape.Square, ToyColor.Red),
